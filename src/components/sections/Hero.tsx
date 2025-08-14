@@ -96,7 +96,7 @@ export default function Hero() {
           transition={{ delay: 0.8, duration: 0.8 }}
           className="flex flex-wrap gap-3 justify-center mb-12 max-w-3xl mx-auto"
         >
-          {["Python", "SQL", "Azure", "Snowflake", "DBT", "Airflow"].map((tech, index) => (
+          {["AWS Glue", "Apache Kafka", "Python", "PySpark", "PostgreSQL", "Redshift"].map((tech, index) => (
             <motion.span
               key={tech}
               initial={{ opacity: 0, scale: 0 }}
@@ -144,7 +144,7 @@ export default function Hero() {
         >
           {[
             { icon: Github, href: "https://github.com/Hritiksingh1611", label: "GitHub" },
-            { icon: Linkedin, href: "https://linkedin.com/in/hritik-singh1611", label: "LinkedIn" },
+            { icon: Linkedin, href: "https://linkedin.com/in/hritik-singh-304450206", label: "LinkedIn" },
             { icon: Mail, href: "mailto:hritiksingh1611@gmail.com", label: "Email" },
           ].map(({ icon: Icon, href, label }) => (
             <motion.a

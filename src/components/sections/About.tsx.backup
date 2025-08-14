@@ -85,7 +85,7 @@ export default function About() {
               <div className="space-y-4">
                 <div className="flex justify-between items-center">
                   <span className="text-neutral-600 dark:text-neutral-400">Location</span>
-                  <span className="text-neutral-800 dark:text-neutral-200 font-medium">Kolkata, India 🇮🇳</span>
+                  <span className="text-neutral-800 dark:text-neutral-200 font-medium">New Delhi, India 🇮🇳</span>
                 </div>
                 <div className="flex justify-between items-center">
                   <span className="text-neutral-600 dark:text-neutral-400">Experience</span>
@@ -93,11 +93,11 @@ export default function About() {
                 </div>
                 <div className="flex justify-between items-center">
                   <span className="text-neutral-600 dark:text-neutral-400">Current Role</span>
-                  <span className="text-neutral-800 dark:text-neutral-200 font-medium">Associate Data Engineer</span>
+                  <span className="text-neutral-800 dark:text-neutral-200 font-medium">Data Engineer at TCS</span>
                 </div>
                 <div className="flex justify-between items-center">
                   <span className="text-neutral-600 dark:text-neutral-400">Education</span>
-                  <span className="text-neutral-800 dark:text-neutral-200 font-medium">MCA (8.64 CGPA)</span>
+                  <span className="text-neutral-800 dark:text-neutral-200 font-medium">B.Tech CSE</span>
                 </div>
                 <div className="flex justify-between items-center">
                   <span className="text-neutral-600 dark:text-neutral-400">Availability</span>
