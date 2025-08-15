@@ -13,30 +13,30 @@ export default function Experience() {
   const experiences = [
     {
       id: 1,
-      title: "Data Engineer",
-      company: "Tata Consultancy Services",
-      location: "New Delhi, India",
-      duration: "September 2022 - Present",
+      title: "Associate Data Engineer",
+      company: "Workmates Core2cloud Solutions Limited",
+      location: "Kolkata, India",
+      duration: "December 2023 - Present",
       type: "Full-time",
       description: "Developing robust ETL pipelines and data solutions for enterprise clients using modern data stack technologies. Working with Azure cloud services and implementing best practices in data engineering.",
       achievements: [
-        "Designed and implemented scalable ETL pipelines using Azure Data Factory",
-        "Built data warehousing solutions using Snowflake and Azure Synapse",
+        "Designed and implemented scalable ETL pipelines using AWS Data Pipeline Services",
+        "Built data warehousing solutions using Redshift and AWS Glue ",
         "Optimized data processing workflows reducing execution time by 30%",
         "Collaborated with cross-functional teams to deliver data-driven insights",
         "Implemented data quality checks and monitoring systems"
       ],
-      technologies: ["Python", "SQL", "Azure Data Factory", "Snowflake", "DBT", "Power BI"],
+      technologies: ["Python", "SQL", "AWS GLUE", "Redshift", "DMS", "S3","AWS Lambda", "QuickSight"],
       logo: "💼"
     },
     {
       id: 2,
-      title: "Data Analyst Intern",
-      company: "Fidelity International",
-      location: "Bangalore, India", 
-      duration: "February 2022 - August 2022",
+      title: "Full Stack Developer",
+      company: "Computer Software Solution LLC",
+      location: "Colorado, USA", 
+      duration: "April 2022 - Novemeber 2023",
       type: "Internship",
-      description: "Worked on data analysis projects and automation scripts. Gained hands-on experience with data visualization tools and statistical analysis techniques.",
+      description: "Developed end to end job searching and posting platform named reviewProbe Jobs.",
       achievements: [
         "Developed automated reporting dashboards using Power BI",
         "Created data analysis scripts in Python for business intelligence",
@@ -49,9 +49,9 @@ export default function Experience() {
     },
     {
       id: 3,
-      title: "Bachelor's in Computer Science Engineering",
-      company: "Galgotias University",
-      location: "Greater Noida, India",
+      title: "Master's in Computer Application",
+      company: "Techno India University",
+      location: "Kolkata, India",
       duration: "2018 - 2022",
       type: "Education",
       description: "Completed comprehensive coursework in computer science fundamentals, data structures, algorithms, and specialized in data engineering and analytics.",
@@ -69,16 +69,16 @@ export default function Experience() {
 
   const certifications = [
     {
-      name: "Microsoft Azure Fundamentals",
-      issuer: "Microsoft",
-      year: "2023",
-      credentialId: "AZ-900-2023"
+      name: "AWS Associate Data Engineer",
+      issuer: "AWS",
+      year: "2024",
+      credentialId: "AWS-AD-2024"
     },
     {
-      name: "Snowflake SnowPro Core Certification",
-      issuer: "Snowflake",
-      year: "2023", 
-      credentialId: "SNOWPRO-CORE-2023"
+      name: "Github Fundamentals",
+      issuer: "Github",
+      year: "2024",
+      credentialId: "GITHUB-FOUNDATIONS-2024"
     },
     {
       name: "Python Programming Certification",
