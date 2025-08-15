@@ -20,48 +20,72 @@ export default function Hero() {
     }, 3000);
     return () => clearInterval(interval);
   }, [roles.length]);
-
   return (
-    <section className="min-h-screen flex items-center justify-center relative overflow-hidden">
-      {/* Professional Background Elements */}
-      <div className="absolute inset-0">
-        {[...Array(8)].map((_, i) => (
+      <section className="min-h-screen flex items-center justify-center relative overflow-hidden bg-gradient-to-br from-blue-100 via-purple-100 to-pink-100 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
+        {/* Glassmorphism Card */}
+        <div className="absolute inset-0 pointer-events-none">
+          {[...Array(8)].map((_, i) => (
+            <motion.div
+              key={i}
+              className="absolute w-2 h-2 bg-gradient-to-tr from-blue-400 via-purple-400 to-pink-400 opacity-30 rounded-full blur-xl"
+              animate={{
+                x: [0, 80, 0],
+                y: [0, -80, 0],
+                opacity: [0.2, 0.5, 0.2],
+              }}
+              transition={{
+                duration: 8 + i * 2,
+                repeat: Infinity,
+                delay: i * 0.5,
+              }}
+              style={{
+                left: `${Math.random() * 100}%`,
+                top: `${Math.random() * 100}%`,
+              }}
+            />
+          ))}
+        </div>
+
+        <div className="container mx-auto px-4 py-20 text-center z-10">
+          {/* Profile Image */}
           <motion.div
-            key={i}
-            className="absolute w-1 h-1 bg-neutral-400/20 rounded-full"
-            animate={{
-              x: [0, 50, 0],
-              y: [0, -50, 0],
-              opacity: [0.2, 0.5, 0.2],
-            }}
-            transition={{
-              duration: 8 + i * 2,
-              repeat: Infinity,
-              delay: i * 0.5,
-            }}
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-            }}
-          />
-        ))}
-      </div>
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 1 }}
+            className="mx-auto mb-8 flex justify-center"
+          >
+            <div className="relative w-44 h-44 md:w-56 md:h-56 rounded-full overflow-hidden shadow-xl border-4 border-white dark:border-neutral-800 bg-gradient-to-tr from-blue-300 via-purple-300 to-pink-300">
+              <img
+                src="/profile.jpg"
+                alt="Hritik Singh profile"
+                className="object-cover w-full h-full"
+                draggable="false"
+              />
+              {/* Data engineering motif overlay */}
+              <div className="absolute inset-0 pointer-events-none flex items-center justify-center">
+                <svg width="80" height="80" viewBox="0 0 80 80" fill="none" className="opacity-30">
+                  <circle cx="40" cy="40" r="38" stroke="#7F56D9" strokeWidth="2" strokeDasharray="8 8" />
+                  <rect x="20" y="20" width="40" height="40" rx="8" stroke="#2563EB" strokeWidth="2" strokeDasharray="6 6" />
+                </svg>
+              </div>
+            </div>
+          </motion.div>
+  </div>
 
       <div className="container mx-auto px-4 py-20 text-center z-10">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="max-w-4xl mx-auto"
+          className="max-w-4xl mx-auto backdrop-blur-lg bg-white/60 dark:bg-neutral-900/60 rounded-3xl shadow-2xl border border-neutral-200 dark:border-neutral-800 p-8 mb-8"
         >
           <motion.h1 
-            className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight"
+            className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight text-transparent bg-clip-text bg-gradient-to-tr from-blue-600 via-purple-600 to-pink-600 dark:from-blue-400 dark:via-purple-400 dark:to-pink-400"
             initial={{ scale: 0.9 }}
             animate={{ scale: 1 }}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-            <span className="text-gradient block">Hritik</span>
-            <span className="text-neutral-900 dark:text-neutral-100 block">Singh</span>
+            Hritik <span className="block">Singh</span>
           </motion.h1>
         </motion.div>
 
