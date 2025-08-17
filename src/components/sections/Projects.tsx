@@ -206,22 +206,31 @@ export default function Projects() {
           initial={{ opacity: 0, y: 30 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="flex flex-wrap justify-center gap-4 mb-12 relative z-10"
+          className="flex flex-wrap justify-center gap-4 mb-12 relative z-20"
         >
           {filters.map(({ key, label, icon: Icon }) => (
             <motion.button
               key={key}
+              type="button"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              onClick={() => {
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
                 console.log('Filter clicked:', key);
                 setActiveFilter(key);
               }}
-              className={`flex items-center gap-2 px-6 py-3 rounded-full font-medium transition-all duration-300 cursor-pointer pointer-events-auto ${
+              onTouchStart={(e) => {
+                e.preventDefault();
+                console.log('Touch start on filter:', key);
+                setActiveFilter(key);
+              }}
+              className={`flex items-center gap-2 px-6 py-3 rounded-full font-medium transition-all duration-300 cursor-pointer pointer-events-auto select-none ${
                 activeFilter === key
                   ? "btn-accent text-white shadow-lg"
                   : "bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-200 dark:hover:bg-neutral-700"
               }`}
+              style={{ touchAction: 'manipulation' }}
             >
               <Icon size={18} />
               {label}

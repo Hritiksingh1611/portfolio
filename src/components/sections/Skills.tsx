@@ -151,24 +151,33 @@ export default function Skills() {
           initial={{ opacity: 0, y: 30 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="flex flex-wrap justify-center gap-4 mb-12 relative z-10"
+          className="flex flex-wrap justify-center gap-4 mb-12 relative z-20"
         >
           {Object.entries(skillCategories).map(([key, category]) => {
             const Icon = category.icon;
             return (
               <motion.button
                 key={key}
+                type="button"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                onClick={() => {
+                onClick={(e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
                   console.log('Skills category clicked:', key);
                   setActiveCategory(key);
                 }}
-                className={`flex items-center gap-2 px-6 py-3 rounded-full font-medium transition-all duration-300 cursor-pointer pointer-events-auto ${
+                onTouchStart={(e) => {
+                  e.preventDefault();
+                  console.log('Touch start on skills category:', key);
+                  setActiveCategory(key);
+                }}
+                className={`flex items-center gap-2 px-6 py-3 rounded-full font-medium transition-all duration-300 cursor-pointer pointer-events-auto select-none ${
                   activeCategory === key
                     ? "btn-accent text-white shadow-lg"
                     : "bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-200 dark:hover:bg-neutral-700"
                 }`}
+                style={{ touchAction: 'manipulation' }}
               >
                 <Icon size={18} />
                 <span className="hidden sm:inline">{category.title}</span>
