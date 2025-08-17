@@ -10,13 +10,20 @@ export default function Hero() {
   const [imgError, setImgError] = useState(false);
   const [imgLoaded, setImgLoaded] = useState(false);
   
-  const profileImagePath = getAssetPath('/profile.svg');
+  // Use the actual profile JPEG image
+  const profileImagePath = getAssetPath('/profile.jpeg');
+  
+  // For local development, also try direct path
+  const directPath = '/profile.jpeg';
   
   // Debug: log the path being used
   useEffect(() => {
-    console.log('Profile image path in production:', profileImagePath);
-    console.log('Current hostname:', typeof window !== 'undefined' ? window.location.hostname : 'SSR');
-  }, [profileImagePath]);
+    console.log('Profile image path:', profileImagePath);
+    console.log('Direct path:', directPath);
+    console.log('Image error state:', imgError);
+    console.log('Image loaded state:', imgLoaded);
+    console.log('Current environment:', process.env.NODE_ENV);
+  }, [profileImagePath, directPath, imgError, imgLoaded]);
   const roles = [
     "Data Engineer",
     "ETL Developer", 
@@ -128,28 +135,21 @@ export default function Hero() {
               <div className="absolute -inset-1 bg-gradient-to-r from-blue-400 via-purple-400 to-indigo-400 rounded-full opacity-50 group-hover:opacity-75 transition duration-300 blur-sm" />
               <div className="relative w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden bg-white dark:bg-slate-900 border-4 border-white/50 dark:border-slate-700/50 shadow-2xl backdrop-blur-sm select-none">
                 {!imgError ? (
-                  <div className="relative w-full h-full">
-                    {!imgLoaded && (
-                      <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-blue-500 via-purple-500 to-indigo-500 text-white z-10">
-                        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-white"></div>
-                      </div>
-                    )}
-                    <img
-                      src={profileImagePath}
-                      alt="Hritik Singh - Data Engineer"
-                      className="w-full h-full object-cover select-none pointer-events-none"
-                      onError={() => {
-                        console.error('Image failed to load. Path was:', profileImagePath);
-                        setImgError(true);
-                      }}
-                      onLoad={() => {
-                        console.log('Image loaded successfully:', profileImagePath);
-                        setImgLoaded(true);
-                      }}
-                      draggable={false}
-                      style={{ objectFit: 'cover' }}
-                    />
-                  </div>
+                  <img
+                    src={process.env.NODE_ENV === 'development' ? directPath : profileImagePath}
+                    alt="Hritik Singh - Data Engineer"
+                    className="w-full h-full object-cover select-none pointer-events-none"
+                    onError={(e) => {
+                      console.error('Image failed to load. Path was:', process.env.NODE_ENV === 'development' ? directPath : profileImagePath);
+                      console.error('Error details:', e);
+                      setImgError(true);
+                    }}
+                    onLoad={() => {
+                      console.log('Image loaded successfully:', process.env.NODE_ENV === 'development' ? directPath : profileImagePath);
+                      setImgLoaded(true);
+                    }}
+                    draggable={false}
+                  />
                 ) : (
                   <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-blue-500 via-purple-500 to-indigo-500 text-white select-none">
                     <span className="text-6xl md:text-7xl font-bold">HS</span>
