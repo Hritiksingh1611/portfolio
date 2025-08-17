@@ -82,10 +82,10 @@ export default function Experience() {
       credentialId: "GITHUB-FOUNDATIONS-2024"
     },
     {
-      name: "Python Programming Certification",
-      issuer: "HackerRank",
-      year: "2022",
-      credentialId: "PYTHON-2022"
+      name: "GCP Associate Cloud Engineer",
+      issuer: "Google",
+      year: "2025",
+      credentialId: "GCP-ACE-2025"
     },
     {
       name: "SQL Advanced Certification",
