@@ -7,7 +7,9 @@ export function getAssetPath(path: string): string {
   const normalizedPath = path.startsWith('/') ? path : `/${path}`;
   
   // In production, add the basePath prefix for GitHub Pages
-  const basePath = process.env.NODE_ENV === 'production' ? '/portfolio' : '';
+  // Check both NODE_ENV and if we're in a GitHub Pages environment
+  const isProduction = process.env.NODE_ENV === 'production' || typeof window !== 'undefined' && window.location.hostname.includes('github.io');
+  const basePath = isProduction ? '/portfolio' : '';
   
   return `${basePath}${normalizedPath}`;
 }

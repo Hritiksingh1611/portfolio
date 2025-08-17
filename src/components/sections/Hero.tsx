@@ -10,16 +10,13 @@ export default function Hero() {
   const [imgError, setImgError] = useState(false);
   const [imgLoaded, setImgLoaded] = useState(false);
   
-  const profileImagePath = '/profile-test.jpg'; // Test with profile1.jpg copy
-  // const profileImagePath = '/profile.jpg'; // Direct path for testing
-  // const profileImagePath = getAssetPath('/profile.jpg');
+  const profileImagePath = getAssetPath('/profile.svg');
   
-  // Debug logging
+  // Debug: log the path being used
   useEffect(() => {
-    console.log('Hero component mounted');
-    console.log('Profile image path:', profileImagePath);
-    console.log('Image states - error:', imgError, 'loaded:', imgLoaded);
-  }, [profileImagePath, imgError, imgLoaded]);
+    console.log('Profile image path in production:', profileImagePath);
+    console.log('Current hostname:', typeof window !== 'undefined' ? window.location.hostname : 'SSR');
+  }, [profileImagePath]);
   const roles = [
     "Data Engineer",
     "ETL Developer", 
@@ -132,13 +129,17 @@ export default function Hero() {
               <div className="relative w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden bg-white dark:bg-slate-900 border-4 border-white/50 dark:border-slate-700/50 shadow-2xl backdrop-blur-sm select-none">
                 {!imgError ? (
                   <div className="relative w-full h-full">
-                    {/* Always show image, no loading state for debugging */}
+                    {!imgLoaded && (
+                      <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-blue-500 via-purple-500 to-indigo-500 text-white z-10">
+                        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-white"></div>
+                      </div>
+                    )}
                     <img
                       src={profileImagePath}
                       alt="Hritik Singh - Data Engineer"
                       className="w-full h-full object-cover select-none pointer-events-none"
                       onError={() => {
-                        console.error('Image failed to load:', profileImagePath);
+                        console.error('Image failed to load. Path was:', profileImagePath);
                         setImgError(true);
                       }}
                       onLoad={() => {
