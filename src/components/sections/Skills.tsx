@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import { useState } from "react";
-import { Code, Database, Brain, Cloud, Settings, BarChart3 } from "lucide-react";
+import { Code, Database, Cloud, Settings, BarChart3 } from "lucide-react";
 
 export default function Skills() {
   const [ref, inView] = useInView({

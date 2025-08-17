@@ -220,7 +220,7 @@ export default function Hero() {
                 transition={{ delay: 0.6, duration: 0.6 }}
                 className="text-xl md:text-2xl text-slate-600 dark:text-neutral-300"
               >
-                I'm a{" "}
+                I&apos;m a{" "}
                 <span className="font-semibold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
                   {roles[currentRole]}
                 </span>
@@ -272,7 +272,7 @@ export default function Hero() {
                 whileTap={{ scale: 0.98 }}
                 className="px-8 py-4 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white rounded-xl font-semibold shadow-lg shadow-blue-500/25 transition-all duration-300 text-center backdrop-blur-sm"
               >
-                Let's Connect
+                Let&apos;s Connect
               </motion.a>
               
               <motion.a
