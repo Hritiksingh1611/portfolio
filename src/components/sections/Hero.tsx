@@ -10,7 +10,16 @@ export default function Hero() {
   const [imgError, setImgError] = useState(false);
   const [imgLoaded, setImgLoaded] = useState(false);
   
-  const profileImagePath = getAssetPath('/profile.jpg');
+  const profileImagePath = '/profile-test.jpg'; // Test with profile1.jpg copy
+  // const profileImagePath = '/profile.jpg'; // Direct path for testing
+  // const profileImagePath = getAssetPath('/profile.jpg');
+  
+  // Debug logging
+  useEffect(() => {
+    console.log('Hero component mounted');
+    console.log('Profile image path:', profileImagePath);
+    console.log('Image states - error:', imgError, 'loaded:', imgLoaded);
+  }, [profileImagePath, imgError, imgLoaded]);
   const roles = [
     "Data Engineer",
     "ETL Developer", 
@@ -123,21 +132,17 @@ export default function Hero() {
               <div className="relative w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden bg-white dark:bg-slate-900 border-4 border-white/50 dark:border-slate-700/50 shadow-2xl backdrop-blur-sm select-none">
                 {!imgError ? (
                   <div className="relative w-full h-full">
-                    {!imgLoaded && (
-                      <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-blue-500 via-purple-500 to-indigo-500 text-white z-10">
-                        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-white"></div>
-                      </div>
-                    )}
-                    {/* Using regular img tag for better compatibility */}
+                    {/* Always show image, no loading state for debugging */}
                     <img
                       src={profileImagePath}
                       alt="Hritik Singh - Data Engineer"
                       className="w-full h-full object-cover select-none pointer-events-none"
                       onError={() => {
-                        console.error('Image failed to load');
+                        console.error('Image failed to load:', profileImagePath);
                         setImgError(true);
                       }}
                       onLoad={() => {
+                        console.log('Image loaded successfully:', profileImagePath);
                         setImgLoaded(true);
                       }}
                       draggable={false}
