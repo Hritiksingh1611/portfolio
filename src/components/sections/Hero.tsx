@@ -10,7 +10,7 @@ export default function Hero() {
   const [imgError, setImgError] = useState(false);
   const [imgLoaded, setImgLoaded] = useState(false);
   
-  const profileImagePath = getAssetPath('/profile.svg');
+  const profileImagePath = getAssetPath('/profile.jpg');
   const roles = [
     "Data Engineer",
     "ETL Developer", 
