@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import { Calendar, MapPin, ExternalLink, Award, TrendingUp } from "lucide-react";
+import { getAssetPath } from "@/lib/assets";
 
 export default function Experience() {
   const [ref, inView] = useInView({
@@ -325,7 +326,7 @@ export default function Experience() {
               innovative projects that make a real impact. Let&apos;s discuss how we can work together!
             </p>
             <motion.a
-              href="/resume.pdf"
+              href={getAssetPath('/resume.pdf')}
               download
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}

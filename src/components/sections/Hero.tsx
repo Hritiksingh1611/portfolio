@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { ChevronDown, Github, Linkedin, Mail, Download, MapPin, Calendar } from "lucide-react";
 import { useState, useEffect } from "react";
+import { getAssetPath } from "@/lib/assets";
 
 export default function Hero() {
   const [currentRole, setCurrentRole] = useState(0);
@@ -119,29 +120,28 @@ export default function Hero() {
               <div className="absolute -inset-1 bg-gradient-to-r from-blue-400 via-purple-400 to-indigo-400 rounded-full opacity-50 group-hover:opacity-75 transition duration-300 blur-sm" />
               <div className="relative w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden bg-white dark:bg-slate-900 border-4 border-white/50 dark:border-slate-700/50 shadow-2xl backdrop-blur-sm select-none">
                 {!imgError ? (
-                  <>
+                  <div className="relative w-full h-full">
                     {!imgLoaded && (
-                      <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-blue-500 via-purple-500 to-indigo-500 text-white">
+                      <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-blue-500 via-purple-500 to-indigo-500 text-white z-10">
                         <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-white"></div>
                       </div>
                     )}
                     {/* Using regular img tag for better compatibility */}
                     <img
-                      src="/profile.jpg"
+                      src={getAssetPath('/profile.jpg')}
                       alt="Hritik Singh - Data Engineer"
-                      className={`w-full h-full object-cover select-none pointer-events-none transition-opacity duration-300 ${imgLoaded ? 'opacity-100' : 'opacity-0'}`}
+                      className="w-full h-full object-cover select-none pointer-events-none"
                       onError={(e) => {
                         console.error('Image failed to load:', e);
                         setImgError(true);
                       }}
                       onLoad={() => {
-                        console.log('Image loaded successfully');
                         setImgLoaded(true);
                       }}
                       draggable={false}
                       style={{ objectFit: 'cover' }}
                     />
-                  </>
+                  </div>
                 ) : (
                   <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-blue-500 via-purple-500 to-indigo-500 text-white select-none">
                     <span className="text-6xl md:text-7xl font-bold">HS</span>
@@ -289,7 +289,7 @@ export default function Hero() {
               </motion.a>
               
               <motion.a
-                href="/resume.pdf"
+                href={getAssetPath('/resume.pdf')}
                 download
                 whileHover={{ y: -2, scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
