@@ -9,6 +9,8 @@ export default function Hero() {
   const [currentRole, setCurrentRole] = useState(0);
   const [imgError, setImgError] = useState(false);
   const [imgLoaded, setImgLoaded] = useState(false);
+  
+  const profileImagePath = getAssetPath('/profile.svg');
   const roles = [
     "Data Engineer",
     "ETL Developer", 
@@ -128,11 +130,11 @@ export default function Hero() {
                     )}
                     {/* Using regular img tag for better compatibility */}
                     <img
-                      src={getAssetPath('/profile.jpg')}
+                      src={profileImagePath}
                       alt="Hritik Singh - Data Engineer"
                       className="w-full h-full object-cover select-none pointer-events-none"
-                      onError={(e) => {
-                        console.error('Image failed to load:', e);
+                      onError={() => {
+                        console.error('Image failed to load');
                         setImgError(true);
                       }}
                       onLoad={() => {
