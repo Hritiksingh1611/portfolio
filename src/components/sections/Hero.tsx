@@ -10,20 +10,15 @@ export default function Hero() {
   const [imgError, setImgError] = useState(false);
   const [imgLoaded, setImgLoaded] = useState(false);
   
-  // Use the actual profile JPEG image
   const profileImagePath = getAssetPath('/profile.jpeg');
   
-  // For local development, also try direct path
-  const directPath = '/profile.jpeg';
-  
-  // Debug: log the path being used
+  // Preload the image for faster loading
   useEffect(() => {
-    console.log('Profile image path:', profileImagePath);
-    console.log('Direct path:', directPath);
-    console.log('Image error state:', imgError);
-    console.log('Image loaded state:', imgLoaded);
-    console.log('Current environment:', process.env.NODE_ENV);
-  }, [profileImagePath, directPath, imgError, imgLoaded]);
+    const img = new Image();
+    img.onload = () => setImgLoaded(true);
+    img.onerror = () => setImgError(true);
+    img.src = profileImagePath;
+  }, [profileImagePath]);
   const roles = [
     "Data Engineer",
     "ETL Developer", 
@@ -44,79 +39,20 @@ export default function Hero() {
       id="home" 
       className="min-h-screen flex items-center justify-center relative overflow-hidden bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-neutral-900 dark:via-neutral-800 dark:to-slate-900 transition-all duration-500"
     >
-      {/* Database/Data themed background */}
+      {/* Simplified background for better performance */}
       <div className="absolute inset-0">
-        {/* Database nodes pattern */}
-        <div className="absolute inset-0">
-          {/* Main data flow lines */}
-          <svg className="absolute inset-0 w-full h-full opacity-10 dark:opacity-20" viewBox="0 0 1000 600">
-            {/* Horizontal data flow lines */}
-            <line x1="0" y1="150" x2="1000" y2="150" stroke="url(#gradient1)" strokeWidth="2" strokeDasharray="5,5">
-              <animate attributeName="stroke-dashoffset" values="0;10" dur="2s" repeatCount="indefinite"/>
-            </line>
-            <line x1="0" y1="300" x2="1000" y2="300" stroke="url(#gradient2)" strokeWidth="2" strokeDasharray="8,4">
-              <animate attributeName="stroke-dashoffset" values="0;12" dur="3s" repeatCount="indefinite"/>
-            </line>
-            <line x1="0" y1="450" x2="1000" y2="450" stroke="url(#gradient3)" strokeWidth="2" strokeDasharray="6,6">
-              <animate attributeName="stroke-dashoffset" values="0;12" dur="2.5s" repeatCount="indefinite"/>
-            </line>
-            
-            {/* Vertical connections */}
-            <line x1="200" y1="0" x2="200" y2="600" stroke="url(#gradient1)" strokeWidth="1" strokeDasharray="3,3" opacity="0.5"/>
-            <line x1="500" y1="0" x2="500" y2="600" stroke="url(#gradient2)" strokeWidth="1" strokeDasharray="3,3" opacity="0.5"/>
-            <line x1="800" y1="0" x2="800" y2="600" stroke="url(#gradient3)" strokeWidth="1" strokeDasharray="3,3" opacity="0.5"/>
-            
-            {/* Database nodes */}
-            <circle cx="200" cy="150" r="8" fill="rgba(59,130,246,0.6)">
-              <animate attributeName="r" values="8;12;8" dur="2s" repeatCount="indefinite"/>
-            </circle>
-            <circle cx="500" cy="300" r="10" fill="rgba(168,85,247,0.6)">
-              <animate attributeName="r" values="10;14;10" dur="2.5s" repeatCount="indefinite"/>
-            </circle>
-            <circle cx="800" cy="450" r="6" fill="rgba(34,197,94,0.6)">
-              <animate attributeName="r" values="6;10;6" dur="1.8s" repeatCount="indefinite"/>
-            </circle>
-            
-            <defs>
-              <linearGradient id="gradient1" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" stopColor="rgba(59,130,246,0.8)"/>
-                <stop offset="100%" stopColor="rgba(59,130,246,0.2)"/>
-              </linearGradient>
-              <linearGradient id="gradient2" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" stopColor="rgba(168,85,247,0.8)"/>
-                <stop offset="100%" stopColor="rgba(168,85,247,0.2)"/>
-              </linearGradient>
-              <linearGradient id="gradient3" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" stopColor="rgba(34,197,94,0.8)"/>
-                <stop offset="100%" stopColor="rgba(34,197,94,0.2)"/>
-              </linearGradient>
-            </defs>
-          </svg>
-        </div>
-        
-        {/* Binary code rain effect */}
+        {/* Static background pattern */}
         <div className="absolute inset-0 opacity-5 dark:opacity-10">
-          <div className="absolute top-10 left-10 text-xs font-mono text-blue-500 animate-pulse">
-            01100100 01100001 01110100 01100001<br/>
-            01100101 01101110 01100111 01101001
-          </div>
-          <div className="absolute top-20 right-20 text-xs font-mono text-purple-500 animate-pulse delay-1000">
-            01101110 01100101 01100101 01110010<br/>
-            01110000 01101001 01110000 01100101
-          </div>
-          <div className="absolute bottom-20 left-20 text-xs font-mono text-green-500 animate-pulse delay-500">
-            01101100 01101001 01101110 01100101<br/>
+          <div className="absolute top-10 left-10 text-xs font-mono text-blue-500">
             01100100 01100001 01110100 01100001
           </div>
+          <div className="absolute top-20 right-20 text-xs font-mono text-purple-500">
+            01101110 01100101 01100101 01110010
+          </div>
+          <div className="absolute bottom-20 left-20 text-xs font-mono text-green-500">
+            01110000 01101001 01110000 01100101
+          </div>
         </div>
-        
-        {/* Floating data elements */}
-        <div className="absolute top-20 left-20 w-24 h-24 bg-gradient-to-r from-blue-400/10 to-purple-400/10 rounded-lg blur-xl animate-pulse border border-blue-400/20" />
-        <div className="absolute bottom-32 right-32 w-32 h-32 bg-gradient-to-r from-purple-400/10 to-green-400/10 rounded-lg blur-xl animate-pulse delay-1000 border border-purple-400/20" />
-        <div className="absolute top-1/2 left-16 w-20 h-20 bg-gradient-to-r from-green-400/10 to-blue-400/10 rounded-lg blur-xl animate-pulse delay-500 border border-green-400/20" />
-        
-        {/* Grid pattern with data theme */}
-        <div className="absolute inset-0 bg-[linear-gradient(rgba(59,130,246,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(59,130,246,0.05)_1px,transparent_1px)] bg-[size:40px_40px] dark:bg-[linear-gradient(rgba(59,130,246,0.1)_1px,transparent_1px),linear-gradient(90deg,rgba(59,130,246,0.1)_1px,transparent_1px)]" />
       </div>
       
       <div className="container mx-auto px-6 py-20 relative z-10">
@@ -124,31 +60,22 @@ export default function Hero() {
           
           {/* Left Column: Profile Image & Social */}
           <motion.div 
-            initial={{ opacity: 0, x: -50 }} 
+            initial={{ opacity: 0, x: -20 }} 
             animate={{ opacity: 1, x: 0 }} 
-            transition={{ duration: 0.8, ease: "easeOut" }}
+            transition={{ duration: 0.5 }}
             className="flex flex-col items-center lg:items-start space-y-6"
           >
             {/* Profile Image */}
             <div className="relative group">
-              <div className="absolute -inset-2 bg-gradient-to-r from-blue-500 via-purple-500 to-indigo-500 rounded-full opacity-75 group-hover:opacity-100 transition duration-500 blur-lg animate-pulse" />
-              <div className="absolute -inset-1 bg-gradient-to-r from-blue-400 via-purple-400 to-indigo-400 rounded-full opacity-50 group-hover:opacity-75 transition duration-300 blur-sm" />
+              <div className="absolute -inset-1 bg-gradient-to-r from-blue-400 via-purple-400 to-indigo-400 rounded-full opacity-30 group-hover:opacity-50 transition duration-300 blur-sm" />
               <div className="relative w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden bg-white dark:bg-slate-900 border-4 border-white/50 dark:border-slate-700/50 shadow-2xl backdrop-blur-sm select-none">
-                {!imgError ? (
+                {!imgError && imgLoaded ? (
                   <img
-                    src={process.env.NODE_ENV === 'development' ? directPath : profileImagePath}
+                    src={profileImagePath}
                     alt="Hritik Singh - Data Engineer"
                     className="w-full h-full object-cover select-none pointer-events-none"
-                    onError={(e) => {
-                      console.error('Image failed to load. Path was:', process.env.NODE_ENV === 'development' ? directPath : profileImagePath);
-                      console.error('Error details:', e);
-                      setImgError(true);
-                    }}
-                    onLoad={() => {
-                      console.log('Image loaded successfully:', process.env.NODE_ENV === 'development' ? directPath : profileImagePath);
-                      setImgLoaded(true);
-                    }}
                     draggable={false}
+                    style={{ objectFit: 'cover' }}
                   />
                 ) : (
                   <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-blue-500 via-purple-500 to-indigo-500 text-white select-none">
@@ -159,7 +86,6 @@ export default function Hero() {
               
               {/* Enhanced status indicator */}
               <div className="absolute bottom-6 right-6 w-8 h-8 bg-gradient-to-r from-green-400 to-emerald-500 rounded-full border-4 border-white dark:border-slate-900 shadow-lg">
-                <div className="w-full h-full bg-gradient-to-r from-green-400 to-emerald-500 rounded-full animate-ping opacity-75" />
                 <div className="absolute inset-1 bg-white dark:bg-slate-900 rounded-full flex items-center justify-center">
                   <div className="w-2 h-2 bg-gradient-to-r from-green-400 to-emerald-500 rounded-full" />
                 </div>
@@ -172,8 +98,7 @@ export default function Hero() {
                 href="https://github.com/Hritiksingh1611"
                 target="_blank"
                 rel="noopener noreferrer"
-                whileHover={{ y: -2, scale: 1.1 }}
-                whileTap={{ scale: 0.95 }}
+                whileHover={{ scale: 1.05 }}
                 className="p-4 bg-neutral-900 dark:bg-neutral-100 hover:bg-neutral-800 dark:hover:bg-neutral-200 rounded-xl shadow-lg transition-all duration-300 group"
               >
                 <Github size={24} className="text-neutral-100 dark:text-neutral-900 group-hover:text-white dark:group-hover:text-black" />
@@ -183,8 +108,7 @@ export default function Hero() {
                 href="https://linkedin.com/in/hritik-singh-304450206"
                 target="_blank"
                 rel="noopener noreferrer"
-                whileHover={{ y: -2, scale: 1.1 }}
-                whileTap={{ scale: 0.95 }}
+                whileHover={{ scale: 1.05 }}
                 className="p-4 bg-blue-50 dark:bg-blue-950/50 hover:bg-blue-100 dark:hover:bg-blue-900/50 rounded-xl shadow-lg transition-all duration-300 group"
               >
                 <Linkedin size={24} className="text-blue-600 dark:text-blue-400 group-hover:text-blue-700 dark:group-hover:text-blue-300" />
@@ -192,8 +116,7 @@ export default function Hero() {
               
               <motion.a
                 href="mailto:hritiksingh1611@gmail.com"
-                whileHover={{ y: -2, scale: 1.1 }}
-                whileTap={{ scale: 0.95 }}
+                whileHover={{ scale: 1.05 }}
                 className="p-4 bg-red-50 dark:bg-red-950/50 hover:bg-red-100 dark:hover:bg-red-900/50 rounded-xl shadow-lg transition-all duration-300 group"
               >
                 <Mail size={24} className="text-red-600 dark:text-red-400 group-hover:text-red-700 dark:group-hover:text-red-300" />
@@ -215,17 +138,17 @@ export default function Hero() {
 
           {/* Right Column: Content */}
           <motion.div 
-            initial={{ opacity: 0, x: 50 }} 
+            initial={{ opacity: 0, x: 20 }} 
             animate={{ opacity: 1, x: 0 }} 
-            transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
+            transition={{ duration: 0.6 }}
             className="space-y-8"
           >
             {/* Main heading */}
             <div className="space-y-4">
               <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.4, duration: 0.6 }}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.2, duration: 0.4 }}
               >
                 <h1 className="text-5xl md:text-7xl font-bold text-slate-900 dark:text-white leading-tight">
                   Hritik
@@ -236,9 +159,9 @@ export default function Hero() {
               </motion.div>
               
               <motion.p
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.6, duration: 0.6 }}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.3, duration: 0.4 }}
                 className="text-xl md:text-2xl text-slate-600 dark:text-neutral-300"
               >
                 I&apos;m a{" "}

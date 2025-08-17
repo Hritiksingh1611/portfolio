@@ -49,23 +49,23 @@ export default function Contact() {
     {
       icon: Mail,
       label: "Email",
-      value: "hritik.singh@example.com",
-      href: "mailto:hritik.singh@example.com",
+      value: "hritik16.work@gmail.com",
+      href: "mailto:hritik16.work@gmail.com",
       description: "Best way to reach me"
     },
     {
       icon: Phone,
       label: "Phone",
-      value: "+91 9876543210",
-      href: "tel:+919876543210",
-      description: "Available 9 AM - 6 PM IST"
+      value: "+91 9123964918",
+      href: "tel:+919123964918",
+      description: "Available 9 AM - 8 PM IST"
     },
     {
       icon: MapPin,
       label: "Location",
       value: "India",
       href: "#",
-      description: "Open to remote work"
+      description: "Just for consulting"
     }
   ];
 

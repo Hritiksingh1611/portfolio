@@ -91,8 +91,8 @@ export default function Skills() {
   return (
     <section id="skills" className="py-20 px-4 pt-24 relative overflow-hidden bg-gradient-to-br from-white via-blue-50 to-purple-50 dark:from-neutral-900 dark:via-neutral-800 dark:to-slate-900 transition-all duration-500" ref={ref}>
       {/* Network Grid Background */}
-      <div className="absolute inset-0 opacity-10 dark:opacity-5">
-        <svg className="w-full h-full" viewBox="0 0 1000 800" fill="none">
+      <div className="absolute inset-0 opacity-10 dark:opacity-5 pointer-events-none">
+        <svg className="w-full h-full" viewBox="0 0 1000 800" fill="none" style={{ pointerEvents: 'none' }}>
           {/* Grid Pattern */}
           <defs>
             <pattern id="grid" width="100" height="100" patternUnits="userSpaceOnUse">
@@ -151,7 +151,7 @@ export default function Skills() {
           initial={{ opacity: 0, y: 30 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="flex flex-wrap justify-center gap-4 mb-12"
+          className="flex flex-wrap justify-center gap-4 mb-12 relative z-10"
         >
           {Object.entries(skillCategories).map(([key, category]) => {
             const Icon = category.icon;
@@ -160,8 +160,11 @@ export default function Skills() {
                 key={key}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                onClick={() => setActiveCategory(key)}
-                className={`flex items-center gap-2 px-6 py-3 rounded-full font-medium transition-all duration-300 ${
+                onClick={() => {
+                  console.log('Skills category clicked:', key);
+                  setActiveCategory(key);
+                }}
+                className={`flex items-center gap-2 px-6 py-3 rounded-full font-medium transition-all duration-300 cursor-pointer pointer-events-auto ${
                   activeCategory === key
                     ? "btn-accent text-white shadow-lg"
                     : "bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-200 dark:hover:bg-neutral-700"
