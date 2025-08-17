@@ -89,7 +89,48 @@ export default function Skills() {
   };
 
   return (
-    <section id="skills" className="py-20 px-4 pt-24 bg-white dark:bg-neutral-950" ref={ref}>
+    <section id="skills" className="py-20 px-4 pt-24 relative overflow-hidden bg-gradient-to-br from-white via-blue-50 to-purple-50 dark:from-neutral-900 dark:via-neutral-800 dark:to-slate-900 transition-all duration-500" ref={ref}>
+      {/* Network Grid Background */}
+      <div className="absolute inset-0 opacity-10 dark:opacity-5">
+        <svg className="w-full h-full" viewBox="0 0 1000 800" fill="none">
+          {/* Grid Pattern */}
+          <defs>
+            <pattern id="grid" width="100" height="100" patternUnits="userSpaceOnUse">
+              <path d="M 100 0 L 0 0 0 100" fill="none" stroke="currentColor" strokeWidth="1" className="text-blue-500 dark:text-blue-400" opacity="0.2"/>
+            </pattern>
+          </defs>
+          <rect width="100%" height="100%" fill="url(#grid)" />
+          
+          {/* Technology Nodes */}
+          <g>
+            <circle cx="200" cy="150" r="8" fill="currentColor" className="text-blue-600 dark:text-blue-400" opacity="0.6">
+              <animate attributeName="r" values="8;12;8" dur="3s" repeatCount="indefinite" />
+            </circle>
+            <circle cx="400" cy="200" r="8" fill="currentColor" className="text-purple-600 dark:text-purple-400" opacity="0.6">
+              <animate attributeName="r" values="8;12;8" dur="4s" repeatCount="indefinite" />
+            </circle>
+            <circle cx="600" cy="300" r="8" fill="currentColor" className="text-green-600 dark:text-green-400" opacity="0.6">
+              <animate attributeName="r" values="8;12;8" dur="3.5s" repeatCount="indefinite" />
+            </circle>
+            <circle cx="800" cy="250" r="8" fill="currentColor" className="text-orange-600 dark:text-orange-400" opacity="0.6">
+              <animate attributeName="r" values="8;12;8" dur="4.5s" repeatCount="indefinite" />
+            </circle>
+          </g>
+          
+          {/* Skill Connection Lines */}
+          <g stroke="currentColor" strokeWidth="2" className="text-neutral-400 dark:text-neutral-600" opacity="0.3">
+            <line x1="200" y1="150" x2="400" y2="200">
+              <animate attributeName="stroke-dasharray" values="0,200;200,0;0,200" dur="8s" repeatCount="indefinite" />
+            </line>
+            <line x1="400" y1="200" x2="600" y2="300">
+              <animate attributeName="stroke-dasharray" values="0,200;200,0;0,200" dur="6s" repeatCount="indefinite" />
+            </line>
+            <line x1="600" y1="300" x2="800" y2="250">
+              <animate attributeName="stroke-dasharray" values="0,200;200,0;0,200" dur="7s" repeatCount="indefinite" />
+            </line>
+          </g>
+        </svg>
+      </div>
       <div className="max-w-6xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
@@ -97,10 +138,10 @@ export default function Skills() {
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-6xl font-bold mb-6">
-            <span className="text-gradient">Skills</span> & Expertise
+          <h2 className="text-4xl md:text-6xl font-bold mb-6 text-slate-900 dark:text-white">
+            <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 bg-clip-text text-transparent">Skills</span> & Expertise
           </h2>
-          <p className="text-xl text-neutral-600 dark:text-neutral-400 max-w-3xl mx-auto">
+          <p className="text-xl text-slate-600 dark:text-neutral-300 max-w-3xl mx-auto">
             A comprehensive toolkit for building modern data solutions
           </p>
         </motion.div>
@@ -150,14 +191,14 @@ export default function Skills() {
               className="glass-effect p-6 rounded-xl hover:bg-white/10 transition-all duration-300 group"
             >
               <div className="flex justify-between items-center mb-3">
-                <h3 className="text-lg font-semibold text-white group-hover:text-blue-300 transition-colors duration-300">
+                <h3 className="text-lg font-semibold text-slate-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-300 transition-colors duration-300">
                   {skill.name}
                 </h3>
-                <span className="text-sm text-gray-400">{skill.level}%</span>
+                <span className="text-sm text-slate-600 dark:text-neutral-400">{skill.level}%</span>
               </div>
               
               <div className="mb-3">
-                <div className="w-full bg-gray-700 rounded-full h-2">
+                <div className="w-full bg-gray-300 dark:bg-gray-700 rounded-full h-2">
                   <motion.div
                     initial={{ width: 0 }}
                     animate={{ width: `${skill.level}%` }}
@@ -167,7 +208,7 @@ export default function Skills() {
                 </div>
               </div>
               
-              <p className="text-gray-400 text-sm">{skill.description}</p>
+              <p className="text-slate-600 dark:text-neutral-400 text-sm">{skill.description}</p>
             </motion.div>
           ))}
         </motion.div>
@@ -179,11 +220,11 @@ export default function Skills() {
           transition={{ duration: 0.8, delay: 0.6 }}
           className="mt-16 text-center"
         >
-          <div className="glass-effect p-8 rounded-2xl border border-white/10 max-w-3xl mx-auto">
-            <h3 className="text-2xl font-semibold text-white mb-4">
+          <div className="glass-effect p-8 rounded-2xl border border-white/10 dark:border-neutral-700/50 max-w-3xl mx-auto">
+            <h3 className="text-2xl font-semibold text-slate-900 dark:text-white mb-4">
               Always Learning, Always Growing
             </h3>
-            <p className="text-gray-300 text-lg leading-relaxed">
+            <p className="text-slate-600 dark:text-neutral-300 text-lg leading-relaxed">
               Technology evolves rapidly, and so do I. I&apos;m constantly exploring new tools, 
               frameworks, and methodologies to stay at the forefront of data engineering and AI. 
               Currently diving deep into Large Language Models, Edge Computing, and Advanced MLOps practices.

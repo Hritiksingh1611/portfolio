@@ -124,7 +124,68 @@ export default function Projects() {
     : projects.filter(project => project.category === activeFilter);
 
   return (
-    <section id="projects" className="py-20 px-4 pt-24 bg-neutral-50 dark:bg-neutral-900/50" ref={ref}>
+    <section id="projects" className="py-20 px-4 pt-24 relative overflow-hidden bg-gradient-to-br from-white via-blue-50 to-purple-50 dark:from-neutral-900 dark:via-neutral-800 dark:to-slate-900 transition-all duration-500" ref={ref}>
+      {/* Code Repository Background */}
+      <div className="absolute inset-0 opacity-10 dark:opacity-5">
+        <svg className="w-full h-full" viewBox="0 0 1000 800" fill="none">
+          {/* Code Blocks */}
+          <g>
+            <rect x="100" y="100" width="200" height="120" rx="12" fill="currentColor" className="text-blue-600 dark:text-blue-400" opacity="0.3">
+              <animate attributeName="opacity" values="0.3;0.7;0.3" dur="5s" repeatCount="indefinite" />
+            </rect>
+            <rect x="350" y="180" width="150" height="100" rx="12" fill="currentColor" className="text-green-600 dark:text-green-400" opacity="0.3">
+              <animate attributeName="opacity" values="0.3;0.7;0.3" dur="4s" repeatCount="indefinite" />
+            </rect>
+            <rect x="550" y="120" width="180" height="140" rx="12" fill="currentColor" className="text-purple-600 dark:text-purple-400" opacity="0.3">
+              <animate attributeName="opacity" values="0.3;0.7;0.3" dur="6s" repeatCount="indefinite" />
+            </rect>
+            <rect x="780" y="160" width="160" height="110" rx="12" fill="currentColor" className="text-orange-600 dark:text-orange-400" opacity="0.3">
+              <animate attributeName="opacity" values="0.3;0.7;0.3" dur="4.5s" repeatCount="indefinite" />
+            </rect>
+          </g>
+          
+          {/* Git Branches */}
+          <g stroke="currentColor" strokeWidth="2" className="text-neutral-400 dark:text-neutral-600" opacity="0.4">
+            <path d="M200,220 Q300,250 350,230">
+              <animate attributeName="stroke-dasharray" values="0,150;150,0;0,150" dur="8s" repeatCount="indefinite" />
+            </path>
+            <path d="M500,230 Q550,200 550,180">
+              <animate attributeName="stroke-dasharray" values="0,100;100,0;0,100" dur="6s" repeatCount="indefinite" />
+            </path>
+            <path d="M730,190 Q780,180 780,190">
+              <animate attributeName="stroke-dasharray" values="0,80;80,0;0,80" dur="7s" repeatCount="indefinite" />
+            </path>
+          </g>
+          
+          {/* Commit Dots */}
+          <g>
+            <circle cx="200" cy="220" r="6" fill="currentColor" className="text-blue-500 dark:text-blue-400">
+              <animate attributeName="r" values="6;10;6" dur="3s" repeatCount="indefinite" />
+            </circle>
+            <circle cx="425" cy="230" r="6" fill="currentColor" className="text-green-500 dark:text-green-400">
+              <animate attributeName="r" values="6;10;6" dur="4s" repeatCount="indefinite" />
+            </circle>
+            <circle cx="640" cy="190" r="6" fill="currentColor" className="text-purple-500 dark:text-purple-400">
+              <animate attributeName="r" values="6;10;6" dur="3.5s" repeatCount="indefinite" />
+            </circle>
+            <circle cx="860" cy="215" r="6" fill="currentColor" className="text-orange-500 dark:text-orange-400">
+              <animate attributeName="r" values="6;10;6" dur="4.5s" repeatCount="indefinite" />
+            </circle>
+          </g>
+          
+          {/* Code Lines */}
+          <g stroke="currentColor" strokeWidth="1" className="text-neutral-300 dark:text-neutral-700" opacity="0.6">
+            <line x1="120" y1="130" x2="280" y2="130" />
+            <line x1="120" y1="145" x2="250" y2="145" />
+            <line x1="120" y1="160" x2="270" y2="160" />
+            <line x1="370" y1="200" x2="480" y2="200" />
+            <line x1="370" y1="215" x2="450" y2="215" />
+            <line x1="570" y1="140" x2="710" y2="140" />
+            <line x1="570" y1="155" x2="680" y2="155" />
+            <line x1="570" y1="170" x2="720" y2="170" />
+          </g>
+        </svg>
+      </div>
       <div className="max-w-7xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
@@ -132,10 +193,10 @@ export default function Projects() {
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-6xl font-bold mb-6">
-            <span className="text-gradient">Featured</span> Projects
+          <h2 className="text-4xl md:text-6xl font-bold mb-6 text-slate-900 dark:text-white">
+            <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 bg-clip-text text-transparent">Featured</span> Projects
           </h2>
-          <p className="text-xl text-neutral-600 dark:text-neutral-400 max-w-3xl mx-auto">
+          <p className="text-xl text-slate-600 dark:text-neutral-300 max-w-3xl mx-auto">
             From data engineering solutions to web applications - here&apos;s what I&apos;ve been building
           </p>
         </motion.div>

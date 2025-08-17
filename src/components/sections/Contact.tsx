@@ -91,7 +91,78 @@ export default function Contact() {
   ];
 
   return (
-    <section id="contact" className="py-20 px-4 pt-24" ref={ref}>
+    <section id="contact" className="py-20 px-4 pt-24 relative overflow-hidden bg-gradient-to-br from-slate-50 via-gray-50 to-blue-50 dark:from-neutral-900 dark:via-neutral-800 dark:to-slate-900 transition-all duration-500" ref={ref}>
+      {/* Communication Network Background */}
+      <div className="absolute inset-0 opacity-10 dark:opacity-5">
+        <svg className="w-full h-full" viewBox="0 0 1000 600" fill="none">
+          {/* Network Nodes */}
+          <g>
+            <circle cx="200" cy="150" r="20" fill="currentColor" className="text-blue-600 dark:text-blue-400" opacity="0.4">
+              <animate attributeName="r" values="20;30;20" dur="4s" repeatCount="indefinite" />
+            </circle>
+            <circle cx="500" cy="100" r="15" fill="currentColor" className="text-green-600 dark:text-green-400" opacity="0.4">
+              <animate attributeName="r" values="15;25;15" dur="3.5s" repeatCount="indefinite" />
+            </circle>
+            <circle cx="800" cy="200" r="18" fill="currentColor" className="text-purple-600 dark:text-purple-400" opacity="0.4">
+              <animate attributeName="r" values="18;28;18" dur="4.5s" repeatCount="indefinite" />
+            </circle>
+            <circle cx="300" cy="350" r="22" fill="currentColor" className="text-orange-600 dark:text-orange-400" opacity="0.4">
+              <animate attributeName="r" values="22;32;22" dur="3s" repeatCount="indefinite" />
+            </circle>
+            <circle cx="700" cy="400" r="16" fill="currentColor" className="text-red-600 dark:text-red-400" opacity="0.4">
+              <animate attributeName="r" values="16;26;16" dur="5s" repeatCount="indefinite" />
+            </circle>
+          </g>
+          
+          {/* Connection Lines */}
+          <g stroke="currentColor" strokeWidth="2" className="text-neutral-400 dark:text-neutral-600" opacity="0.3">
+            <line x1="200" y1="150" x2="500" y2="100">
+              <animate attributeName="stroke-dasharray" values="0,300;300,0;0,300" dur="6s" repeatCount="indefinite" />
+            </line>
+            <line x1="500" y1="100" x2="800" y2="200">
+              <animate attributeName="stroke-dasharray" values="0,300;300,0;0,300" dur="7s" repeatCount="indefinite" />
+            </line>
+            <line x1="200" y1="150" x2="300" y2="350">
+              <animate attributeName="stroke-dasharray" values="0,200;200,0;0,200" dur="5s" repeatCount="indefinite" />
+            </line>
+            <line x1="300" y1="350" x2="700" y2="400">
+              <animate attributeName="stroke-dasharray" values="0,400;400,0;0,400" dur="8s" repeatCount="indefinite" />
+            </line>
+            <line x1="800" y1="200" x2="700" y2="400">
+              <animate attributeName="stroke-dasharray" values="0,200;200,0;0,200" dur="6.5s" repeatCount="indefinite" />
+            </line>
+          </g>
+          
+          {/* Message Packets */}
+          <g>
+            <circle r="4" fill="currentColor" className="text-blue-500 dark:text-blue-400" opacity="0.8">
+              <animateMotion dur="6s" repeatCount="indefinite" path="M200,150 L500,100 L800,200" />
+            </circle>
+            <circle r="3" fill="currentColor" className="text-green-500 dark:text-green-400" opacity="0.7">
+              <animateMotion dur="8s" repeatCount="indefinite" path="M300,350 L700,400 L800,200" />
+            </circle>
+            <circle r="3.5" fill="currentColor" className="text-purple-500 dark:text-purple-400" opacity="0.9">
+              <animateMotion dur="10s" repeatCount="indefinite" path="M200,150 L300,350 L700,400" />
+            </circle>
+          </g>
+          
+          {/* Signal Waves */}
+          <g stroke="currentColor" strokeWidth="1" fill="none" className="text-neutral-300 dark:text-neutral-700" opacity="0.5">
+            <circle cx="200" cy="150" r="40">
+              <animate attributeName="r" values="20;60;20" dur="3s" repeatCount="indefinite" />
+              <animate attributeName="opacity" values="0.5;0;0.5" dur="3s" repeatCount="indefinite" />
+            </circle>
+            <circle cx="500" cy="100" r="35">
+              <animate attributeName="r" values="15;55;15" dur="4s" repeatCount="indefinite" />
+              <animate attributeName="opacity" values="0.5;0;0.5" dur="4s" repeatCount="indefinite" />
+            </circle>
+            <circle cx="800" cy="200" r="45">
+              <animate attributeName="r" values="18;65;18" dur="3.5s" repeatCount="indefinite" />
+              <animate attributeName="opacity" values="0.5;0;0.5" dur="3.5s" repeatCount="indefinite" />
+            </circle>
+          </g>
+        </svg>
+      </div>
       <div className="max-w-6xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
@@ -99,10 +170,10 @@ export default function Contact() {
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-6xl font-bold gradient-text mb-6">
-            Let&apos;s Connect
+          <h2 className="text-4xl md:text-6xl font-bold mb-6 text-slate-900 dark:text-white">
+            <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 bg-clip-text text-transparent">Let&apos;s</span> Connect
           </h2>
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+          <p className="text-xl text-slate-600 dark:text-neutral-300 max-w-3xl mx-auto">
             Ready to collaborate on your next big data project? I&apos;d love to hear from you!
           </p>
         </motion.div>

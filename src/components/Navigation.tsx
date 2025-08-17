@@ -2,15 +2,15 @@
 
 import { motion } from "framer-motion";
 import { useState, useEffect, useMemo } from "react";
-import { Menu, X, Sun, Moon, Home, User, Code, Briefcase, FolderOpen, Mail } from "lucide-react";
 import { useTheme } from "next-themes";
+import { Menu, X, Home, User, Code, Briefcase, FolderOpen, Mail, Sun, Moon } from "lucide-react";
 
 export default function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
   const [isScrolled, setIsScrolled] = useState(false);
-  const [mounted, setMounted] = useState(false);
   const { theme, setTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
     setMounted(true);
@@ -59,6 +59,10 @@ export default function Navigation() {
     setIsOpen(false);
   };
 
+  const toggleTheme = () => {
+    setTheme(theme === 'dark' ? 'light' : 'dark');
+  };
+
   return (
     <>
       {/* Desktop Navigation */}
@@ -68,7 +72,7 @@ export default function Navigation() {
         transition={{ duration: 0.5 }}
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
           isScrolled 
-            ? 'bg-white/80 dark:bg-neutral-900/80 backdrop-blur-md border-b border-neutral-200 dark:border-neutral-800' 
+            ? 'bg-white/95 dark:bg-neutral-900/95 backdrop-blur-md border-b border-gray-200 dark:border-neutral-700' 
             : 'bg-transparent'
         }`}
       >
@@ -92,41 +96,52 @@ export default function Navigation() {
                   onClick={() => scrollToSection(href)}
                   className={`flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition-all duration-300 ${
                     activeSection === id
-                      ? 'btn-accent text-white'
-                      : 'text-neutral-600 dark:text-neutral-300 hover:text-neutral-800 dark:hover:text-neutral-100 hover:bg-neutral-100 dark:hover:bg-neutral-800'
+                      ? 'bg-blue-600 text-white shadow-lg'
+                      : 'text-gray-700 dark:text-neutral-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-neutral-800'
                   }`}
                 >
                   <Icon size={16} />
                   {label}
                 </motion.button>
               ))}
+              
+              {/* Theme Toggle */}
+              {mounted && (
+                <motion.button
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.9 }}
+                  onClick={toggleTheme}
+                  className="p-2 ml-4 bg-gray-100 dark:bg-neutral-800 text-gray-700 dark:text-neutral-300 rounded-lg hover:bg-gray-200 dark:hover:bg-neutral-700 transition-all duration-300 shadow-sm"
+                  aria-label="Toggle theme"
+                >
+                  {theme === 'dark' ? <Sun size={20} /> : <Moon size={20} />}
+                </motion.button>
+              )}
             </div>
 
-            {/* Theme Toggle & Mobile Menu Button */}
+            {/* Mobile Menu Button */}
             <div className="flex items-center gap-4">
-              <motion.button
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.9 }}
-                onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-                className="p-2 bg-neutral-100 dark:bg-neutral-800 rounded-lg hover:bg-neutral-200 dark:hover:bg-neutral-700 transition-all duration-300"
-                aria-label="Toggle theme"
-              >
-                {mounted && theme === 'dark' ? (
-                  <Sun size={20} className="text-neutral-600 dark:text-neutral-300" />
-                ) : (
-                  <Moon size={20} className="text-neutral-600 dark:text-neutral-300" />
-                )}
-              </motion.button>
+              {/* Mobile Theme Toggle */}
+              {mounted && (
+                <motion.button
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.9 }}
+                  onClick={toggleTheme}
+                  className="md:hidden p-2 bg-gray-100 dark:bg-neutral-800 text-gray-700 dark:text-neutral-300 rounded-lg hover:bg-gray-200 dark:hover:bg-neutral-700 transition-all duration-300 shadow-sm"
+                  aria-label="Toggle theme"
+                >
+                  {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
+                </motion.button>
+              )}
 
-              {/* Mobile menu button */}
               <motion.button
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
                 onClick={() => setIsOpen(!isOpen)}
-                className="md:hidden p-2 bg-neutral-100 dark:bg-neutral-800 rounded-lg hover:bg-neutral-200 dark:hover:bg-neutral-700 transition-all duration-300"
+                className="md:hidden p-2 bg-gray-100 dark:bg-neutral-800 rounded-lg hover:bg-gray-200 dark:hover:bg-neutral-700 transition-all duration-300 shadow-sm"
                 aria-label="Toggle menu"
               >
-                {isOpen ? <X size={20} className="text-neutral-600 dark:text-neutral-300" /> : <Menu size={20} className="text-neutral-600 dark:text-neutral-300" />}
+                {isOpen ? <X size={20} className="text-gray-700 dark:text-neutral-300" /> : <Menu size={20} className="text-gray-700 dark:text-neutral-300" />}
               </motion.button>
             </div>
           </div>
@@ -141,7 +156,7 @@ export default function Navigation() {
           x: isOpen ? 0 : "100%" 
         }}
         transition={{ duration: 0.3, ease: "easeInOut" }}
-        className={`fixed inset-y-0 right-0 z-50 w-full max-w-sm bg-white/95 dark:bg-neutral-900/95 backdrop-blur-md border-l border-neutral-200 dark:border-neutral-700 md:hidden ${
+        className={`fixed inset-y-0 right-0 z-50 w-full max-w-sm bg-white dark:bg-neutral-900 backdrop-blur-md border-l border-gray-200 dark:border-neutral-700 md:hidden ${
           isOpen ? 'pointer-events-auto' : 'pointer-events-none'
         }`}
       >

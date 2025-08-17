@@ -5,29 +5,52 @@ import { useEffect, useState } from "react";
 
 export default function FloatingElements() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [isClient, setIsClient] = useState(false);
+  const [floatingElements, setFloatingElements] = useState<Array<{
+    id: number;
+    size: number;
+    initialX: number;
+    initialY: number;
+    color: string;
+  }>>([]);
 
   useEffect(() => {
+    // Set client-side flag
+    setIsClient(true);
+    
+    // Generate floating elements only on client
+    const elements = Array.from({ length: 15 }, (_, i) => ({
+      id: i,
+      size: Math.random() * 4 + 2,
+      initialX: Math.random() * (window?.innerWidth || 1000),
+      initialY: Math.random() * (window?.innerHeight || 1000),
+      color: [
+        'bg-blue-500/20',
+        'bg-purple-500/20',
+        'bg-pink-500/20',
+        'bg-green-500/20',
+        'bg-yellow-500/20',
+      ][Math.floor(Math.random() * 5)],
+    }));
+    
+    setFloatingElements(elements);
+  }, []);
+
+  useEffect(() => {
+    if (!isClient) return;
+    
     const updateMousePosition = (e: MouseEvent) => {
       setMousePosition({ x: e.clientX, y: e.clientY });
     };
 
     window.addEventListener('mousemove', updateMousePosition);
     return () => window.removeEventListener('mousemove', updateMousePosition);
-  }, []);
+  }, [isClient]);
 
-  const floatingElements = Array.from({ length: 15 }, (_, i) => ({
-    id: i,
-    size: Math.random() * 4 + 2,
-    initialX: typeof window !== 'undefined' ? Math.random() * window.innerWidth : Math.random() * 1000,
-    initialY: typeof window !== 'undefined' ? Math.random() * window.innerHeight : Math.random() * 1000,
-    color: [
-      'bg-blue-500/20',
-      'bg-purple-500/20',
-      'bg-pink-500/20',
-      'bg-green-500/20',
-      'bg-yellow-500/20',
-    ][Math.floor(Math.random() * 5)],
-  }));
+  // Don't render anything on server side
+  if (!isClient) {
+    return null;
+  }
 
   return (
     <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
@@ -52,12 +75,12 @@ export default function FloatingElements() {
           animate={{
             x: [
               element.initialX,
-              element.initialX + Math.sin(Date.now() * 0.001 + element.id) * 100,
+              element.initialX + (element.id % 2 === 0 ? 100 : -100),
               element.initialX,
             ],
             y: [
               element.initialY,
-              element.initialY + Math.cos(Date.now() * 0.001 + element.id) * 100,
+              element.initialY + (element.id % 3 === 0 ? 100 : -100),
               element.initialY,
             ],
             scale: [1, 1.5, 1],

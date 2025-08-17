@@ -95,7 +95,72 @@ export default function Experience() {
   ];
 
   return (
-    <section id="experience" className="py-20 px-4 pt-24" ref={ref}>
+    <section id="experience" className="py-20 px-4 pt-24 relative overflow-hidden bg-gradient-to-br from-slate-50 via-gray-50 to-blue-50 dark:from-neutral-900 dark:via-neutral-800 dark:to-slate-900 transition-all duration-500" ref={ref}>
+      {/* Data Pipeline Background */}
+      <div className="absolute inset-0 opacity-10 dark:opacity-5">
+        <svg className="w-full h-full" viewBox="0 0 1200 800" fill="none">
+          {/* Pipeline Stages */}
+          <g>
+            <rect x="100" y="200" width="80" height="60" rx="10" fill="currentColor" className="text-blue-600 dark:text-blue-400" opacity="0.4">
+              <animate attributeName="opacity" values="0.4;0.8;0.4" dur="3s" repeatCount="indefinite" />
+            </rect>
+            <rect x="300" y="200" width="80" height="60" rx="10" fill="currentColor" className="text-purple-600 dark:text-purple-400" opacity="0.4">
+              <animate attributeName="opacity" values="0.4;0.8;0.4" dur="3.5s" repeatCount="indefinite" />
+            </rect>
+            <rect x="500" y="200" width="80" height="60" rx="10" fill="currentColor" className="text-green-600 dark:text-green-400" opacity="0.4">
+              <animate attributeName="opacity" values="0.4;0.8;0.4" dur="4s" repeatCount="indefinite" />
+            </rect>
+            <rect x="700" y="200" width="80" height="60" rx="10" fill="currentColor" className="text-orange-600 dark:text-orange-400" opacity="0.4">
+              <animate attributeName="opacity" values="0.4;0.8;0.4" dur="4.5s" repeatCount="indefinite" />
+            </rect>
+            <rect x="900" y="200" width="80" height="60" rx="10" fill="currentColor" className="text-red-600 dark:text-red-400" opacity="0.4">
+              <animate attributeName="opacity" values="0.4;0.8;0.4" dur="5s" repeatCount="indefinite" />
+            </rect>
+          </g>
+          
+          {/* Pipeline Flow Arrows */}
+          <g stroke="currentColor" strokeWidth="3" className="text-neutral-400 dark:text-neutral-600" fill="none" opacity="0.5">
+            <path d="M180,230 L300,230" markerEnd="url(#arrowhead)">
+              <animate attributeName="stroke-dasharray" values="0,120;120,0;0,120" dur="6s" repeatCount="indefinite" />
+            </path>
+            <path d="M380,230 L500,230" markerEnd="url(#arrowhead)">
+              <animate attributeName="stroke-dasharray" values="0,120;120,0;0,120" dur="6.5s" repeatCount="indefinite" />
+            </path>
+            <path d="M580,230 L700,230" markerEnd="url(#arrowhead)">
+              <animate attributeName="stroke-dasharray" values="0,120;120,0;0,120" dur="7s" repeatCount="indefinite" />
+            </path>
+            <path d="M780,230 L900,230" markerEnd="url(#arrowhead)">
+              <animate attributeName="stroke-dasharray" values="0,120;120,0;0,120" dur="7.5s" repeatCount="indefinite" />
+            </path>
+          </g>
+          
+          {/* Arrow Marker */}
+          <defs>
+            <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+              <polygon points="0 0, 10 3.5, 0 7" fill="currentColor" className="text-neutral-400 dark:text-neutral-600" />
+            </marker>
+          </defs>
+          
+          {/* Timeline Dots */}
+          <g>
+            <circle cx="140" cy="350" r="4" fill="currentColor" className="text-blue-500 dark:text-blue-400">
+              <animate attributeName="r" values="4;8;4" dur="4s" repeatCount="indefinite" />
+            </circle>
+            <circle cx="340" cy="350" r="4" fill="currentColor" className="text-purple-500 dark:text-purple-400">
+              <animate attributeName="r" values="4;8;4" dur="4.5s" repeatCount="indefinite" />
+            </circle>
+            <circle cx="540" cy="350" r="4" fill="currentColor" className="text-green-500 dark:text-green-400">
+              <animate attributeName="r" values="4;8;4" dur="5s" repeatCount="indefinite" />
+            </circle>
+            <circle cx="740" cy="350" r="4" fill="currentColor" className="text-orange-500 dark:text-orange-400">
+              <animate attributeName="r" values="4;8;4" dur="5.5s" repeatCount="indefinite" />
+            </circle>
+            <circle cx="940" cy="350" r="4" fill="currentColor" className="text-red-500 dark:text-red-400">
+              <animate attributeName="r" values="4;8;4" dur="6s" repeatCount="indefinite" />
+            </circle>
+          </g>
+        </svg>
+      </div>
       <div className="max-w-6xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
@@ -103,10 +168,10 @@ export default function Experience() {
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-6xl font-bold gradient-text mb-6">
-            Experience & Achievements
+          <h2 className="text-4xl md:text-6xl font-bold mb-6 text-slate-900 dark:text-white">
+            <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 bg-clip-text text-transparent">Experience</span> & Achievements
           </h2>
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+          <p className="text-xl text-slate-600 dark:text-neutral-300 max-w-3xl mx-auto">
             My journey through the world of data engineering and AI
           </p>
         </motion.div>
