@@ -16,18 +16,18 @@ export default function Projects() {
   const projects = [
     {
       id: 1,
-      title: "Enterprise ETL Pipeline System",
-      description: "Built comprehensive ETL pipelines using Azure Data Factory and Snowflake for enterprise data processing. Automated data ingestion from multiple sources with robust error handling and monitoring.",
+      title: "AWS Data Pipeline System",
+      description: "Built comprehensive ETL pipelines using AWS Glue and Redshift for enterprise data processing. Automated data ingestion from multiple sources with robust error handling and monitoring.",
       image: "/api/placeholder/600/400",
-      tags: ["Azure Data Factory", "Snowflake", "Python", "SQL", "DBT"],
+      tags: ["AWS Glue", "Redshift", "Python", "SQL", "S3"],
       category: "data",
       status: "Production",
-      github: "https://github.com/Hritiksingh1611/etl-pipeline",
+      github: "https://github.com/Hritiksingh1611/aws-etl-pipeline",
       demo: "#",
       highlights: [
         "Processes 100GB+ of data daily",
-        "95% reduction in manual data processing",
-        "Automated data quality validation"
+        "40% improvement in data processing speed",
+        "Automated data quality validation and monitoring"
       ]
     },
     {
@@ -80,6 +80,22 @@ export default function Projects() {
     },
     {
       id: 5,
+      title: "reviewProbe Jobs Platform",
+      description: "End-to-end job searching and posting platform with user authentication, job management, and payment integration. Built with modern full-stack technologies.",
+      image: "/api/placeholder/600/400",
+      tags: ["React", "Node.js", "MongoDB", "Express.js", "JavaScript"],
+      category: "web",
+      status: "Live",
+      github: "https://github.com/Hritiksingh1611/reviewprobe-jobs",
+      demo: "#",
+      highlights: [
+        "Complete job portal functionality",
+        "User authentication and authorization", 
+        "Payment system integration"
+      ]
+    },
+    {
+      id: 6,
       title: "Portfolio Website",
       description: "Modern, responsive portfolio website built with Next.js, TypeScript, and Tailwind CSS. Features dark/light mode, smooth animations, and optimized performance.",
       image: "/api/placeholder/600/400",
@@ -95,7 +111,7 @@ export default function Projects() {
       ]
     },
     {
-      id: 6,
+      id: 7,
       title: "Database Management Scripts",
       description: "Collection of SQL scripts and Python utilities for database administration, maintenance, and optimization across multiple database platforms.",
       image: "/api/placeholder/600/400",
@@ -196,7 +212,7 @@ export default function Projects() {
           <h2 className="text-4xl md:text-6xl font-bold mb-6 text-slate-900 dark:text-white">
             <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 bg-clip-text text-transparent">Featured</span> Projects
           </h2>
-          <p className="text-xl text-slate-600 dark:text-neutral-300 max-w-3xl mx-auto">
+          <p className="text-xl text-slate-800 dark:text-neutral-300 max-w-3xl mx-auto">
             From data engineering solutions to web applications - here&apos;s what I&apos;ve been building
           </p>
         </motion.div>
@@ -228,7 +244,7 @@ export default function Projects() {
               className={`flex items-center gap-2 px-6 py-3 rounded-full font-medium transition-all duration-300 cursor-pointer pointer-events-auto select-none ${
                 activeFilter === key
                   ? "btn-accent text-white shadow-lg"
-                  : "bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-200 dark:hover:bg-neutral-700"
+                  : "bg-slate-100 dark:bg-neutral-800 text-slate-800 dark:text-neutral-300 hover:bg-slate-200 dark:hover:bg-neutral-700"
               }`}
               style={{ touchAction: 'manipulation' }}
             >
@@ -250,7 +266,7 @@ export default function Projects() {
               initial={{ opacity: 0, y: 50 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: index * 0.1 }}
-              className="glass-effect rounded-2xl overflow-hidden border border-white/10 hover:border-white/20 transition-all duration-300 group"
+              className="glass-effect rounded-2xl overflow-hidden border border-white/10 dark:border-white/10 border-slate-200/50 hover:border-white/20 dark:hover:border-white/20 hover:border-slate-300/50 transition-all duration-300 group bg-white/90 dark:bg-transparent"
             >
               {/* Project Image */}
               <div className="relative h-48 bg-gradient-to-br from-blue-500/20 to-purple-600/20 overflow-hidden">
@@ -268,8 +284,8 @@ export default function Projects() {
                 <div className="absolute top-4 right-4">
                   <span className={`px-3 py-1 text-xs font-medium rounded-full ${
                     project.status === "Production" 
-                      ? "bg-green-500/20 text-green-300 border border-green-500/30"
-                      : "bg-blue-500/20 text-blue-300 border border-blue-500/30"
+                      ? "bg-green-500/20 text-green-700 dark:text-green-300 border border-green-500/30"
+                      : "bg-blue-500/20 text-blue-700 dark:text-blue-300 border border-blue-500/30"
                   }`}>
                     {project.status}
                   </span>
@@ -278,21 +294,21 @@ export default function Projects() {
 
               {/* Project Content */}
               <div className="p-6">
-                <h3 className="text-xl font-bold text-white mb-3 group-hover:text-blue-300 transition-colors duration-300">
+                <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-3 group-hover:text-blue-600 dark:group-hover:text-blue-300 transition-colors duration-300">
                   {project.title}
                 </h3>
                 
-                <p className="text-gray-300 mb-4 leading-relaxed">
+                <p className="text-slate-700 dark:text-gray-300 mb-4 leading-relaxed">
                   {project.description}
                 </p>
 
                 {/* Highlights */}
                 <div className="mb-4">
-                  <h4 className="text-sm font-semibold text-gray-400 mb-2">Key Achievements:</h4>
+                  <h4 className="text-sm font-semibold text-slate-600 dark:text-slate-300 mb-2">Key Achievements:</h4>
                   <ul className="space-y-1">
                     {project.highlights.map((highlight, idx) => (
-                      <li key={idx} className="text-sm text-gray-300 flex items-start gap-2">
-                        <span className="text-blue-400 mt-1">•</span>
+                      <li key={idx} className="text-sm text-slate-600 dark:text-gray-300 flex items-start gap-2">
+                        <span className="text-blue-600 dark:text-blue-400 mt-1">•</span>
                         {highlight}
                       </li>
                     ))}
@@ -304,7 +320,7 @@ export default function Projects() {
                   {project.tags.map((tag) => (
                     <span
                       key={tag}
-                      className="px-3 py-1 text-xs bg-blue-500/20 text-blue-300 rounded-full border border-blue-500/30"
+                      className="px-3 py-1 text-xs bg-blue-500/20 text-blue-700 dark:text-blue-300 rounded-full border border-blue-500/30"
                     >
                       {tag}
                     </span>
@@ -349,11 +365,11 @@ export default function Projects() {
           transition={{ duration: 0.8, delay: 0.6 }}
           className="text-center mt-16"
         >
-          <div className="glass-effect p-8 rounded-2xl border border-white/10 max-w-3xl mx-auto">
-            <h3 className="text-2xl font-semibold text-white mb-4">
+          <div className="glass-effect p-8 rounded-2xl border border-white/10 dark:border-white/10 border-slate-200/50 max-w-3xl mx-auto bg-white/90 dark:bg-transparent">
+            <h3 className="text-2xl font-semibold text-slate-900 dark:text-white mb-4">
               Interested in Collaborating?
             </h3>
-            <p className="text-gray-300 text-lg leading-relaxed mb-6">
+            <p className="text-slate-800 dark:text-gray-300 text-lg leading-relaxed mb-6">
               I&apos;m always excited to work on innovative projects that push the boundaries of 
               data engineering and AI. Let&apos;s build something amazing together!
             </p>

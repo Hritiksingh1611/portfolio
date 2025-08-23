@@ -30,11 +30,11 @@ export default function Skills() {
       title: "Data Engineering",
       icon: Database,
       skills: [
-        { name: "Snowflake", level: 90, description: "Cloud data warehouse and analytics" },
-        { name: "Azure Data Factory", level: 88, description: "ETL/ELT pipeline orchestration" },
-        { name: "DBT", level: 85, description: "Data transformation and modeling" },
-        { name: "Apache Airflow", level: 82, description: "Workflow management and scheduling" },
-        { name: "SSIS", level: 80, description: "SQL Server Integration Services" },
+        { name: "AWS Glue", level: 92, description: "Serverless ETL service" },
+        { name: "AWS DMS", level: 88, description: "Database Migration Service" },
+        { name: "Snowflake", level: 85, description: "Cloud data warehouse and analytics" },
+        { name: "Azure Data Factory", level: 80, description: "ETL/ELT pipeline orchestration" },
+        { name: "Apache Airflow", level: 75, description: "Workflow management and scheduling" },
         { name: "Power BI", level: 88, description: "Business intelligence and visualization" }
       ]
     },
@@ -54,12 +54,12 @@ export default function Skills() {
       title: "Cloud & DevOps",
       icon: Cloud,
       skills: [
-        { name: "Microsoft Azure", level: 88, description: "Cloud services and data solutions" },
-        { name: "Azure Synapse", level: 85, description: "Analytics service and data integration" },
-        { name: "Azure Blob Storage", level: 82, description: "Cloud object storage solutions" },
-        { name: "Docker", level: 80, description: "Containerization and deployment" },
-        { name: "Git/GitHub", level: 90, description: "Version control and collaboration" },
-        { name: "Azure DevOps", level: 78, description: "CI/CD and project management" }
+        { name: "Amazon Web Services", level: 90, description: "AWS cloud services and data solutions" },
+        { name: "AWS Glue", level: 88, description: "Serverless data integration service" },
+        { name: "AWS Redshift", level: 85, description: "Cloud data warehouse solutions" },
+        { name: "AWS S3", level: 90, description: "Object storage and data lake" },
+        { name: "Microsoft Azure", level: 82, description: "Azure cloud services" },
+        { name: "Git/GitHub", level: 90, description: "Version control and collaboration" }
       ]
     },
     frameworks: {
@@ -141,7 +141,7 @@ export default function Skills() {
           <h2 className="text-4xl md:text-6xl font-bold mb-6 text-slate-900 dark:text-white">
             <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 bg-clip-text text-transparent">Skills</span> & Expertise
           </h2>
-          <p className="text-xl text-slate-600 dark:text-neutral-300 max-w-3xl mx-auto">
+          <p className="text-xl text-slate-800 dark:text-neutral-300 max-w-3xl mx-auto">
             A comprehensive toolkit for building modern data solutions
           </p>
         </motion.div>
@@ -203,10 +203,10 @@ export default function Skills() {
               className="glass-effect p-6 rounded-xl hover:bg-white/10 transition-all duration-300 group"
             >
               <div className="flex justify-between items-center mb-3">
-                <h3 className="text-lg font-semibold text-slate-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-300 transition-colors duration-300">
+                <h3 className="text-lg font-semibold text-slate-800 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-300 transition-colors duration-300">
                   {skill.name}
                 </h3>
-                <span className="text-sm text-slate-600 dark:text-neutral-400">{skill.level}%</span>
+                <span className="text-sm text-slate-700 dark:text-neutral-400">{skill.level}%</span>
               </div>
               
               <div className="mb-3">
@@ -220,7 +220,7 @@ export default function Skills() {
                 </div>
               </div>
               
-              <p className="text-slate-600 dark:text-neutral-400 text-sm">{skill.description}</p>
+              <p className="text-slate-700 dark:text-neutral-400 text-sm">{skill.description}</p>
             </motion.div>
           ))}
         </motion.div>
@@ -236,7 +236,7 @@ export default function Skills() {
             <h3 className="text-2xl font-semibold text-slate-900 dark:text-white mb-4">
               Always Learning, Always Growing
             </h3>
-            <p className="text-slate-600 dark:text-neutral-300 text-lg leading-relaxed">
+            <p className="text-slate-800 dark:text-neutral-300 text-lg leading-relaxed">
               Technology evolves rapidly, and so do I. I&apos;m constantly exploring new tools, 
               frameworks, and methodologies to stay at the forefront of data engineering and AI. 
               Currently diving deep into Large Language Models, Edge Computing, and Advanced MLOps practices.

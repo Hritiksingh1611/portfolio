@@ -173,7 +173,7 @@ export default function Contact() {
           <h2 className="text-4xl md:text-6xl font-bold mb-6 text-slate-900 dark:text-white">
             <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 bg-clip-text text-transparent">Let&apos;s</span> Connect
           </h2>
-          <p className="text-xl text-slate-600 dark:text-neutral-300 max-w-3xl mx-auto">
+          <p className="text-xl text-slate-800 dark:text-neutral-300 max-w-3xl mx-auto">
             Ready to collaborate on your next big data project? I&apos;d love to hear from you!
           </p>
         </motion.div>
@@ -187,8 +187,8 @@ export default function Contact() {
             className="space-y-8"
           >
             <div>
-              <h3 className="text-2xl font-bold text-white mb-6">Get in Touch</h3>
-              <p className="text-gray-300 text-lg leading-relaxed mb-8">
+              <h3 className="text-2xl font-bold text-slate-900 dark:text-white mb-6">Get in Touch</h3>
+              <p className="text-slate-800 dark:text-gray-300 text-lg leading-relaxed mb-8">
                 Whether you have a project in mind, want to discuss opportunities, 
                 or just want to say hello, I&apos;m always excited to connect with 
                 fellow tech enthusiasts and potential collaborators.
@@ -202,17 +202,17 @@ export default function Contact() {
                   key={label}
                   href={href}
                   whileHover={{ scale: 1.02 }}
-                  className="flex items-center gap-4 p-4 glass-effect rounded-xl hover:bg-white/10 transition-all duration-300 group"
+                  className="flex items-center gap-4 p-4 glass-effect rounded-xl hover:bg-white/10 dark:hover:bg-white/10 hover:bg-slate-100/80 transition-all duration-300 group bg-white/90 dark:bg-transparent border border-slate-200/50 dark:border-white/10"
                 >
                   <div className="p-3 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg group-hover:shadow-lg group-hover:shadow-blue-500/25 transition-all duration-300">
                     <Icon size={20} className="text-white" />
                   </div>
                   <div>
-                    <p className="font-semibold text-white group-hover:text-blue-300 transition-colors duration-300">
+                    <p className="font-semibold text-slate-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-300 transition-colors duration-300">
                       {label}
                     </p>
-                    <p className="text-gray-300">{value}</p>
-                    <p className="text-sm text-gray-400">{description}</p>
+                    <p className="text-slate-700 dark:text-gray-300">{value}</p>
+                    <p className="text-sm text-slate-600 dark:text-gray-400">{description}</p>
                   </div>
                 </motion.a>
               ))}
@@ -220,7 +220,7 @@ export default function Contact() {
 
             {/* Social Links */}
             <div>
-              <h4 className="text-lg font-semibold text-white mb-4">Follow Me</h4>
+              <h4 className="text-lg font-semibold text-slate-900 dark:text-white mb-4">Follow Me</h4>
               <div className="flex gap-4">
                 {socialLinks.map(({ icon: Icon, label, href, color }) => (
                   <motion.a
@@ -244,13 +244,13 @@ export default function Contact() {
               initial={{ opacity: 0, y: 20 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ delay: 0.6, duration: 0.5 }}
-              className="glass-effect p-6 rounded-xl border border-green-500/30"
+              className="glass-effect p-6 rounded-xl border border-green-500/30 bg-white/90 dark:bg-transparent"
             >
               <div className="flex items-center gap-3 mb-3">
                 <div className="w-3 h-3 bg-green-400 rounded-full animate-pulse"></div>
-                <span className="text-green-300 font-semibold">Available for Work</span>
+                <span className="text-green-600 dark:text-green-300 font-semibold">Available for Work</span>
               </div>
-              <p className="text-gray-300 text-sm">
+              <p className="text-slate-700 dark:text-gray-300 text-sm">
                 Currently open to new opportunities and exciting projects. 
                 Let&apos;s build something amazing together!
               </p>
@@ -263,13 +263,13 @@ export default function Contact() {
             animate={inView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.4 }}
           >
-            <form onSubmit={handleSubmit} className="glass-effect p-8 rounded-2xl border border-white/10">
-              <h3 className="text-2xl font-bold text-white mb-6">Send a Message</h3>
+            <form onSubmit={handleSubmit} className="glass-effect p-8 rounded-2xl border border-white/10 dark:border-white/10 border-slate-200/50 bg-white/90 dark:bg-transparent">
+              <h3 className="text-2xl font-bold text-slate-900 dark:text-white mb-6">Send a Message</h3>
               
               <div className="space-y-6">
                 <div className="grid md:grid-cols-2 gap-4">
                   <div>
-                    <label htmlFor="name" className="block text-sm font-medium text-gray-300 mb-2">
+                    <label htmlFor="name" className="block text-sm font-medium text-slate-700 dark:text-gray-300 mb-2">
                       Name *
                     </label>
                     <input
@@ -279,13 +279,13 @@ export default function Contact() {
                       value={formData.name}
                       onChange={handleInputChange}
                       required
-                      className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all duration-300"
+                      className="w-full px-4 py-3 bg-white/5 dark:bg-white/5 bg-slate-50 border border-white/10 dark:border-white/10 border-slate-300 rounded-lg text-slate-900 dark:text-white placeholder-slate-500 dark:placeholder-gray-400 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all duration-300"
                       placeholder="Your name"
                     />
                   </div>
                   
                   <div>
-                    <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-2">
+                    <label htmlFor="email" className="block text-sm font-medium text-slate-700 dark:text-gray-300 mb-2">
                       Email *
                     </label>
                     <input
@@ -295,14 +295,14 @@ export default function Contact() {
                       value={formData.email}
                       onChange={handleInputChange}
                       required
-                      className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all duration-300"
+                      className="w-full px-4 py-3 bg-white/5 dark:bg-white/5 bg-slate-50 border border-white/10 dark:border-white/10 border-slate-300 rounded-lg text-slate-900 dark:text-white placeholder-slate-500 dark:placeholder-gray-400 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all duration-300"
                       placeholder="your@email.com"
                     />
                   </div>
                 </div>
 
                 <div>
-                  <label htmlFor="subject" className="block text-sm font-medium text-gray-300 mb-2">
+                  <label htmlFor="subject" className="block text-sm font-medium text-slate-700 dark:text-gray-300 mb-2">
                     Subject *
                   </label>
                   <input
@@ -318,7 +318,7 @@ export default function Contact() {
                 </div>
 
                 <div>
-                  <label htmlFor="message" className="block text-sm font-medium text-gray-300 mb-2">
+                  <label htmlFor="message" className="block text-sm font-medium text-slate-700 dark:text-gray-300 mb-2">
                     Message *
                   </label>
                   <textarea
@@ -389,11 +389,11 @@ export default function Contact() {
           transition={{ duration: 0.8, delay: 0.8 }}
           className="text-center mt-16"
         >
-          <div className="glass-effect p-8 rounded-2xl border border-white/10 max-w-3xl mx-auto">
-            <h3 className="text-2xl font-semibold text-white mb-4">
+          <div className="glass-effect p-8 rounded-2xl border border-white/10 dark:border-white/10 border-slate-200/50 max-w-3xl mx-auto bg-white/90 dark:bg-transparent">
+            <h3 className="text-2xl font-semibold text-slate-900 dark:text-white mb-4">
               Thank You for Visiting! 🚀
             </h3>
-            <p className="text-gray-300 text-lg leading-relaxed">
+            <p className="text-slate-800 dark:text-gray-300 text-lg leading-relaxed">
               I appreciate you taking the time to learn about my work. Whether you&apos;re 
               looking to collaborate on a project, discuss opportunities, or just connect 
               with a fellow data enthusiast, I&apos;m always excited to meet new people in the tech community.

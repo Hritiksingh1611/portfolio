@@ -26,17 +26,17 @@ export default function AIChat() {
 
   // Predefined responses for different topics
   const responses = {
-    experience: "Hritik has 3+ years of experience as a Data Engineer, working with companies like TechCorp Solutions and DataFlow Systems. He specializes in building scalable data pipelines, ML model deployment, and cloud architecture. His journey started as a Data Analyst and evolved into senior data engineering roles.",
+    experience: "Hritik has 2+ years of experience as a Data Engineer, currently working at Workmates Core2cloud Solutions Limited. Previously, he worked as a Full Stack Developer at Computer Software Solution LLC, building the reviewProbe Jobs platform. He specializes in AWS data services, ETL pipelines, and cloud-based data solutions.",
     
-    skills: "Hritik's key skills include Python (95%), Apache Spark (92%), TensorFlow/Keras (88%), AWS (88%), SQL (90%), and Docker (90%). He's also proficient in React/Next.js for full-stack development and has experience with Kubernetes, MongoDB, and various ML frameworks.",
+    skills: "Hritik's key skills include Python (95%), AWS Glue (92%), SQL (90%), Snowflake (85%), Redshift (85%), and Power BI (88%). He's proficient in AWS services like S3, DMS, and Lambda, plus has full-stack development experience with React, Node.js, and MongoDB.",
     
-    projects: "Some of Hritik's notable projects include: 1) AI-Powered Customer Analytics Platform processing 1M+ events daily, 2) Real-Time Data Pipeline Orchestrator handling 10TB+ data, 3) Intelligent Document Processing System with 95% accuracy, and 4) This modern portfolio website with AI features!",
+    projects: "Some of Hritik's notable projects include: 1) AWS Data Pipeline System processing 100GB+ daily data, 2) reviewProbe Jobs - complete job portal platform, 3) Power BI Dashboard Suite for business intelligence, 4) Automated Data Quality Framework, and 5) This modern portfolio website!",
     
-    education: "While specific educational details aren't mentioned in his portfolio, Hritik has multiple certifications including AWS Certified Data Engineer, Google Cloud Professional Data Engineer, Certified Kubernetes Administrator, and TensorFlow Developer Certificate.",
+    education: "Hritik holds a Master's degree in Computer Application (MCA) from Techno India University with 8.64 CGPA. He has certifications including AWS Associate Data Engineer, Github Fundamentals, GCP Associate Cloud Engineer, and SQL Advanced Certification from HackerRank.",
     
-    contact: "You can reach Hritik via email at hritik.singh@example.com, phone at +91 9876543210, or connect on LinkedIn and GitHub. He's currently available for new opportunities and exciting projects!",
+    contact: "You can reach Hritik via email at hritik16.work@gmail.com, phone at +91 9123964918, or connect on LinkedIn and GitHub. He's currently available for new opportunities and exciting data engineering projects!",
     
-    ai: "Hritik is passionate about AI and Machine Learning! He works with TensorFlow, PyTorch, Scikit-learn, and Hugging Face transformers. He's built AI systems for customer analytics, document processing, sentiment analysis, and predictive maintenance. He's always exploring the latest in AI research!",
+    ai: "While Hritik's primary focus is data engineering, he's passionate about leveraging AI and ML in data pipelines! He works with Python for data processing and analysis, building intelligent data solutions that provide actionable business insights. He's always exploring the intersection of data engineering and AI!",
     
     default: "That's an interesting question! While I have information about Hritik's professional background, you might want to reach out to him directly for more specific details. You can contact him through the contact section below or via his social media links."
   };

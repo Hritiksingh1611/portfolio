@@ -75,7 +75,7 @@ export default function About() {
           <h2 className="text-4xl md:text-6xl font-bold mb-6 text-slate-900 dark:text-white">
             <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 bg-clip-text text-transparent">About</span> Me
           </h2>
-          <p className="text-xl text-slate-600 dark:text-neutral-300 max-w-3xl mx-auto">
+          <p className="text-xl text-slate-800 dark:text-neutral-300 max-w-3xl mx-auto">
             Transforming raw data into actionable insights and intelligent solutions
           </p>
         </motion.div>
@@ -92,17 +92,17 @@ export default function About() {
             </h3>
             <p className="text-slate-700 dark:text-neutral-300 text-lg leading-relaxed">
               I&apos;m a passionate Data Engineer with 2+ years of experience in designing and implementing 
-              scalable ETL pipelines and data solutions. Currently working at Tata Consultancy Services, 
+              scalable ETL pipelines and data solutions. Currently working at Workmates Core2cloud Solutions Limited, 
               I specialize in modern data stack technologies and cloud-based data warehousing.
             </p>
             <p className="text-slate-700 dark:text-neutral-300 text-lg leading-relaxed">
               My expertise includes building efficient data pipelines using Python, SQL, and modern tools like 
-              DBT, Airflow, and Snowflake. I have hands-on experience with Azure cloud services and have 
-              successfully delivered multiple data engineering projects for enterprise clients.
+              AWS Glue, Snowflake, and Azure Data Factory. I have hands-on experience with AWS and Azure cloud services 
+              and have successfully delivered multiple data engineering projects for enterprise clients.
             </p>
             <p className="text-slate-700 dark:text-neutral-300 text-lg leading-relaxed">
-              I hold a Bachelor&apos;s degree in Computer Science Engineering from Galgotias University and 
-              continuously expand my skills in emerging data technologies and best practices.
+              I hold a Master&apos;s degree in Computer Application (MCA) from Techno India University with 8.64 CGPA 
+              and continuously expand my skills in emerging data technologies and best practices.
             </p>
             
             <div className="flex flex-wrap gap-3 mt-6">
@@ -130,23 +130,23 @@ export default function About() {
               <h4 className="text-xl font-semibold text-neutral-800 dark:text-neutral-200 mb-6">Quick Facts</h4>
               <div className="space-y-4">
                 <div className="flex justify-between items-center">
-                  <span className="text-neutral-600 dark:text-neutral-400">Location</span>
+                  <span className="text-slate-800 dark:text-neutral-400">Location</span>
                   <span className="text-neutral-800 dark:text-neutral-200 font-medium">Kolkata, India 🇮🇳</span>
                 </div>
                 <div className="flex justify-between items-center">
-                  <span className="text-neutral-600 dark:text-neutral-400">Experience</span>
+                  <span className="text-slate-800 dark:text-neutral-400">Experience</span>
                   <span className="text-neutral-800 dark:text-neutral-200 font-medium">2+ Years</span>
                 </div>
                 <div className="flex justify-between items-center">
-                  <span className="text-neutral-600 dark:text-neutral-400">Current Role</span>
+                  <span className="text-slate-800 dark:text-neutral-400">Current Role</span>
                   <span className="text-neutral-800 dark:text-neutral-200 font-medium">Associate Data Engineer</span>
                 </div>
                 <div className="flex justify-between items-center">
-                  <span className="text-neutral-600 dark:text-neutral-400">Education</span>
+                  <span className="text-slate-800 dark:text-neutral-400">Education</span>
                   <span className="text-neutral-800 dark:text-neutral-200 font-medium">MCA (8.64 CGPA)</span>
                 </div>
                 <div className="flex justify-between items-center">
-                  <span className="text-neutral-600 dark:text-neutral-400">Availability</span>
+                  <span className="text-slate-800 dark:text-neutral-400">Availability</span>
                   <span className="text-green-600 dark:text-green-400 font-medium">Open to Opportunities</span>
                 </div>
               </div>
@@ -171,7 +171,7 @@ export default function About() {
             >
               <Icon size={32} className="mx-auto mb-3 text-primary-600 dark:text-primary-400 group-hover:text-primary-700 dark:group-hover:text-primary-300 transition-colors duration-300" />
               <div className="text-3xl font-bold text-primary-600 dark:text-primary-400 mb-2">{number}</div>
-              <div className="text-neutral-600 dark:text-neutral-400 text-sm">{label}</div>
+              <div className="text-slate-800 dark:text-neutral-400 text-sm">{label}</div>
             </motion.div>
           ))}
         </motion.div>

@@ -115,7 +115,7 @@ export default function Hero() {
               </motion.a>
               
               <motion.a
-                href="mailto:hritiksingh1611@gmail.com"
+                href="mailto:hritik16.work@gmail.com"
                 whileHover={{ scale: 1.05 }}
                 className="p-4 bg-red-50 dark:bg-red-950/50 hover:bg-red-100 dark:hover:bg-red-900/50 rounded-xl shadow-lg transition-all duration-300 group"
               >
@@ -124,7 +124,7 @@ export default function Hero() {
             </div>
 
             {/* Quick Info */}
-            <div className="flex flex-col sm:flex-row gap-4 text-sm text-neutral-600 dark:text-neutral-400">
+            <div className="flex flex-col sm:flex-row gap-4 text-sm text-slate-800 dark:text-neutral-400">
               <div className="flex items-center gap-2">
                 <MapPin size={16} />
                 <span>Kolkata, West Bengal, India</span>
@@ -162,7 +162,7 @@ export default function Hero() {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.3, duration: 0.4 }}
-                className="text-xl md:text-2xl text-slate-600 dark:text-neutral-300"
+                className="text-xl md:text-2xl text-slate-800 dark:text-neutral-300"
               >
                 I&apos;m a{" "}
                 <span className="font-semibold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
@@ -176,7 +176,7 @@ export default function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.8, duration: 0.6 }}
-              className="text-lg text-slate-600 dark:text-neutral-300 leading-relaxed max-w-xl"
+              className="text-lg text-slate-700 dark:text-neutral-300 leading-relaxed max-w-xl"
             >
               Passionate about building scalable data pipelines, implementing ML solutions, 
               and transforming raw data into actionable insights. I specialize in modern 
@@ -190,7 +190,7 @@ export default function Hero() {
               transition={{ delay: 1.0, duration: 0.6 }}
               className="flex flex-wrap gap-3"
             >
-              {["Python", "Apache Kafka", "AWS", "Docker", "PostgreSQL", "Apache Spark"].map((tech, i) => (
+              {["Python", "AWS Glue", "Snowflake", "Redshift", "PostgreSQL", "Power BI"].map((tech, i) => (
                 <motion.span
                   key={tech}
                   initial={{ opacity: 0, scale: 0.8 }}
@@ -221,13 +221,13 @@ export default function Hero() {
               
               <motion.a
                 href={getAssetPath('/resume.pdf')}
-                download
+                download="Hritik_Singh_Resume.pdf"
                 whileHover={{ y: -2, scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
                 className="px-8 py-4 bg-white/80 dark:bg-slate-800/80 border-2 border-slate-200/80 dark:border-slate-700/80 hover:border-slate-300/80 dark:hover:border-slate-600/80 text-slate-700 dark:text-slate-300 rounded-xl font-semibold shadow-lg transition-all duration-300 flex items-center justify-center gap-2 backdrop-blur-sm"
               >
                 <Download size={20} />
-                Resume
+                Download Resume
               </motion.a>
             </motion.div>
           </motion.div>
@@ -249,7 +249,7 @@ export default function Hero() {
             transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
             className="p-3 bg-white/20 dark:bg-slate-800/50 backdrop-blur-sm rounded-full hover:bg-white/30 dark:hover:bg-slate-700/50 transition-all duration-300 border border-white/20 dark:border-slate-700/50"
           >
-            <ChevronDown size={24} className="text-slate-600 dark:text-slate-400" />
+            <ChevronDown size={24} className="text-slate-800 dark:text-slate-400" />
           </motion.button>
         </motion.div>
       </div>
