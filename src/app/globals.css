@@ -58,6 +58,36 @@ body {
   color: hsl(var(--foreground));
   font-family: var(--font-inter), system-ui, sans-serif;
   font-feature-settings: "rlig" 1, "calt" 1;
+  /* Mobile performance optimizations */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* Mobile performance optimizations */
+@media (max-width: 768px) {
+  body {
+    font-feature-settings: normal; /* Disable advanced font features on mobile */
+    text-rendering: auto;
+  }
+  
+  /* Reduce motion on mobile for better performance */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+  
+  /* Optimize transforms for mobile */
+  * {
+    transform: translateZ(0);
+    will-change: auto;
+  }
 }
 
   /* Text Gradients with proper spacing */
@@ -132,7 +162,19 @@ body {
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3); /* Reduced shadow */
 }
 
-/* Grid pattern with dark mode support */
+/* Mobile optimizations */
+@media (max-width: 768px) {
+  .glass-effect {
+    backdrop-filter: blur(4px) saturate(120%); /* Even more reduced blur on mobile */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .dark .glass-effect {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  }
+}
+
+/* Grid pattern with dark mode support and mobile optimization */
 .grid-bg {
   background-image: 
     linear-gradient(rgba(0, 0, 0, 0.05) 1px, transparent 1px),
@@ -144,6 +186,22 @@ body {
   background-image: 
     linear-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px),
     linear-gradient(90deg, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+}
+
+/* Mobile optimization for grid pattern */
+@media (max-width: 768px) {
+  .grid-bg {
+    background-size: 32px 32px; /* Smaller grid on mobile */
+    background-image: 
+      linear-gradient(rgba(0, 0, 0, 0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0, 0, 0, 0.03) 1px, transparent 1px);
+  }
+  
+  .dark .grid-bg {
+    background-image: 
+      linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+  }
 }
 
 /* Professional button styles */

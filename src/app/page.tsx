@@ -2,42 +2,60 @@
 
 import Hero from "@/components/sections/Hero";
 import Navigation from "@/components/Navigation";
-import LoadingSpinner from "@/components/LoadingSpinner";
 import dynamic from "next/dynamic";
+import { useEffect, useState } from "react";
 
-// Lazy load non-critical components to improve initial load time
+// Create a simple mobile loading component
+const MobileLoading = () => (
+  <div className="h-20 flex items-center justify-center md:h-96">
+    <div className="w-4 h-4 border-2 border-blue-500 border-t-transparent rounded-full animate-spin md:w-6 md:h-6" />
+  </div>
+);
+
+// Lazy load non-critical components with mobile-optimized loading
 const About = dynamic(() => import("@/components/sections/About"), {
-  loading: () => <LoadingSpinner />
+  loading: () => <MobileLoading />
 });
 const Skills = dynamic(() => import("@/components/sections/Skills"), {
-  loading: () => <LoadingSpinner />
+  loading: () => <MobileLoading />
 });
 const Projects = dynamic(() => import("@/components/sections/Projects"), {
-  loading: () => <LoadingSpinner />
+  loading: () => <MobileLoading />
 });
 const Experience = dynamic(() => import("@/components/sections/Experience"), {
-  loading: () => <LoadingSpinner />
+  loading: () => <MobileLoading />
 });
 const Contact = dynamic(() => import("@/components/sections/Contact"), {
-  loading: () => <LoadingSpinner />
+  loading: () => <MobileLoading />
 });
+
+// Optimize AI Chat and FloatingElements for mobile
 const AIChat = dynamic(() => import("@/components/AIChat"), {
   ssr: false
 });
 
-// Dynamically import FloatingElements with no SSR to prevent hydration issues
 const FloatingElements = dynamic(() => import("@/components/FloatingElements"), {
   ssr: false,
 });
 
 export default function Home() {
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
   return (
-    <div className="relative min-h-screen bg-white transition-colors duration-300">
-      {/* Subtle Background Pattern */}
-      <div className="fixed inset-0 grid-bg opacity-50" />
+    <div className="relative min-h-screen bg-white dark:bg-neutral-900 transition-colors duration-300">
+      {/* Subtle Background Pattern - Reduced opacity on mobile */}
+      <div className="fixed inset-0 grid-bg opacity-30 md:opacity-50" />
       
-      {/* Floating Background Elements */}
-      <FloatingElements />
+      {/* Floating Background Elements - Only show on desktop */}
+      {isMounted && (
+        <div className="hidden md:block">
+          <FloatingElements />
+        </div>
+      )}
       
       {/* Navigation */}
       <Navigation />
@@ -52,8 +70,12 @@ export default function Home() {
         <Contact />
       </main>
       
-      {/* AI Chat Component */}
-      <AIChat />
+      {/* AI Chat Component - Only show on larger screens */}
+      {isMounted && (
+        <div className="hidden lg:block">
+          <AIChat />
+        </div>
+      )}
     </div>
   );
 }

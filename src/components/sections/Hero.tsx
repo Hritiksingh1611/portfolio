@@ -52,10 +52,10 @@ export default function Hero() {
       id="home" 
       className="min-h-screen flex items-center justify-center relative overflow-hidden bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-neutral-900 dark:via-neutral-800 dark:to-slate-900 transition-all duration-500"
     >
-      {/* Simplified background for better performance */}
+      {/* Simplified background for better performance - reduced on mobile */}
       <div className="absolute inset-0">
-        {/* Static background pattern */}
-        <div className="absolute inset-0 opacity-5 dark:opacity-10">
+        {/* Static background pattern - hidden on mobile */}
+        <div className="hidden md:block absolute inset-0 opacity-5 dark:opacity-10">
           <div className="absolute top-10 left-10 text-xs font-mono text-blue-500">
             01100100 01100001 01110100 01100001
           </div>
@@ -80,8 +80,9 @@ export default function Hero() {
           >
             {/* Profile Image */}
             <div className="relative group">
-              <div className="absolute -inset-1 bg-gradient-to-r from-blue-400 via-purple-400 to-indigo-400 rounded-full opacity-30 group-hover:opacity-50 transition duration-300 blur-sm" />
-              <div className="relative w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden bg-white dark:bg-slate-900 border-4 border-white/50 dark:border-slate-700/50 shadow-2xl backdrop-blur-sm select-none">
+              {/* Gradient border - simplified on mobile */}
+              <div className="absolute -inset-1 bg-gradient-to-r from-blue-400 via-purple-400 to-indigo-400 rounded-full opacity-30 md:group-hover:opacity-50 transition duration-300 md:blur-sm" />
+              <div className="relative w-48 h-48 sm:w-64 sm:h-64 md:w-80 md:h-80 rounded-full overflow-hidden bg-white dark:bg-slate-900 border-2 md:border-4 border-white/50 dark:border-slate-700/50 shadow-xl md:shadow-2xl md:backdrop-blur-sm select-none">
                 {!imgError && imgLoaded ? (
                   <img
                     src={profileImagePath}
@@ -89,18 +90,19 @@ export default function Hero() {
                     className="w-full h-full object-cover select-none pointer-events-none"
                     draggable={false}
                     style={{ objectFit: 'cover' }}
+                    loading="eager"
                   />
                 ) : (
                   <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-blue-500 via-purple-500 to-indigo-500 text-white select-none">
-                    <span className="text-6xl md:text-7xl font-bold">HS</span>
+                    <span className="text-4xl sm:text-6xl md:text-7xl font-bold">HS</span>
                   </div>
                 )}
               </div>
               
-              {/* Enhanced status indicator */}
-              <div className="absolute bottom-6 right-6 w-8 h-8 bg-gradient-to-r from-green-400 to-emerald-500 rounded-full border-4 border-white dark:border-slate-900 shadow-lg">
+              {/* Enhanced status indicator - simplified on mobile */}
+              <div className="absolute bottom-4 right-4 md:bottom-6 md:right-6 w-6 h-6 md:w-8 md:h-8 bg-gradient-to-r from-green-400 to-emerald-500 rounded-full border-2 md:border-4 border-white dark:border-slate-900 shadow-lg">
                 <div className="absolute inset-1 bg-white dark:bg-slate-900 rounded-full flex items-center justify-center">
-                  <div className="w-2 h-2 bg-gradient-to-r from-green-400 to-emerald-500 rounded-full" />
+                  <div className="w-1 h-1 md:w-2 md:h-2 bg-gradient-to-r from-green-400 to-emerald-500 rounded-full" />
                 </div>
               </div>
             </div>
