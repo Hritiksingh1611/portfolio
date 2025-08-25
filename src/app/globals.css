@@ -60,7 +60,7 @@ body {
   font-feature-settings: "rlig" 1, "calt" 1;
 }
 
-  /* Text Gradients */
+  /* Text Gradients with proper spacing */
   .text-gradient {
     /* Fallback color for browsers that don't support gradients */
     color: #3b82f6;
@@ -70,6 +70,8 @@ body {
     -webkit-text-fill-color: transparent;
     color: transparent;
     display: inline-block;
+    padding-bottom: 0.1em; /* Prevent descender clipping */
+    line-height: 1.2; /* Better line height for gradient text */
   }
   
   /* Support check for gradient text */
@@ -88,6 +90,8 @@ body {
     -webkit-text-fill-color: transparent;
     color: transparent;
     display: inline-block;
+    padding-bottom: 0.1em; /* Prevent descender clipping */
+    line-height: 1.2; /* Better line height for gradient text */
   }
   
   /* Support check for gradient text */
@@ -98,17 +102,34 @@ body {
   }
 
 /* Glass effect with dark mode support */
+
+/* Hero name gradient fix */
+.hero-name-gradient {
+  background: linear-gradient(135deg, #2563eb 0%, #7c3aed 50%, #4f46e5 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  display: block;
+  padding-bottom: 0.15em;
+  line-height: 1.15;
+  /* Ensure proper rendering on all browsers */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Optimized glass effect with reduced blur for better performance */
 .glass-effect {
   background: rgba(255, 255, 255, 0.8);
-  backdrop-filter: blur(16px) saturate(180%);
+  backdrop-filter: blur(8px) saturate(150%); /* Reduced blur from 16px to 8px */
   border: 1px solid rgba(255, 255, 255, 0.3);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1); /* Reduced shadow */
 }
 
 .dark .glass-effect {
   background: rgba(15, 15, 23, 0.8);
   border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3); /* Reduced shadow */
 }
 
 /* Grid pattern with dark mode support */

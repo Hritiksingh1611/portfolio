@@ -1,14 +1,29 @@
 "use client";
 
 import Hero from "@/components/sections/Hero";
-import About from "@/components/sections/About";
-import Skills from "@/components/sections/Skills";
-import Projects from "@/components/sections/Projects";
-import Experience from "@/components/sections/Experience";
-import Contact from "@/components/sections/Contact";
 import Navigation from "@/components/Navigation";
+import LoadingSpinner from "@/components/LoadingSpinner";
 import dynamic from "next/dynamic";
-import AIChat from "@/components/AIChat";
+
+// Lazy load non-critical components to improve initial load time
+const About = dynamic(() => import("@/components/sections/About"), {
+  loading: () => <LoadingSpinner />
+});
+const Skills = dynamic(() => import("@/components/sections/Skills"), {
+  loading: () => <LoadingSpinner />
+});
+const Projects = dynamic(() => import("@/components/sections/Projects"), {
+  loading: () => <LoadingSpinner />
+});
+const Experience = dynamic(() => import("@/components/sections/Experience"), {
+  loading: () => <LoadingSpinner />
+});
+const Contact = dynamic(() => import("@/components/sections/Contact"), {
+  loading: () => <LoadingSpinner />
+});
+const AIChat = dynamic(() => import("@/components/AIChat"), {
+  ssr: false
+});
 
 // Dynamically import FloatingElements with no SSR to prevent hydration issues
 const FloatingElements = dynamic(() => import("@/components/FloatingElements"), {

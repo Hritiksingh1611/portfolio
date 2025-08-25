@@ -5,6 +5,19 @@ import { ChevronDown, Github, Linkedin, Mail, Download, MapPin, Calendar } from 
 import { useState, useEffect } from "react";
 import { getAssetPath } from "@/lib/assets";
 
+// Custom X (Twitter) Icon Component
+const XIcon = ({ size = 24, className = "" }) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    fill="currentColor"
+    className={className}
+  >
+    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+  </svg>
+);
+
 export default function Hero() {
   const [currentRole, setCurrentRole] = useState(0);
   const [imgError, setImgError] = useState(false);
@@ -115,6 +128,16 @@ export default function Hero() {
               </motion.a>
               
               <motion.a
+                href="https://x.com/Hritik1611"
+                target="_blank"
+                rel="noopener noreferrer"
+                whileHover={{ scale: 1.05 }}
+                className="p-4 bg-sky-50 dark:bg-sky-950/50 hover:bg-sky-100 dark:hover:bg-sky-900/50 rounded-xl shadow-lg transition-all duration-300 group"
+              >
+                <XIcon size={24} className="text-sky-600 dark:text-sky-400 group-hover:text-sky-700 dark:group-hover:text-sky-300" />
+              </motion.a>
+              
+              <motion.a
                 href="mailto:hritik16.work@gmail.com"
                 whileHover={{ scale: 1.05 }}
                 className="p-4 bg-red-50 dark:bg-red-950/50 hover:bg-red-100 dark:hover:bg-red-900/50 rounded-xl shadow-lg transition-all duration-300 group"
@@ -150,9 +173,9 @@ export default function Hero() {
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.2, duration: 0.4 }}
               >
-                <h1 className="text-5xl md:text-7xl font-bold text-slate-900 dark:text-white leading-tight">
+                <h1 className="text-5xl md:text-7xl font-bold text-slate-900 dark:text-white leading-[1.1]">
                   Hritik
-                  <span className="block bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 bg-clip-text text-transparent">
+                  <span className="hero-name-gradient">
                     Singh
                   </span>
                 </h1>

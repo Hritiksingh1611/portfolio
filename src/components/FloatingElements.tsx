@@ -18,19 +18,18 @@ export default function FloatingElements() {
     // Set client-side flag
     setIsClient(true);
     
-    // Generate floating elements only on client
-    const elements = Array.from({ length: 15 }, (_, i) => ({
+    // Reduce floating elements from 15 to 8 for better performance
+    const elements = Array.from({ length: 8 }, (_, i) => ({
       id: i,
-      size: Math.random() * 4 + 2,
+      size: Math.random() * 3 + 2, // Slightly smaller elements
       initialX: Math.random() * (window?.innerWidth || 1000),
       initialY: Math.random() * (window?.innerHeight || 1000),
       color: [
-        'bg-blue-500/20',
-        'bg-purple-500/20',
-        'bg-pink-500/20',
-        'bg-green-500/20',
-        'bg-yellow-500/20',
-      ][Math.floor(Math.random() * 5)],
+        'bg-blue-500/15',
+        'bg-purple-500/15',
+        'bg-pink-500/15',
+        'bg-green-500/15',
+      ][Math.floor(Math.random() * 4)], // Reduced colors and opacity
     }));
     
     setFloatingElements(elements);
@@ -39,12 +38,22 @@ export default function FloatingElements() {
   useEffect(() => {
     if (!isClient) return;
     
+    let throttleTimer: NodeJS.Timeout | null = null;
+    
     const updateMousePosition = (e: MouseEvent) => {
-      setMousePosition({ x: e.clientX, y: e.clientY });
+      if (throttleTimer) return;
+      
+      throttleTimer = setTimeout(() => {
+        setMousePosition({ x: e.clientX, y: e.clientY });
+        throttleTimer = null;
+      }, 50); // Throttle to 20fps instead of every pixel
     };
 
-    window.addEventListener('mousemove', updateMousePosition);
-    return () => window.removeEventListener('mousemove', updateMousePosition);
+    window.addEventListener('mousemove', updateMousePosition, { passive: true });
+    return () => {
+      window.removeEventListener('mousemove', updateMousePosition);
+      if (throttleTimer) clearTimeout(throttleTimer);
+    };
   }, [isClient]);
 
   // Don't render anything on server side

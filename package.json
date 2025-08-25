@@ -10,7 +10,6 @@
     "export": "next build"
   },
   "dependencies": {
-    "@emailjs/browser": "^4.4.1",
     "@radix-ui/react-dialog": "^1.1.15",
     "@radix-ui/react-tabs": "^1.1.13",
     "@radix-ui/react-tooltip": "^1.2.8",
