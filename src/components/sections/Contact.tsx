@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import { useState } from "react";
 import { Mail, Phone, MapPin, Send, Github, Linkedin, Twitter, CheckCircle, AlertCircle } from "lucide-react";
+import emailjs from '@emailjs/browser';
 
 export default function Contact() {
   const [ref, inView] = useInView({
@@ -31,13 +32,23 @@ export default function Contact() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    
-    // Simulate form submission
+
+    const serviceId = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID || 'default_service_id';
+    const templateId = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID || 'default_template_id';
+    const userId = process.env.NEXT_PUBLIC_EMAILJS_USER_ID || 'default_user_id';
+
     try {
-      await new Promise(resolve => setTimeout(resolve, 2000));
+      await emailjs.send(serviceId, templateId, {
+        from_name: formData.name,
+        from_email: formData.email,
+        subject: formData.subject,
+        message: formData.message,
+      }, userId);
+      
       setSubmitStatus('success');
       setFormData({ name: "", email: "", subject: "", message: "" });
-    } catch {
+    } catch (error) {
+      console.error('EmailJS error:', error);
       setSubmitStatus('error');
     } finally {
       setIsSubmitting(false);
