@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ChevronDown, Github, Linkedin, Mail, Download, MapPin, Calendar } from "lucide-react";
+import { ChevronDown, Github, Linkedin, Mail, Download, MapPin } from "lucide-react";
 import { useState, useEffect } from "react";
 import { getAssetPath } from "@/lib/assets";
 
