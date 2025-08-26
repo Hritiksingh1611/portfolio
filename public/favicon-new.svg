@@ -1,0 +1,31 @@
+<svg width="32" height="32" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="iconGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#3B82F6;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#8B5CF6;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#6366F1;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Modern hexagon background -->
+  <path d="M16 2 L26 8 L26 24 L16 30 L6 24 L6 8 Z" fill="url(#iconGradient)"/>
+  
+  <!-- Letter H and S for Hritik Singh -->
+  <text x="16" y="21" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="14" font-weight="bold">HS</text>
+  
+  <!-- Data flow indicators -->
+  <circle cx="16" cy="7" r="1" fill="white" opacity="0.9"/>
+  <circle cx="22" cy="12" r="1" fill="white" opacity="0.7"/>
+  <circle cx="10" cy="12" r="1" fill="white" opacity="0.7"/>
+  <circle cx="22" cy="20" r="1" fill="white" opacity="0.7"/>
+  <circle cx="10" cy="20" r="1" fill="white" opacity="0.7"/>
+  <circle cx="16" cy="25" r="1" fill="white" opacity="0.9"/>
+  
+  <!-- Connection lines -->
+  <line x1="16" y1="7" x2="22" y2="12" stroke="white" stroke-width="0.5" opacity="0.5"/>
+  <line x1="16" y1="7" x2="10" y2="12" stroke="white" stroke-width="0.5" opacity="0.5"/>
+  <line x1="22" y1="12" x2="22" y2="20" stroke="white" stroke-width="0.5" opacity="0.5"/>
+  <line x1="10" y1="12" x2="10" y2="20" stroke="white" stroke-width="0.5" opacity="0.5"/>
+  <line x1="22" y1="20" x2="16" y2="25" stroke="white" stroke-width="0.5" opacity="0.5"/>
+  <line x1="10" y1="20" x2="16" y2="25" stroke="white" stroke-width="0.5" opacity="0.5"/>
+</svg>

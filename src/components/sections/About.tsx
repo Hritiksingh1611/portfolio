@@ -147,7 +147,7 @@ export default function About() {
                 </div>
                 <div className="flex justify-between items-center">
                   <span className="text-slate-800 dark:text-neutral-400">Availability</span>
-                  <span className="text-green-600 dark:text-green-400 font-medium">Open to Opportunities</span>
+                  <span className="text-blue-600 dark:text-blue-400 font-medium">Currently Working</span>
                 </div>
               </div>
             </div>
