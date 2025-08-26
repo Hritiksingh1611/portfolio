@@ -68,21 +68,21 @@ export default function Hero() {
         </div>
       </div>
       
-      <div className="container mx-auto px-6 py-20 relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center max-w-7xl mx-auto">
+  <div className="container mx-auto px-6 py-20 md:py-24 relative z-10">
+        <div className="grid grid-cols-1 lg:grid-cols-[auto_minmax(0,1fr)] gap-8 lg:gap-10 items-center max-w-5xl mx-auto">
           
           {/* Left Column: Profile Image & Social */}
           <motion.div 
-            initial={{ opacity: 0, x: -20 }} 
+            initial={{ opacity: 0, x: -18 }} 
             animate={{ opacity: 1, x: 0 }} 
             transition={{ duration: 0.5 }}
-            className="flex flex-col items-center lg:items-start space-y-6"
+            className="flex flex-col items-center lg:items-start space-y-5 w-full max-w-sm mx-auto"
           >
             {/* Profile Image */}
             <div className="relative group">
               {/* Gradient border - simplified on mobile */}
               <div className="absolute -inset-1 bg-gradient-to-r from-blue-400 via-purple-400 to-indigo-400 rounded-full opacity-30 md:group-hover:opacity-50 transition duration-300 md:blur-sm" />
-              <div className="relative w-48 h-48 sm:w-64 sm:h-64 md:w-80 md:h-80 rounded-full overflow-hidden bg-white dark:bg-slate-900 border-2 md:border-4 border-white/50 dark:border-slate-700/50 shadow-xl md:shadow-2xl md:backdrop-blur-sm select-none">
+              <div className="relative w-60 h-60 sm:w-64 sm:h-64 md:w-80 md:h-80 lg:w-[21rem] lg:h-[21rem] rounded-full overflow-hidden bg-white dark:bg-slate-900 border-2 md:border-4 border-white/50 dark:border-slate-700/50 shadow-xl md:shadow-2xl md:backdrop-blur-sm select-none">
                 {!imgError && imgLoaded ? (
                   <img
                     src={profileImagePath}
@@ -94,7 +94,7 @@ export default function Hero() {
                   />
                 ) : (
                   <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-blue-500 via-purple-500 to-indigo-500 text-white select-none">
-                    <span className="text-4xl sm:text-6xl md:text-7xl font-bold">HS</span>
+                    <span className="text-5xl sm:text-6xl md:text-6xl font-bold">HS</span>
                   </div>
                 )}
               </div>
@@ -163,23 +163,20 @@ export default function Hero() {
 
           {/* Right Column: Content */}
           <motion.div 
-            initial={{ opacity: 0, x: 20 }} 
+            initial={{ opacity: 0, x: 18 }} 
             animate={{ opacity: 1, x: 0 }} 
-            transition={{ duration: 0.6 }}
-            className="space-y-8"
+            transition={{ duration: 0.55 }}
+            className="space-y-6 flex flex-col justify-center h-full text-center lg:text-left items-center lg:items-start lg:pl-2"
           >
             {/* Main heading */}
-            <div className="space-y-4">
+            <div className="space-y-3">
               <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.2, duration: 0.4 }}
               >
-                <h1 className="text-5xl md:text-7xl font-bold text-slate-900 dark:text-white leading-[1.1]">
-                  Hritik
-                  <span className="hero-name-gradient">
-                    Singh
-                  </span>
+                <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-slate-900 dark:text-white leading-tight tracking-tight whitespace-nowrap">
+                  Hritik <span className="hero-name-gradient">Singh</span>
                 </h1>
               </motion.div>
               
@@ -187,7 +184,7 @@ export default function Hero() {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.3, duration: 0.4 }}
-                className="text-xl md:text-2xl text-slate-800 dark:text-neutral-300"
+                className="text-lg md:text-xl text-slate-700 dark:text-neutral-300 font-medium"
               >
                 I&apos;m a{" "}
                 <span className="font-semibold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
@@ -198,22 +195,20 @@ export default function Hero() {
 
             {/* Description */}
             <motion.p
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 18 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.8, duration: 0.6 }}
-              className="text-lg text-slate-700 dark:text-neutral-300 leading-relaxed max-w-xl"
+              transition={{ delay: 0.65, duration: 0.5 }}
+              className="text-base md:text-lg text-slate-600 dark:text-neutral-300 leading-relaxed max-w-lg"
             >
-              Passionate about building scalable data pipelines, implementing ML solutions, 
-              and transforming raw data into actionable insights. I specialize in modern 
-              data engineering practices with Python, cloud platforms, and distributed systems.
+              Passionate about building scalable data pipelines, implementing ML solutions, and transforming raw data into actionable insights. I specialize in modern data engineering practices with Python, cloud platforms, and distributed systems.
             </motion.p>
 
             {/* Tech stack pills */}
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 1.0, duration: 0.6 }}
-              className="flex flex-wrap gap-3"
+              transition={{ delay: 0.8, duration: 0.5 }}
+              className="flex flex-wrap gap-2.5"
             >
               {["Python", "AWS Glue", "Snowflake", "Redshift", "PostgreSQL", "Power BI"].map((tech, i) => (
                 <motion.span
@@ -221,7 +216,7 @@ export default function Hero() {
                   initial={{ opacity: 0, scale: 0.8 }}
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ delay: 1.2 + i * 0.1, duration: 0.4 }}
-                  className="px-4 py-2 bg-slate-100/80 dark:bg-slate-800/80 text-slate-700 dark:text-slate-300 rounded-full text-sm font-medium hover:bg-slate-200/80 dark:hover:bg-slate-700/80 transition-colors cursor-default backdrop-blur-sm border border-slate-200/50 dark:border-slate-700/50"
+                  className="px-3.5 py-1.5 bg-slate-100/70 dark:bg-slate-800/70 text-slate-700 dark:text-slate-300 rounded-full text-xs md:text-sm font-medium hover:bg-slate-200/70 dark:hover:bg-slate-700/70 transition-colors cursor-default backdrop-blur-sm border border-slate-200/40 dark:border-slate-700/40"
                 >
                   {tech}
                 </motion.span>
@@ -230,16 +225,16 @@ export default function Hero() {
 
             {/* Action buttons */}
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 1.4, duration: 0.6 }}
-              className="flex flex-col sm:flex-row gap-4 pt-4"
+              transition={{ delay: 0.95, duration: 0.5 }}
+              className="flex flex-col sm:flex-row gap-4 pt-2"
             >
               <motion.a
                 href="#contact"
                 whileHover={{ y: -2, scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
-                className="px-8 py-4 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white rounded-xl font-semibold shadow-lg shadow-blue-500/25 transition-all duration-300 text-center backdrop-blur-sm"
+                className="px-9 py-4 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white rounded-lg font-semibold shadow-md shadow-blue-500/25 transition-all duration-300 text-center backdrop-blur-sm text-sm md:text-base"
               >
                 Let&apos;s Connect
               </motion.a>
@@ -249,7 +244,7 @@ export default function Hero() {
                 download="Hritik_Singh_Resume.pdf"
                 whileHover={{ y: -2, scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
-                className="px-8 py-4 bg-white/80 dark:bg-slate-800/80 border-2 border-slate-200/80 dark:border-slate-700/80 hover:border-slate-300/80 dark:hover:border-slate-600/80 text-slate-700 dark:text-slate-300 rounded-xl font-semibold shadow-lg transition-all duration-300 flex items-center justify-center gap-2 backdrop-blur-sm"
+                className="px-9 py-4 bg-white/80 dark:bg-slate-800/70 border border-slate-200/70 dark:border-slate-700/70 hover:border-slate-300/70 dark:hover:border-slate-600/70 text-slate-700 dark:text-slate-300 rounded-lg font-semibold shadow-md transition-all duration-300 flex items-center justify-center gap-2 backdrop-blur-sm text-sm md:text-base"
               >
                 <Download size={20} />
                 Download Resume
