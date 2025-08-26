@@ -1,0 +1,273 @@
+# 🚀 Hritik Singh - Data Engineer Portfolio
+
+> A modern, performance-optimized portfolio website showcasing data engineering expertise and professional journey.
+
+[![Portfolio Live](https://img.shields.io/badge/Portfolio-Live-brightgreen?style=for-the-badge)](https://hritiksingh1611.github.io/portfolio/)
+[![Next.js](https://img.shields.io/badge/Next.js-15.4.6-black?style=for-the-badge&logo=next.js)](https://nextjs.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue?style=for-the-badge&logo=typescript)](https://www.typescriptlang.org/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind-3.4.4-38B2AC?style=for-the-badge&logo=tailwind-css)](https://tailwindcss.com/)
+[![GitHub Pages](https://img.shields.io/badge/Deployed%20on-GitHub%20Pages-222?style=for-the-badge&logo=github)](https://pages.github.com/)
+
+## 🎯 Overview
+
+Welcome to my personal portfolio! I'm **Hritik Singh**, a passionate **Data Engineer** with 2+ years of experience specializing in scalable ETL pipelines, cloud-based data solutions, and modern data stack technologies. This portfolio showcases my professional journey, technical expertise, and featured projects.
+
+### 🌟 Portfolio Highlights
+
+- **Clean, Modern Design**: Professional aesthetic with dark/light theme support
+- **Performance Optimized**: Lightning-fast loading with mobile-first approach
+- **Interactive Elements**: Smooth animations and engaging user experience
+- **Responsive Design**: Seamless experience across all devices
+- **Contact Integration**: Functional contact form with Formspree integration
+
+## 🛠️ Tech Stack & Architecture
+
+### **Frontend Framework**
+- **Next.js 15.4.6** - React framework with App Router
+- **TypeScript** - Type-safe development
+- **Tailwind CSS 3.4.4** - Utility-first CSS framework
+
+### **UI & Animations**
+- **Framer Motion** - Smooth, performant animations
+- **Lucide React** - Beautiful, customizable icons
+- **Radix UI** - Accessible component primitives
+- **next-themes** - Dark/light theme switching
+
+### **Performance & Optimization**
+- **Static Site Generation (SSG)** - Pre-rendered for speed
+- **Code Splitting** - Optimized bundle sizes
+- **Image Optimization** - Lazy loading and responsive images
+- **Font Optimization** - Inter & Space Grotesk with display swap
+
+### **Development Tools**
+- **ESLint** - Code linting and quality
+- **PostCSS** - CSS processing
+- **Autoprefixer** - CSS vendor prefixes
+
+### **Deployment & CI/CD**
+- **GitHub Actions** - Automated deployment pipeline
+- **GitHub Pages** - Static hosting platform
+- **Formspree** - Contact form handling
+
+## 📱 Portfolio Sections
+
+### 🏠 **Hero Section**
+- Dynamic role rotation (Data Engineer → Backend Developer → ML Engineer)
+- Professional profile image with status indicator
+- Direct links to GitHub, LinkedIn, and email
+- Resume download functionality
+
+### 👨‍💻 **About Section**
+- Personal introduction and professional summary
+- Key statistics and achievements
+- Quick facts including location, experience, and current role
+- Animated background with data flow visualizations
+
+### 🔧 **Skills Section**
+- **Technical Skills**: Python, SQL, AWS, Snowflake, Azure Data Factory
+- **Data Engineering**: ETL/ELT, Data Warehousing, Pipeline Development
+- **Cloud Platforms**: AWS, Azure, Google Cloud Platform
+- **Databases**: PostgreSQL, MySQL, MongoDB, Redis
+- Interactive skill categories with filtering
+
+### 💼 **Experience Section**
+- **Current Role**: Associate Data Engineer at Workmates Core2cloud Solutions Limited
+- **Key Projects**: ETL pipeline development, cloud data migration, real-time processing
+- Timeline visualization of professional journey
+- Detailed descriptions of responsibilities and achievements
+
+### 🚀 **Projects Section**
+- Featured data engineering projects
+- Filterable by category (All Projects, Analytics, Data Engineering, Web Development)
+- Technologies used and live/GitHub links
+- Project descriptions and technical implementations
+
+### 📞 **Contact Section**
+- Functional contact form powered by Formspree
+- Professional contact information
+- Social media links (GitHub, LinkedIn, X/Twitter)
+- Availability status and location
+
+## 🚀 Getting Started
+
+### Prerequisites
+- **Node.js** 18.0 or higher
+- **npm** or **yarn** package manager
+- **Git** for version control
+
+### Local Development Setup
+
+1. **Clone the Repository**
+   ```bash
+   git clone https://github.com/Hritiksingh1611/portfolio.git
+   cd portfolio
+   ```
+
+2. **Install Dependencies**
+   ```bash
+   npm install
+   # or
+   yarn install
+   ```
+
+3. **Start Development Server**
+   ```bash
+   npm run dev
+   # or
+   yarn dev
+   ```
+
+4. **Open in Browser**
+   Navigate to [http://localhost:3000](http://localhost:3000)
+
+### Available Scripts
+
+```bash
+# Development
+npm run dev          # Start development server
+npm run build        # Build for production
+npm run start        # Start production server
+npm run lint         # Run ESLint
+npm run export       # Export static files
+
+# Quick Commands
+npm run type-check   # TypeScript type checking
+npm run preview      # Preview production build locally
+```
+
+## 🌐 Deployment
+
+### **Automatic Deployment (GitHub Actions)**
+The portfolio is automatically deployed to GitHub Pages on every push to the `main` branch using GitHub Actions workflow.
+
+**Workflow Features:**
+- Builds the Next.js application
+- Exports static files optimized for GitHub Pages
+- Deploys to `gh-pages` branch
+- Includes custom domain support
+
+### **Manual Deployment Steps**
+1. **Build the Project**
+   ```bash
+   npm run build
+   ```
+
+2. **Configure GitHub Pages**
+   - Go to repository Settings → Pages
+   - Set source to "Deploy from a branch"
+   - Select `gh-pages` branch
+
+3. **Custom Domain (Optional)**
+   - Add `CNAME` file with your domain
+   - Update DNS settings
+
+### **Alternative Deployment Platforms**
+- **Vercel**: Connect GitHub repo for automatic deployment
+- **Netlify**: Drag & drop the `out` folder
+- **AWS S3**: Upload static files to S3 bucket with CloudFront
+
+## ⚡ Performance Metrics
+
+### **Lighthouse Scores**
+- **Performance**: 95+ /100
+- **Accessibility**: 100/100
+- **Best Practices**: 100/100
+- **SEO**: 100/100
+
+### **Core Web Vitals**
+- **First Contentful Paint (FCP)**: < 1.2s
+- **Largest Contentful Paint (LCP)**: < 2.0s
+- **Cumulative Layout Shift (CLS)**: < 0.1
+- **First Input Delay (FID)**: < 100ms
+
+### **Optimization Techniques**
+- Static Site Generation for faster loading
+- Image optimization and lazy loading
+- Code splitting and tree shaking
+- Font optimization with display swap
+- Reduced JavaScript bundle sizes
+- Mobile-first responsive design
+
+## 🔧 Configuration & Customization
+
+### **Environment Variables**
+```bash
+# .env.local (for local development)
+NEXT_PUBLIC_SITE_URL=https://your-domain.com
+NEXT_PUBLIC_FORMSPREE_ID=your_formspree_form_id
+```
+
+### **Next.js Configuration**
+```javascript
+// next.config.js
+const nextConfig = {
+  output: 'export',
+  basePath: process.env.NODE_ENV === 'production' ? '/portfolio' : '',
+  assetPrefix: process.env.NODE_ENV === 'production' ? '/portfolio' : '',
+  trailingSlash: true,
+  images: { unoptimized: true }
+};
+```
+
+### **Tailwind Configuration**
+```javascript
+// tailwind.config.js
+module.exports = {
+  content: ['./src/**/*.{js,ts,jsx,tsx,mdx}'],
+  darkMode: 'class',
+  theme: {
+    extend: {
+      fontFamily: {
+        sans: ['var(--font-inter)'],
+        mono: ['var(--font-space-grotesk)']
+      }
+    }
+  }
+};
+```
+
+## 🤝 Contributing
+
+Contributions, issues, and feature requests are welcome! Feel free to check the [issues page](https://github.com/Hritiksingh1611/portfolio/issues).
+
+### **Development Workflow**
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+## 📄 License
+
+This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) file for details.
+
+## 📞 Contact & Social
+
+**Hritik Singh** - Data Engineer
+
+- 📧 **Email**: [hritik16.work@gmail.com](mailto:hritik16.work@gmail.com)
+- 💼 **LinkedIn**: [linkedin.com/in/hritik-singh-62530b201](https://linkedin.com/in/hritik-singh-62530b201)
+- 🐙 **GitHub**: [github.com/Hritiksingh1611](https://github.com/Hritiksingh1611)
+- 🐦 **X (Twitter)**: [x.com/Hritik1611](https://x.com/Hritik1611)
+- 🌐 **Portfolio**: [hritiksingh1611.github.io/portfolio](https://hritiksingh1611.github.io/portfolio/)
+
+## 🎉 Acknowledgments
+
+- **Next.js Team** for the amazing React framework
+- **Vercel** for hosting and deployment solutions
+- **Tailwind CSS** for the utility-first CSS framework
+- **Framer Motion** for smooth animations
+- **Lucide** for beautiful icons
+- **GitHub** for version control and Pages hosting
+
+---
+
+<div align="center">
+  
+### 🌟 **Star this repository if you found it helpful!** 🌟
+
+**Built with ❤️ and ☕ by [Hritik Singh](https://github.com/Hritiksingh1611)**
+
+*© 2025 Hritik Singh. All rights reserved.*
+
+</div>

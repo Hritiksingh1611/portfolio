@@ -263,7 +263,7 @@ export default function Contact() {
             </div>
 
             {/* Availability Status */}
-            {/* <motion.div
+            <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ delay: 0.6, duration: 0.5 }}
@@ -277,7 +277,7 @@ export default function Contact() {
                 Currently open to new opportunities and exciting projects. 
                 Let&apos;s build something amazing together!
               </p>
-            </motion.div> */}
+            </motion.div>
           </motion.div>
 
           {/* Contact Form */}
