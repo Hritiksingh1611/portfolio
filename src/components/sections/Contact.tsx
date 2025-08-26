@@ -271,11 +271,11 @@ export default function Contact() {
             >
               <div className="flex items-center gap-3 mb-3">
                 <div className="w-3 h-3 bg-green-400 rounded-full animate-pulse"></div>
-                <span className="text-green-600 dark:text-green-300 font-semibold">Available for Work</span>
+                <span className="text-green-600 dark:text-green-300 font-semibold">Collaboration-Friendly</span>
               </div>
               <p className="text-slate-700 dark:text-gray-300 text-sm">
-                Currently open to new opportunities and exciting projects. 
-                Let&apos;s build something amazing together!
+                Currently open to new ideas and build exciting projects. 
+                Let&apos;s build something amazing together for a better tomorrow!
               </p>
             </motion.div>
           </motion.div>
