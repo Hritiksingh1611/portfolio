@@ -82,12 +82,6 @@ body {
       scroll-behavior: auto !important;
     }
   }
-  
-  /* Optimize transforms for mobile */
-  * {
-    transform: translateZ(0);
-    will-change: auto;
-  }
 }
 
   /* Text Gradients with proper spacing */

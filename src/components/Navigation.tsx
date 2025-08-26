@@ -156,14 +156,14 @@ export default function Navigation() {
           x: isOpen ? 0 : "100%" 
         }}
         transition={{ duration: 0.3, ease: "easeInOut" }}
-        className={`fixed inset-y-0 right-0 z-50 w-full max-w-sm bg-white dark:bg-neutral-900 backdrop-blur-md border-l border-gray-200 dark:border-neutral-700 md:hidden ${
+        className={`fixed inset-y-0 right-0 z-50 w-full max-w-xs bg-white/95 dark:bg-neutral-900/95 backdrop-blur-md border-l border-gray-200 dark:border-neutral-700 md:hidden ${
           isOpen ? 'pointer-events-auto' : 'pointer-events-none'
         }`}
       >
-        <div className="flex flex-col h-full pt-20 pb-6">
+        <div className="flex flex-col h-full pt-16 pb-4">
           {/* Mobile Menu Items */}
-          <div className="flex-1 px-6">
-            <div className="space-y-2">
+          <div className="flex-1 px-4">
+            <div className="space-y-1">
               {navItems.map(({ id, label, icon: Icon, href }, index) => (
                 <motion.button
                   key={id}
@@ -172,15 +172,15 @@ export default function Navigation() {
                     opacity: isOpen ? 1 : 0, 
                     x: isOpen ? 0 : 50 
                   }}
-                  transition={{ delay: index * 0.1, duration: 0.3 }}
+                  transition={{ delay: index * 0.05, duration: 0.25 }}
                   onClick={() => scrollToSection(href)}
-                  className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg font-medium transition-all duration-300 ${
+                  className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg font-medium transition-all duration-200 ${
                     activeSection === id
-                      ? 'btn-accent text-white'
+                      ? 'bg-blue-600 text-white shadow-md'
                       : 'text-neutral-600 dark:text-neutral-300 hover:text-neutral-800 dark:hover:text-neutral-100 hover:bg-neutral-100 dark:hover:bg-neutral-800'
                   }`}
                 >
-                  <Icon size={20} />
+                  <Icon size={18} />
                   {label}
                 </motion.button>
               ))}
@@ -188,8 +188,8 @@ export default function Navigation() {
           </div>
 
           {/* Mobile Footer */}
-          <div className="px-6 py-4 border-t border-neutral-200 dark:border-neutral-700">
-            <p className="text-sm text-neutral-500 dark:text-neutral-400 text-center">
+          <div className="px-4 py-2 border-t border-neutral-200 dark:border-neutral-700">
+            <p className="text-xs text-neutral-500 dark:text-neutral-400 text-center">
               Hritik Singh © 2024
             </p>
           </div>
@@ -203,7 +203,7 @@ export default function Navigation() {
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           onClick={() => setIsOpen(false)}
-          className="fixed inset-0 bg-black/50 backdrop-blur-sm z-40 md:hidden"
+          className="fixed inset-0 bg-black/40 backdrop-blur-sm z-40 md:hidden"
         />
       )}
     </>
