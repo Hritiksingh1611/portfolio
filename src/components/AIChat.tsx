@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, AnimatePresence } from "framer-motion";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { MessageCircle, X, Send, Bot, User, Sparkles } from "lucide-react";
 
 interface Message {
@@ -13,6 +13,7 @@ interface Message {
 
 export default function AIChat() {
   const [isOpen, setIsOpen] = useState(false);
+  const [isVisible, setIsVisible] = useState(true);
   const [messages, setMessages] = useState<Message[]>([
     {
       id: '1',
@@ -23,6 +24,40 @@ export default function AIChat() {
   ]);
   const [inputValue, setInputValue] = useState('');
   const [isTyping, setIsTyping] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const contactSection = document.getElementById('contact');
+      if (contactSection) {
+        const contactRect = contactSection.getBoundingClientRect();
+        const windowHeight = window.innerHeight;
+        
+        // Hide AI chat when contact section is significantly visible (more than 25% of contact section is visible)
+        const contactSectionHeight = contactRect.height;
+        const visibleHeight = Math.min(contactRect.bottom, windowHeight) - Math.max(contactRect.top, 0);
+        const visibilityRatio = visibleHeight / contactSectionHeight;
+        
+        if (visibilityRatio > 0.25 && contactRect.top < windowHeight) {
+          setIsVisible(false);
+          if (isOpen) setIsOpen(false); // Also close chat if it's open
+        } else {
+          setIsVisible(true);
+        }
+      }
+    };
+
+    // Add a small delay before checking initial state to ensure DOM is ready
+    const timeoutId = setTimeout(() => {
+      handleScroll();
+    }, 1000);
+
+    window.addEventListener('scroll', handleScroll);
+    
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      clearTimeout(timeoutId);
+    };
+  }, [isOpen]);
 
   // Predefined responses for different topics
   const responses = {
@@ -114,17 +149,21 @@ export default function AIChat() {
   return (
     <>
       {/* Chat Toggle Button */}
-      <motion.button
-        initial={{ scale: 0 }}
-        animate={{ scale: 1 }}
-        transition={{ delay: 2, duration: 0.5 }}
-        whileHover={{ scale: 1.1 }}
-        whileTap={{ scale: 0.9 }}
-        onClick={() => setIsOpen(true)}
-        className={`fixed bottom-6 left-6 z-50 w-14 h-14 bg-gradient-to-r from-purple-500 to-pink-600 text-white rounded-full shadow-lg hover:shadow-purple-500/25 transition-all duration-300 flex items-center justify-center ${isOpen ? 'hidden' : 'flex'}`}
-      >
-        <MessageCircle size={20} />
-      </motion.button>
+      {isVisible && (
+        <motion.button
+          initial={{ scale: 0 }}
+          animate={{ scale: 1 }}
+          exit={{ scale: 0 }}
+          transition={{ delay: 2, duration: 0.5 }}
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.9 }}
+          onClick={() => setIsOpen(true)}
+          className={`fixed bottom-4 left-4 md:bottom-6 md:left-6 z-50 w-12 h-12 md:w-14 md:h-14 bg-gradient-to-r from-purple-500 to-pink-600 text-white rounded-full shadow-lg hover:shadow-purple-500/25 transition-all duration-300 flex items-center justify-center ${isOpen ? 'hidden' : 'flex'}`}
+        >
+          <MessageCircle size={18} className="md:hidden" />
+          <MessageCircle size={20} className="hidden md:block" />
+        </motion.button>
+      )}
 
       {/* Chat Window */}
       <AnimatePresence>
@@ -134,7 +173,7 @@ export default function AIChat() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 100, scale: 0.8 }}
             transition={{ duration: 0.3 }}
-            className="fixed bottom-6 left-6 z-50 w-96 h-[500px] max-w-[calc(100vw-3rem)] max-h-[calc(100vh-3rem)]"
+            className="fixed bottom-2 left-2 md:bottom-6 md:left-6 z-50 w-[calc(100vw-1rem)] h-[calc(100vh-2rem)] md:w-96 md:h-[500px] max-w-[calc(100vw-1rem)] max-h-[calc(100vh-2rem)] md:max-w-[calc(100vw-3rem)] md:max-h-[calc(100vh-3rem)]"
           >
             <div className="glass-effect rounded-2xl border border-white/20 h-full flex flex-col overflow-hidden">
               {/* Chat Header */}

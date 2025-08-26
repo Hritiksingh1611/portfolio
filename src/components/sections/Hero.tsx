@@ -154,10 +154,10 @@ export default function Hero() {
                 <MapPin size={16} />
                 <span>Kolkata, West Bengal, India</span>
               </div>
-              <div className="flex items-center gap-2">
+              {/* <div className="flex items-center gap-2">
                 <Calendar size={16} />
                 <span>Available for hire</span>
-              </div>
+              </div> */}
             </div>
           </motion.div>
 
