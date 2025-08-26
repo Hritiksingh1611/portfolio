@@ -38,6 +38,10 @@ const FloatingElements = dynamic(() => import("@/components/FloatingElements"), 
   ssr: false,
 });
 
+const FloatingContacts = dynamic(() => import("@/components/FloatingContacts"), {
+  ssr: false,
+});
+
 export default function Home() {
   const [isMounted, setIsMounted] = useState(false);
 
@@ -70,12 +74,11 @@ export default function Home() {
         <Contact />
       </main>
       
-      {/* AI Chat Component - Only show on larger screens */}
-      {isMounted && (
-        <div className="hidden lg:block">
-          <AIChat />
-        </div>
-      )}
+      {/* AI Chat Component - Show on all screen sizes */}
+      {isMounted && <AIChat />}
+      
+      {/* Floating Contacts Component - Show on all screen sizes */}
+      {isMounted && <FloatingContacts />}
     </div>
   );
 }

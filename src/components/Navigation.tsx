@@ -206,27 +206,6 @@ export default function Navigation() {
           className="fixed inset-0 bg-black/50 backdrop-blur-sm z-40 md:hidden"
         />
       )}
-
-      {/* Floating Action Button (Mobile) */}
-      <motion.div
-        initial={{ scale: 0 }}
-        animate={{ scale: 1 }}
-        transition={{ delay: 1, duration: 0.5 }}
-        className="fixed bottom-6 right-6 z-40 md:hidden"
-      >
-        <motion.a
-          href="#contact"
-          whileHover={{ scale: 1.1 }}
-          whileTap={{ scale: 0.9 }}
-          onClick={(e) => {
-            e.preventDefault();
-            scrollToSection("#contact");
-          }}
-          className="flex items-center justify-center w-14 h-14 btn-accent text-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300"
-        >
-          <Mail size={20} />
-        </motion.a>
-      </motion.div>
     </>
   );
 }
