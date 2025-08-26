@@ -3,6 +3,8 @@ import { Inter, Space_Grotesk } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Analytics } from "@vercel/analytics/react";
+import FloatingChat from "@/components/FloatingChat";
+import ContactFAB from "@/components/ContactFAB";
 import PerformanceMonitor from "@/components/PerformanceMonitor";
 
 const inter = Inter({ 
@@ -62,7 +64,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${inter.variable} ${spaceGrotesk.variable} font-sans antialiased`}
+        className={`${inter.variable} ${spaceGrotesk.variable} font-sans antialiased isolate`}
       >
         <ThemeProvider
           attribute="class"
@@ -73,6 +75,9 @@ export default function RootLayout({
           {children}
           <Analytics />
           <PerformanceMonitor />
+          {/* Global floating actions */}
+          <FloatingChat />
+          <ContactFAB />
         </ThemeProvider>
       </body>
     </html>

@@ -50,10 +50,10 @@ export default function Hero() {
   return (
     <section 
       id="home" 
-      className="min-h-screen flex items-center justify-center relative overflow-hidden bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-neutral-900 dark:via-neutral-800 dark:to-slate-900 transition-all duration-500"
+      className="min-h-screen flex items-center justify-center relative z-10 overflow-hidden bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-neutral-900 dark:via-neutral-800 dark:to-slate-900 transition-all duration-500"
     >
       {/* Simplified background for better performance - reduced on mobile */}
-      <div className="absolute inset-0">
+      <div className="absolute inset-0 pointer-events-none -z-10">
         {/* Static background pattern - hidden on mobile */}
         <div className="hidden md:block absolute inset-0 opacity-5 dark:opacity-10">
           <div className="absolute top-10 left-10 text-xs font-mono text-blue-500">

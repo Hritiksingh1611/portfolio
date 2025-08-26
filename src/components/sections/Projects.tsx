@@ -140,9 +140,9 @@ export default function Projects() {
     : projects.filter(project => project.category === activeFilter);
 
   return (
-    <section id="projects" className="py-20 px-4 pt-24 relative overflow-hidden bg-gradient-to-br from-white via-blue-50 to-purple-50 dark:from-neutral-900 dark:via-neutral-800 dark:to-slate-900 transition-all duration-500" ref={ref}>
+    <section id="projects" className="py-20 px-4 pt-24 relative z-10 overflow-hidden bg-gradient-to-br from-white via-blue-50 to-purple-50 dark:from-neutral-900 dark:via-neutral-800 dark:to-slate-900 transition-all duration-500" ref={ref}>
       {/* Code Repository Background */}
-      <div className="absolute inset-0 opacity-10 dark:opacity-5 pointer-events-none">
+      <div className="absolute inset-0 opacity-10 dark:opacity-5 pointer-events-none -z-10">
         <svg className="w-full h-full" viewBox="0 0 1000 800" fill="none" style={{ pointerEvents: 'none' }}>
           {/* Code Blocks */}
           <g>

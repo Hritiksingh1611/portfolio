@@ -114,9 +114,9 @@ export default function Contact() {
   ];
 
   return (
-    <section id="contact" className="py-20 px-4 pt-24 relative overflow-hidden bg-gradient-to-br from-slate-50 via-gray-50 to-blue-50 dark:from-neutral-900 dark:via-neutral-800 dark:to-slate-900 transition-all duration-500" ref={ref}>
+    <section id="contact" className="py-20 px-4 pt-24 relative z-10 overflow-hidden bg-gradient-to-br from-slate-50 via-gray-50 to-blue-50 dark:from-neutral-900 dark:via-neutral-800 dark:to-slate-900 transition-all duration-500" ref={ref}>
       {/* Communication Network Background */}
-      <div className="absolute inset-0 opacity-10 dark:opacity-5">
+      <div className="absolute inset-0 opacity-10 dark:opacity-5 pointer-events-none -z-10">
         <svg className="w-full h-full" viewBox="0 0 1000 600" fill="none">
           {/* Network Nodes */}
           <g>
