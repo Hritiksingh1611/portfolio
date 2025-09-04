@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 206" width="160" height="160" role="img" aria-label="AWS Certified AI Practitioner – Foundational Badge">
+	<defs>
+		<linearGradient id="aiHex" x1="0" y1="0" x2="1" y2="1">
+			<stop offset="0%" stop-color="#0f172a"/>
+			<stop offset="100%" stop-color="#1e293b"/>
+		</linearGradient>
+	</defs>
+	<polygon points="90 4 170 52 170 154 90 202 10 154 10 52" fill="url(#aiHex)" stroke="#475569" stroke-width="2"/>
+	<text x="50%" y="70" font-size="26" font-family="'Segoe UI',Arial" fill="#fff" font-weight="600" text-anchor="middle">AWS</text>
+	<text x="50%" y="103" font-size="16" font-family="'Segoe UI',Arial" fill="#e2e8f0" font-weight="500" text-anchor="middle">AI Practitioner</text>
+	<rect x="40" y="118" width="100" height="28" rx="14" fill="#1e293b" stroke="#64748b" stroke-width="1"/>
+	<text x="50%" y="137" font-size="12" font-family="'Segoe UI',Arial" fill="#f1f5f9" font-weight="500" text-anchor="middle">FOUNDATIONAL</text>
+</svg>

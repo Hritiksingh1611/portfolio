@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState, useRef } from "react";
 import { createPortal } from "react-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import { MessageCircle, X, Send, Bot, User } from "lucide-react";
@@ -55,10 +55,32 @@ export default function FloatingChat() {
   const chatBottom = useMemo(() => `${baseBottom + vvOffset}px`, [vvOffset]);
   const panelBottom = useMemo(() => `${baseBottom + CIRCLE_DIAMETER + GAP_ABOVE_TRIGGER + vvOffset}px`, [vvOffset]);
   const [open, setOpen] = useState(false);
+  // Restore persisted open state
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    const saved = window.localStorage.getItem('chat-open');
+    if (saved === '1') setOpen(true);
+  }, []);
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    window.localStorage.setItem('chat-open', open ? '1' : '0');
+  }, [open]);
   const [input, setInput] = useState("");
   const [messages, setMessages] = useState<ChatMessage[]>([
     { id: "ai-welcome", text: "Hi! I'm Hritik's AI assistant. How can I help?", sender: "ai" },
   ]);
+  // One-time helper tip after open (once per session)
+  useEffect(() => {
+    if (!open) return;
+    if (typeof window === 'undefined') return;
+    if (window.sessionStorage.getItem('chat-tip-shown')) return;
+    const t = setTimeout(() => {
+      setMessages(m => [...m, { id: 'ai-tip', text: 'Try asking: "Summarize my experience" or "Show my key skills"', sender: 'ai' }]);
+      window.sessionStorage.setItem('chat-tip-shown', '1');
+    }, 1200);
+    return () => clearTimeout(t);
+  }, [open]);
+  const liveRegionRef = useRef<HTMLDivElement | null>(null);
   const [sending, setSending] = useState(false);
   const [typing, setTyping] = useState(false);
 
@@ -82,6 +104,7 @@ export default function FloatingChat() {
       setMessages((m) => [...m, aiMsg]);
       setSending(false);
       setTyping(false);
+      if (liveRegionRef.current) liveRegionRef.current.textContent = aiMsg.text;
     }, 700);
   };
 
@@ -152,7 +175,7 @@ export default function FloatingChat() {
               </div>
 
               {/* Messages */}
-              <div className="relative max-h-[50vh] overflow-y-auto px-3 py-3 space-y-2 rounded-xl before:absolute before:inset-0 before:rounded-xl before:bg-gradient-to-b before:from-white/5 before:via-white/0 before:to-white/0 dark:before:from-white/10 dark:before:via-white/0 dark:before:to-white/0 before:pointer-events-none">
+              <div className="relative max-h-[50vh] overflow-y-auto px-3 py-3 space-y-2 rounded-xl before:absolute before:inset-0 before:rounded-xl before:bg-gradient-to-b before:from-white/5 before:via-white/0 before:to-white/0 dark:before:from-white/10 dark:before:via-white/0 dark:before:to-white/0 before:pointer-events-none" role="log" aria-live="polite" aria-relevant="additions" aria-label="Chat messages">
                 {messages.map((m, idx) => {
                   const isUser = m.sender === 'user';
                   const prev = messages[idx - 1];
@@ -223,7 +246,7 @@ export default function FloatingChat() {
               </div>
 
               {/* Composer */}
-              <div className="px-3 py-3 border-t border-white/10 flex items-center gap-2 bg-white/50 dark:bg-neutral-900/30">
+        <div className="px-3 py-3 border-t border-white/10 flex items-center gap-2 bg-white/50 dark:bg-neutral-900/30">
                 <input
                   type="text"
                   value={input}
@@ -231,6 +254,7 @@ export default function FloatingChat() {
                   onKeyDown={onKeyDown}
                   placeholder="Ask about skills, projects, contact..."
                   className="flex-1 px-3 py-2 rounded-lg bg-white/90 dark:bg-white/10 border border-slate-300 dark:border-white/10 text-slate-900 dark:text-white placeholder-slate-500 dark:placeholder-slate-400 outline-none focus:ring-1 focus:ring-blue-600"
+          aria-label="Type your message"
                 />
                 <button
                   aria-label="Send message"
@@ -245,6 +269,7 @@ export default function FloatingChat() {
           </motion.div>
         )}
       </AnimatePresence>
+    <div ref={liveRegionRef} className="sr-only" aria-live="polite" />
 
       {/* Overlay for outside click to close */}
       <AnimatePresence>

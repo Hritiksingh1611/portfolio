@@ -110,6 +110,7 @@ export default function Hero() {
             {/* Social Links */}
             <div className="flex items-center gap-4">
               <motion.a
+                aria-label="GitHub profile"
                 href="https://github.com/Hritiksingh1611"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -120,6 +121,7 @@ export default function Hero() {
               </motion.a>
               
               <motion.a
+                aria-label="LinkedIn profile"
                 href="https://linkedin.com/in/hritik-singh-304450206"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -130,6 +132,7 @@ export default function Hero() {
               </motion.a>
               
               <motion.a
+                aria-label="Twitter (X) profile"
                 href="https://x.com/Hritik1611"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -140,6 +143,7 @@ export default function Hero() {
               </motion.a>
               
               <motion.a
+                aria-label="Send email"
                 href="mailto:hritik16.work@gmail.com"
                 whileHover={{ scale: 1.05 }}
                 className="p-4 bg-red-50 dark:bg-red-950/50 hover:bg-red-100 dark:hover:bg-red-900/50 rounded-xl shadow-lg transition-all duration-300 group"

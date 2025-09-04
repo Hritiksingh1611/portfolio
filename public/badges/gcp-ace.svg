@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="160" height="160" role="img" aria-label="Google Cloud – Associate Cloud Engineer Badge">
+	<defs>
+		<radialGradient id="gcpBg" cx="50%" cy="50%" r="60%">
+			<stop offset="0%" stop-color="#ffffff"/>
+			<stop offset="100%" stop-color="#e2e8f0"/>
+		</radialGradient>
+	</defs>
+	<circle cx="100" cy="100" r="96" fill="url(#gcpBg)" stroke="#94a3b8" stroke-width="2"/>
+	<circle cx="100" cy="100" r="56" fill="#fff" stroke="#cbd5e1" stroke-width="10" stroke-dasharray="8 14" stroke-linecap="round"/>
+	<g transform="translate(100 100) scale(0.9) translate(-100 -100)">
+		<circle cx="100" cy="100" r="34" fill="#fff"/>
+		<path fill="#4285F4" d="M100 66a34 34 0 0127.82 14.18l-12.1 8.75A17 17 0 00100 83"/>
+		<path fill="#34A853" d="M127.82 80.18A34 34 0 01107 134l-3.8-14.65A17 17 0 00115.72 89"/>
+		<path fill="#FBBC05" d="M107 134a34 34 0 01-41.8-19.53l13.8-6.6A17 17 0 00103.2 119.35"/>
+		<path fill="#EA4335" d="M65.2 114.47A34 34 0 0199.99 66v17a17 17 0 00-15.79 25.34"/>
+	</g>
+	<text x="50%" y="165" text-anchor="middle" font-size="13" font-family="'Segoe UI',Arial" fill="#0f172a" font-weight="600">Associate Cloud Engineer</text>
+</svg>
