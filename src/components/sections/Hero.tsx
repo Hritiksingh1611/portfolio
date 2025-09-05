@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Image from "next/image";
 import { ChevronDown, Github, Linkedin, Mail, Download, MapPin } from "lucide-react";
 import { useState, useEffect } from "react";
 import { getAssetPath } from "@/lib/assets";
@@ -25,12 +26,14 @@ export default function Hero() {
   
   const profileImagePath = getAssetPath('/profile.jpeg');
   
-  // Preload the image for faster loading
+  // Preload the image for faster loading (use browser Image constructor; avoid conflict with next/image import)
   useEffect(() => {
-    const img = new Image();
-    img.onload = () => setImgLoaded(true);
-    img.onerror = () => setImgError(true);
-    img.src = profileImagePath;
+    const img = typeof window !== 'undefined' ? new window.Image() : null;
+    if (img) {
+      img.onload = () => setImgLoaded(true);
+      img.onerror = () => setImgError(true);
+      img.src = profileImagePath;
+    }
   }, [profileImagePath]);
   const roles = [
     "Data Engineer",
@@ -84,14 +87,17 @@ export default function Hero() {
               <div className="absolute -inset-1 bg-gradient-to-r from-blue-400 via-purple-400 to-indigo-400 rounded-full opacity-30 md:group-hover:opacity-50 transition duration-300 md:blur-sm" />
               <div className="relative w-60 h-60 sm:w-64 sm:h-64 md:w-80 md:h-80 lg:w-[21rem] lg:h-[21rem] rounded-full overflow-hidden bg-white dark:bg-slate-900 border-2 md:border-4 border-white/50 dark:border-slate-700/50 shadow-xl md:shadow-2xl md:backdrop-blur-sm select-none">
                 {!imgError && imgLoaded ? (
-                  <img
-                    src={profileImagePath}
-                    alt="Hritik Singh - Data Engineer"
-                    className="w-full h-full object-cover select-none pointer-events-none"
-                    draggable={false}
-                    style={{ objectFit: 'cover' }}
-                    loading="eager"
-                  />
+                    <Image
+                      src={profileImagePath}
+                      alt="Hritik Singh - Data Engineer"
+                      fill
+                      priority
+                      sizes="(max-width: 768px) 16rem, (max-width: 1024px) 20rem, 21rem"
+                      className="object-cover select-none pointer-events-none"
+                      draggable={false}
+                      style={{ objectFit: 'cover' }}
+                      unoptimized
+                    />
                 ) : (
                   <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-blue-500 via-purple-500 to-indigo-500 text-white select-none">
                     <span className="text-5xl sm:text-6xl md:text-6xl font-bold">HS</span>

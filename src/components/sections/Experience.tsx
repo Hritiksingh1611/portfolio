@@ -3,6 +3,8 @@
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import { Calendar, MapPin, ExternalLink, Award, TrendingUp } from "lucide-react";
+import Image from "next/image";
+
 import { getAssetPath } from "@/lib/assets";
 
 export default function Experience() {
@@ -308,36 +310,34 @@ export default function Experience() {
           
           <div className="flex flex-wrap gap-8 justify-center">
             {certifications.map((cert, index) => {
-              const Wrapper: any = motion.a;
-              const commonProps = {
-                initial: { opacity: 0, y: 30 },
-                animate: inView ? { opacity: 1, y: 0 } : {},
-                transition: { delay: 1 + index * 0.1, duration: 0.5 },
-                className: "focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500/60 rounded-xl w-full sm:w-[calc(50%-1rem)] xl:w-[31%] max-w-sm"
-              };
               return (
-                <Wrapper
+                <motion.a
                   key={cert.name}
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={inView ? { opacity: 1, y: 0 } : {}}
+                  transition={{ delay: 1 + index * 0.1, duration: 0.5 }}
+                  className="focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500/60 rounded-xl w-full sm:w-[calc(50%-1rem)] xl:w-[31%] max-w-sm"
                   href={cert.credlyUrl || undefined}
                   target={cert.credlyUrl ? "_blank" : undefined}
                   rel={cert.credlyUrl ? "noopener noreferrer" : undefined}
                   aria-label={cert.credlyUrl ? `Open credential on Credly: ${cert.name}` : undefined}
                   whileHover={{ scale: cert.credlyUrl ? 1.02 : 1 }}
                   whileTap={{ scale: cert.credlyUrl ? 0.98 : 1 }}
-                  {...commonProps}
                 >
                   <div className="glass-effect p-6 rounded-2xl h-full flex flex-col border border-white/10 dark:border-white/10 border-slate-200/40 hover:border-slate-300/60 dark:hover:border-white/30 transition-colors duration-300 group bg-white/90 dark:bg-neutral-900/50 cursor-pointer min-h-[200px] relative overflow-hidden">
                     <div className="absolute inset-0 pointer-events-none opacity-[0.04] bg-[radial-gradient(circle_at_65%_40%,#60a5fa,transparent_70%)]" />
                     <div className="grid grid-cols-[88px_1fr] gap-5 relative items-start">
                       {cert.image && (
-                        <div className="w-22 h-22 aspect-square rounded-xl bg-gradient-to-br from-slate-100 via-white to-slate-50 dark:from-white/10 dark:via-white/5 dark:to-white/0 flex items-center justify-center overflow-hidden shadow-sm">
-                          <img
-                            src={cert.image}
-                            alt={`${cert.name} badge`}
-                            className="w-full h-full object-contain"
-                            loading="lazy"
-                          />
-                        </div>
+                          <div className="w-22 h-22 aspect-square rounded-xl bg-gradient-to-br from-slate-100 via-white to-slate-50 dark:from-white/10 dark:via-white/5 dark:to-white/0 flex items-center justify-center overflow-hidden shadow-sm relative">
+                            <Image
+                              src={cert.image}
+                              alt={`${cert.name} badge`}
+                              fill
+                              sizes="88px"
+                              className="object-contain p-1"
+                              unoptimized
+                            />
+                          </div>
                       )}
                       <div className="flex-1 min-w-0 flex flex-col pr-2">
                         <h4 className="text-[17px] font-semibold text-slate-900 dark:text-white group-hover:text-blue-500 dark:group-hover:text-blue-300 transition-colors duration-300 leading-snug">
@@ -362,7 +362,7 @@ export default function Experience() {
                       </div>
                     </div>
                   </div>
-                </Wrapper>
+                </motion.a>
               );
             })}
           </div>
