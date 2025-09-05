@@ -330,7 +330,7 @@ export default function Experience() {
                       {cert.image && (
                           <div className="w-22 h-22 aspect-square rounded-xl bg-gradient-to-br from-slate-100 via-white to-slate-50 dark:from-white/10 dark:via-white/5 dark:to-white/0 flex items-center justify-center overflow-hidden shadow-sm relative">
                             <Image
-                              src={cert.image}
+                              src={getAssetPath(cert.image)}
                               alt={`${cert.name} badge`}
                               fill
                               sizes="88px"
