@@ -414,7 +414,7 @@ export default function Contact() {
         >
           <div className="glass-effect p-8 rounded-2xl border border-white/10 dark:border-white/10 border-slate-200/50 max-w-3xl mx-auto bg-white/90 dark:bg-transparent">
             <h3 className="text-2xl font-semibold text-slate-900 dark:text-white mb-4">
-              Thank You for Visiting! 🚀
+              Thank You for Visiting!!
             </h3>
             <p className="text-slate-800 dark:text-gray-300 text-lg leading-relaxed">
               I appreciate you taking the time to learn about my work. Whether you&apos;re 
