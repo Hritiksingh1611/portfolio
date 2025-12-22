@@ -81,7 +81,7 @@ export default function Experience() {
   image: "/aws-certified-data-engineer-associate (3).png"
     },
     {
-      name: "AWS Certified Machine Learning Engineer - Associate",
+      name: "AWS Associate Machine Learning Engineer",
       issuer: "AWS",
       year: "2024",
       credentialId: "AWS-AD-2024",
@@ -115,16 +115,17 @@ export default function Experience() {
       credlyUrl: "https://www.credly.com/badges/4d4163cb-bd43-45a4-acc1-2813a83a0041/public_url",
   badgeKey: "aws",
   image: "/aws-certified-ai-practitioner (1).png"
-    },
-    {
-      name: "SQL Advanced Certification",
-      issuer: "HackerRank",
-      year: "2022",
-      credentialId: "SQL-ADV-2022",
-  badgeKey: "hackerrank",
-  image: "/badges/sql-advanced.svg" /* keep custom SVG for SQL */
-      // No Credly URL provided for this one
     }
+  // ,
+  //   {
+  //     name: "SQL Advanced Certification",
+  //     issuer: "HackerRank",
+  //     year: "2022",
+  //     credentialId: "SQL-ADV-2022",
+  // badgeKey: "hackerrank",
+  // image: "/badges/sql-advanced.svg" /* keep custom SVG for SQL */
+  //     // No Credly URL provided for this one
+  //   }
   ];
 
   // Map badge keys to image sources (using devicon CDN open-source icons)
