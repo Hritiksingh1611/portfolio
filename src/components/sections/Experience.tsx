@@ -81,6 +81,15 @@ export default function Experience() {
   image: "/aws-certified-data-engineer-associate (3).png"
     },
     {
+      name: "AWS Certified Machine Learning Engineer - Associate",
+      issuer: "AWS",
+      year: "2024",
+      credentialId: "AWS-AD-2024",
+      credlyUrl: "https://www.credly.com/badges/71f85288-9704-48e7-8a73-5ecc26d5f813/public_url",
+  badgeKey: "aws",
+  image: "/aws-certified-machine-learning-engineer-associate (1).png"
+    },
+    {
       name: "Github Fundamentals",
       issuer: "Github",
       year: "2024",
