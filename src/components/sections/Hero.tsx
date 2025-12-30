@@ -24,7 +24,7 @@ export default function Hero() {
   const [imgError, setImgError] = useState(false);
   const [imgLoaded, setImgLoaded] = useState(false);
   
-  const profileImagePath = getAssetPath('/profile.jpeg');
+  const profileImagePath = getAssetPath('/profile.png');
   
   // Preload the image for faster loading (use browser Image constructor; avoid conflict with next/image import)
   useEffect(() => {
