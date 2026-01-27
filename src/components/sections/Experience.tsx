@@ -24,7 +24,7 @@ export default function Experience() {
       description: "Developing robust ETL pipelines and data solutions for enterprise clients using modern data stack technologies. Working with AWS cloud services including Glue, Redshift, and S3, implementing best practices in data engineering.",
       achievements: [
         "Designed and implemented scalable ETL pipelines using AWS Glue and Data Pipeline Services",
-        "Built data warehousing solutions using AWS Redshift and Snowflake",
+        "Built data warehousing solutions using AWS Redshift and S3 for large-scale data storage and analysis",
         "Optimized data processing workflows reducing execution time by 40%",
         "Collaborated with cross-functional teams to deliver data-driven insights for enterprise clients",
         "Implemented comprehensive data quality checks and real-time monitoring systems"
@@ -71,6 +71,15 @@ export default function Experience() {
   ];
 
   const certifications = [
+    {
+      name: "GCP Professional Data Engineer",
+      issuer: "GCP",
+      year: "2026",
+      credentialId: "112e9bf0ae7544eab2aca5f74f836bf5",
+      credlyUrl: "https://www.credly.com/badges/1b899ddc-af10-401c-8571-1e6587578686/public_url",
+  badgeKey: "gcp",
+  image: "/gcp-professional-data-engineer-certification.png"
+    },
     {
       name: "AWS Associate Data Engineer",
       issuer: "AWS",
