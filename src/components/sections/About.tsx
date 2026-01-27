@@ -97,7 +97,7 @@ export default function About() {
             </p>
             <p className="text-slate-700 dark:text-neutral-300 text-lg leading-relaxed">
               My expertise includes building efficient data pipelines using Python, SQL, and modern tools like 
-              AWS Glue, Snowflake, and Azure Data Factory. I have hands-on experience with AWS and Azure cloud services 
+              Data Related Services in AWS and GCP. I have hands-on experience with AWS and GCP. 
               and have successfully delivered multiple data engineering projects for enterprise clients.
             </p>
             <p className="text-slate-700 dark:text-neutral-300 text-lg leading-relaxed">

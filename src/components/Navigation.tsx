@@ -94,7 +94,7 @@ export default function Navigation() {
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   onClick={() => scrollToSection(href)}
-                  className={`flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition-all duration-300 ${
+                  className={`flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition-all duration-300 ${id === 'contact' ? 'mr-6' : ''} ${
                     activeSection === id
                       ? 'bg-blue-600 text-white shadow-lg'
                       : 'text-gray-700 dark:text-neutral-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-neutral-800'
@@ -111,7 +111,7 @@ export default function Navigation() {
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.9 }}
                   onClick={toggleTheme}
-                  className="p-2 ml-4 bg-gray-100 dark:bg-neutral-800 text-gray-700 dark:text-neutral-300 rounded-lg hover:bg-gray-200 dark:hover:bg-neutral-700 transition-all duration-300 shadow-sm"
+                  className="p-2 ml-12 bg-gray-100 dark:bg-neutral-800 text-gray-700 dark:text-neutral-300 rounded-lg hover:bg-gray-200 dark:hover:bg-neutral-700 transition-all duration-300 shadow-sm"
                   aria-label="Toggle theme"
                 >
                   {theme === 'dark' ? <Sun size={20} /> : <Moon size={20} />}

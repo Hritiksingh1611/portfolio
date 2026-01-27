@@ -14,10 +14,10 @@ type ChatMessage = {
 const getAIReply = (input: string): string => {
   const msg = input.toLowerCase();
   if (msg.includes("experience") || msg.includes("work")) {
-    return "I have 2+ years in data engineering, building ETL on AWS (Glue, Redshift, S3) and Snowflake.";
+    return "I have 2+ years in data engineering, building ETL on AWS (Glue, Redshift, S3) and BI dashboards with QuickSuite.";
   }
   if (msg.includes("skills") || msg.includes("stack") || msg.includes("tech")) {
-    return "Core skills: Python, SQL, AWS Glue, Redshift, Snowflake, Power BI. Also React/Next.js for frontend.";
+    return "Core skills: Python, SQL, AWS Glue, Redshift, Power BI. Also React/Next.js for frontend.";
   }
   if (msg.includes("project") || msg.includes("portfolio")) {
     return "Notable projects: AWS Data Pipeline System, reviewProbe Jobs platform, BI dashboards.";

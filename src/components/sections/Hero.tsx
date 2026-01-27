@@ -220,7 +220,7 @@ export default function Hero() {
               transition={{ delay: 0.8, duration: 0.5 }}
               className="flex flex-wrap gap-2.5"
             >
-              {["Python", "AWS Glue", "Snowflake", "Redshift", "PostgreSQL", "Power BI"].map((tech, i) => (
+              {["SQL", "PySpark", "ETL/ELT", "Datawarehouse", "Datalake", "Data Visualization"].map((tech, i) => (
                 <motion.span
                   key={tech}
                   initial={{ opacity: 0, scale: 0.8 }}
