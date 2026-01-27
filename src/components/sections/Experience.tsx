@@ -136,10 +136,6 @@ export default function Experience() {
   //     // No Credly URL provided for this one
   //   }
   ];
-
-  // Map badge keys to image sources (using devicon CDN open-source icons)
-  // (Removed external badge icon logic; now using local SVG badge images.)
-
   return (
     <section id="experience" className="py-20 px-4 pt-24 relative z-10 overflow-hidden bg-gradient-to-br from-slate-50 via-gray-50 to-blue-50 dark:from-neutral-900 dark:via-neutral-800 dark:to-slate-900 transition-all duration-500" ref={ref}>
       {/* Data Pipeline Background */}
