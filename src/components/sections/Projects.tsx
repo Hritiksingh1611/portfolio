@@ -3,386 +3,256 @@
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import { useState } from "react";
-import { ExternalLink, Github, Play, Code2, Database, Brain, Smartphone, BarChart3 } from "lucide-react";
+import { ArrowUpRight, Github } from "lucide-react";
+
+type Category = "all" | "data" | "analytics" | "web";
+
+interface Project {
+  id: number;
+  title: string;
+  description: string;
+  tags: string[];
+  category: Exclude<Category, "all">;
+  status: "Production" | "Live" | "Ongoing";
+  github: string;
+  demo?: string;
+  highlights: string[];
+  gradient: string;
+  icon: string;
+}
+
+const projects: Project[] = [
+  {
+    id: 1,
+    title: "AWS Data Pipeline System",
+    description: "Comprehensive ETL pipelines using AWS Glue and Redshift for enterprise data processing — automated ingestion from multiple sources with robust error handling.",
+    tags: ["AWS Glue", "Redshift", "Python", "SQL", "S3"],
+    category: "data",
+    status: "Production",
+    github: "https://github.com/Hritiksingh1611/aws-etl-pipeline",
+    highlights: ["Processes 100 GB+ of data daily", "40% improvement in processing speed", "Automated data quality validation"],
+    gradient: "from-indigo-600/20 to-blue-600/10",
+    icon: "⚡",
+  },
+  {
+    id: 2,
+    title: "Power BI Dashboard Suite",
+    description: "Interactive business intelligence dashboards using Power BI — automated reports enabling stakeholder decision-making with real-time drill-down analytics.",
+    tags: ["Power BI", "SQL", "Azure", "DAX", "Data Modeling"],
+    category: "analytics",
+    status: "Production",
+    github: "https://github.com/Hritiksingh1611/powerbi-dashboards",
+    highlights: ["Real-time data visualization", "Automated reports for 50+ stakeholders", "Interactive drill-down capabilities"],
+    gradient: "from-yellow-600/15 to-orange-600/10",
+    icon: "📊",
+  },
+  {
+    id: 3,
+    title: "Data Warehouse Architecture",
+    description: "Modern data warehouse built on Snowflake and Azure Synapse — scalable architecture for enterprise data storage, analytics, and cost-optimized cloud storage.",
+    tags: ["Snowflake", "Azure Synapse", "SQL", "Data Modeling", "ETL"],
+    category: "data",
+    status: "Production",
+    github: "https://github.com/Hritiksingh1611/data-warehouse",
+    highlights: ["Scalable warehouse design", "60% query performance improvement", "Cost-effective cloud storage"],
+    gradient: "from-cyan-600/15 to-teal-600/10",
+    icon: "🏗️",
+  },
+  {
+    id: 4,
+    title: "Automated Data Quality Framework",
+    description: "Comprehensive data quality framework with automated validation rules, anomaly detection, and real-time alerting using Python and SQL.",
+    tags: ["Python", "SQL", "Data Validation", "Automation", "Monitoring"],
+    category: "data",
+    status: "Production",
+    github: "https://github.com/Hritiksingh1611/data-quality",
+    highlights: ["Automated quality checks", "Real-time anomaly detection", "85% reduction in data errors"],
+    gradient: "from-emerald-600/15 to-green-600/10",
+    icon: "🛡️",
+  },
+  {
+    id: 5,
+    title: "reviewProbe Jobs Platform",
+    description: "End-to-end job searching and posting platform with user auth, job management, and payment integration — built with modern full-stack technologies.",
+    tags: ["React", "Node.js", "MongoDB", "Express.js", "JavaScript"],
+    category: "web",
+    status: "Live",
+    github: "https://github.com/Hritiksingh1611/reviewprobe-jobs",
+    highlights: ["Complete job portal functionality", "User authentication & authorization", "Payment system integration"],
+    gradient: "from-purple-600/15 to-pink-600/10",
+    icon: "💼",
+  },
+  {
+    id: 6,
+    title: "Portfolio Website",
+    description: "This site — built with Next.js 15, TypeScript, Tailwind CSS, and Framer Motion. Dark-first, Gen Z aesthetic with performance-first architecture.",
+    tags: ["Next.js", "TypeScript", "Tailwind CSS", "Framer Motion"],
+    category: "web",
+    status: "Live",
+    github: "https://github.com/Hritiksingh1611/portfolio",
+    demo: "https://hritiksingh-portfolio.vercel.app",
+    highlights: ["Dark-first Gen Z design", "Smooth Framer Motion animations", "Optimized for Core Web Vitals"],
+    gradient: "from-indigo-600/20 to-purple-600/10",
+    icon: "🚀",
+  },
+];
+
+const filters: { key: Category; label: string }[] = [
+  { key: "all",       label: "All Projects" },
+  { key: "data",      label: "Data Engineering" },
+  { key: "analytics", label: "Analytics" },
+  { key: "web",       label: "Web Dev" },
+];
+
+const statusColors: Record<Project["status"], string> = {
+  Production: "bg-emerald-500/15 text-emerald-400 border-emerald-500/30",
+  Live:       "bg-blue-500/15 text-blue-400 border-blue-500/30",
+  Ongoing:    "bg-amber-500/15 text-amber-400 border-amber-500/30",
+};
 
 export default function Projects() {
-  const [ref, inView] = useInView({
-    triggerOnce: true,
-    threshold: 0.1,
-  });
+  const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.05 });
+  const [active, setActive] = useState<Category>("all");
 
-  const [activeFilter, setActiveFilter] = useState("all");
-
-  const projects = [
-    {
-      id: 1,
-      title: "AWS Data Pipeline System",
-      description: "Built comprehensive ETL pipelines using AWS Glue and Redshift for enterprise data processing. Automated data ingestion from multiple sources with robust error handling and monitoring.",
-      image: "/api/placeholder/600/400",
-      tags: ["AWS Glue", "Redshift", "Python", "SQL", "S3"],
-      category: "data",
-      status: "Production",
-      github: "https://github.com/Hritiksingh1611/aws-etl-pipeline",
-      demo: "#",
-      highlights: [
-        "Processes 100GB+ of data daily",
-        "40% improvement in data processing speed",
-        "Automated data quality validation and monitoring"
-      ]
-    },
-    {
-      id: 2,
-      title: "Power BI Dashboard Suite",
-      description: "Developed interactive business intelligence dashboards using Power BI for data visualization and analytics. Created automated reports for stakeholder decision-making.",
-      image: "/api/placeholder/600/400", 
-      tags: ["Power BI", "SQL", "Azure", "DAX", "Data Modeling"],
-      category: "analytics",
-      status: "Production",
-      github: "https://github.com/Hritiksingh1611/powerbi-dashboards",
-      demo: "#",
-      highlights: [
-        "Real-time data visualization",
-        "Automated reporting for 50+ stakeholders",
-        "Interactive drill-down capabilities"
-      ]
-    },
-    {
-      id: 3,
-      title: "Data Warehouse Architecture",
-      description: "Designed and implemented modern data warehouse solutions using Snowflake and Azure Synapse. Built scalable architecture for enterprise data storage and analytics.",
-      image: "/api/placeholder/600/400",
-      tags: ["Snowflake", "Azure Synapse", "SQL", "Data Modeling", "ETL"],
-      category: "data", 
-      status: "Production",
-      github: "https://github.com/Hritiksingh1611/data-warehouse",
-      demo: "#",
-      highlights: [
-        "Scalable data warehouse design",
-        "Optimized query performance by 60%",
-        "Cost-effective cloud storage solution"
-      ]
-    },
-    {
-      id: 4,
-      title: "Automated Data Quality Framework",
-      description: "Created comprehensive data quality framework with automated validation rules, anomaly detection, and alerting systems using Python and SQL.",
-      image: "/api/placeholder/600/400",
-      tags: ["Python", "SQL", "Data Validation", "Automation", "Monitoring"],
-      category: "data",
-      status: "Production", 
-      github: "https://github.com/Hritiksingh1611/data-quality",
-      demo: "#",
-      highlights: [
-        "Automated data quality checks",
-        "Real-time anomaly detection",
-        "Reduced data errors by 85%"
-      ]
-    },
-    {
-      id: 5,
-      title: "reviewProbe Jobs Platform",
-      description: "End-to-end job searching and posting platform with user authentication, job management, and payment integration. Built with modern full-stack technologies.",
-      image: "/api/placeholder/600/400",
-      tags: ["React", "Node.js", "MongoDB", "Express.js", "JavaScript"],
-      category: "web",
-      status: "Live",
-      github: "https://github.com/Hritiksingh1611/reviewprobe-jobs",
-      demo: "#",
-      highlights: [
-        "Complete job portal functionality",
-        "User authentication and authorization", 
-        "Payment system integration"
-      ]
-    },
-    {
-      id: 6,
-      title: "Portfolio Website",
-      description: "Modern, responsive portfolio website built with Next.js, TypeScript, and Tailwind CSS. Features dark/light mode, smooth animations, and optimized performance.",
-      image: "/api/placeholder/600/400",
-      tags: ["Next.js", "TypeScript", "Tailwind CSS", "React", "Framer Motion"],
-      category: "web",
-      status: "Live",
-      github: "https://github.com/Hritiksingh1611/portfolio",
-      demo: "https://hritiksingh-portfolio.vercel.app",
-      highlights: [
-        "Modern responsive design",
-        "Dark/Light theme support", 
-        "Optimized performance"
-      ]
-    },
-    {
-      id: 7,
-      title: "Database Management Scripts",
-      description: "Collection of SQL scripts and Python utilities for database administration, maintenance, and optimization across multiple database platforms.",
-      image: "/api/placeholder/600/400",
-      tags: ["SQL", "Python", "PostgreSQL", "MySQL", "Database Admin"],
-      category: "data",
-      status: "Ongoing",
-      github: "https://github.com/Hritiksingh1611/database-scripts", 
-      demo: "#",
-      highlights: [
-        "Automated database maintenance",
-        "Performance optimization scripts",
-        "Cross-platform compatibility"
-      ]
-    }
-  ];
-
-  const filters = [
-    { key: "all", label: "All Projects", icon: Code2 },
-    { key: "analytics", label: "Analytics", icon: BarChart3 },
-    { key: "data", label: "Data Engineering", icon: Database },
-    { key: "web", label: "Web Development", icon: ExternalLink },
-  ];
-
-  const filteredProjects = activeFilter === "all" 
-    ? projects 
-    : projects.filter(project => project.category === activeFilter);
+  const filtered = active === "all" ? projects : projects.filter((p) => p.category === active);
 
   return (
-    <section id="projects" className="py-20 px-4 pt-24 relative z-10 overflow-hidden bg-gradient-to-br from-white via-blue-50 to-purple-50 dark:from-neutral-900 dark:via-neutral-800 dark:to-slate-900 transition-all duration-500" ref={ref}>
-      {/* Code Repository Background */}
-      <div className="absolute inset-0 opacity-10 dark:opacity-5 pointer-events-none -z-10">
-        <svg className="w-full h-full" viewBox="0 0 1000 800" fill="none" style={{ pointerEvents: 'none' }}>
-          {/* Code Blocks */}
-          <g>
-            <rect x="100" y="100" width="200" height="120" rx="12" fill="currentColor" className="text-blue-600 dark:text-blue-400" opacity="0.3">
-              <animate attributeName="opacity" values="0.3;0.7;0.3" dur="5s" repeatCount="indefinite" />
-            </rect>
-            <rect x="350" y="180" width="150" height="100" rx="12" fill="currentColor" className="text-green-600 dark:text-green-400" opacity="0.3">
-              <animate attributeName="opacity" values="0.3;0.7;0.3" dur="4s" repeatCount="indefinite" />
-            </rect>
-            <rect x="550" y="120" width="180" height="140" rx="12" fill="currentColor" className="text-purple-600 dark:text-purple-400" opacity="0.3">
-              <animate attributeName="opacity" values="0.3;0.7;0.3" dur="6s" repeatCount="indefinite" />
-            </rect>
-            <rect x="780" y="160" width="160" height="110" rx="12" fill="currentColor" className="text-orange-600 dark:text-orange-400" opacity="0.3">
-              <animate attributeName="opacity" values="0.3;0.7;0.3" dur="4.5s" repeatCount="indefinite" />
-            </rect>
-          </g>
-          
-          {/* Git Branches */}
-          <g stroke="currentColor" strokeWidth="2" className="text-neutral-400 dark:text-neutral-600" opacity="0.4">
-            <path d="M200,220 Q300,250 350,230">
-              <animate attributeName="stroke-dasharray" values="0,150;150,0;0,150" dur="8s" repeatCount="indefinite" />
-            </path>
-            <path d="M500,230 Q550,200 550,180">
-              <animate attributeName="stroke-dasharray" values="0,100;100,0;0,100" dur="6s" repeatCount="indefinite" />
-            </path>
-            <path d="M730,190 Q780,180 780,190">
-              <animate attributeName="stroke-dasharray" values="0,80;80,0;0,80" dur="7s" repeatCount="indefinite" />
-            </path>
-          </g>
-          
-          {/* Commit Dots */}
-          <g>
-            <circle cx="200" cy="220" r="6" fill="currentColor" className="text-blue-500 dark:text-blue-400">
-              <animate attributeName="r" values="6;10;6" dur="3s" repeatCount="indefinite" />
-            </circle>
-            <circle cx="425" cy="230" r="6" fill="currentColor" className="text-green-500 dark:text-green-400">
-              <animate attributeName="r" values="6;10;6" dur="4s" repeatCount="indefinite" />
-            </circle>
-            <circle cx="640" cy="190" r="6" fill="currentColor" className="text-purple-500 dark:text-purple-400">
-              <animate attributeName="r" values="6;10;6" dur="3.5s" repeatCount="indefinite" />
-            </circle>
-            <circle cx="860" cy="215" r="6" fill="currentColor" className="text-orange-500 dark:text-orange-400">
-              <animate attributeName="r" values="6;10;6" dur="4.5s" repeatCount="indefinite" />
-            </circle>
-          </g>
-          
-          {/* Code Lines */}
-          <g stroke="currentColor" strokeWidth="1" className="text-neutral-300 dark:text-neutral-700" opacity="0.6">
-            <line x1="120" y1="130" x2="280" y2="130" />
-            <line x1="120" y1="145" x2="250" y2="145" />
-            <line x1="120" y1="160" x2="270" y2="160" />
-            <line x1="370" y1="200" x2="480" y2="200" />
-            <line x1="370" y1="215" x2="450" y2="215" />
-            <line x1="570" y1="140" x2="710" y2="140" />
-            <line x1="570" y1="155" x2="680" y2="155" />
-            <line x1="570" y1="170" x2="720" y2="170" />
-          </g>
-        </svg>
-      </div>
-      <div className="max-w-7xl mx-auto">
+    <section id="projects" ref={ref} className="py-24 px-4 relative z-10 overflow-hidden">
+      <div className="absolute top-0 left-1/4 w-96 h-96 orb orb-pink opacity-10 pointer-events-none" />
+
+      <div className="max-w-6xl mx-auto">
+        {/* Header */}
         <motion.div
-          initial={{ opacity: 0, y: 50 }}
+          initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8 }}
-          className="text-center mb-16"
+          transition={{ duration: 0.5 }}
+          className="mb-12"
         >
-          <h2 className="text-4xl md:text-6xl font-bold mb-6 text-slate-900 dark:text-white">
-            <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 bg-clip-text text-transparent">Featured</span> Projects
+          <p className="section-label">What I&apos;ve built</p>
+          <h2 className="font-display font-black text-4xl md:text-6xl text-white leading-none">
+            Featured <span className="text-gradient-vivid">Projects</span>
           </h2>
-          <p className="text-xl text-slate-800 dark:text-neutral-300 max-w-3xl mx-auto">
-            From data engineering solutions to web applications - here&apos;s what I&apos;ve been building
-          </p>
         </motion.div>
 
-        {/* Filter Buttons */}
+        {/* Filter tabs */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 16 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          className="flex flex-wrap justify-center gap-4 mb-12 relative z-20"
+          transition={{ delay: 0.15, duration: 0.5 }}
+          className="flex flex-wrap gap-2 mb-10"
         >
-          {filters.map(({ key, label, icon: Icon }) => (
-            <motion.button
+          {filters.map(({ key, label }) => (
+            <button
               key={key}
-              type="button"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              onClick={(e) => {
-                e.preventDefault();
-                e.stopPropagation();
-                console.log('Filter clicked:', key);
-                setActiveFilter(key);
-              }}
-              onTouchStart={(e) => {
-                e.preventDefault();
-                console.log('Touch start on filter:', key);
-                setActiveFilter(key);
-              }}
-              className={`flex items-center gap-2 px-6 py-3 rounded-full font-medium transition-all duration-300 cursor-pointer pointer-events-auto select-none ${
-                activeFilter === key
-                  ? "btn-accent text-white shadow-lg"
-                  : "bg-slate-100 dark:bg-neutral-800 text-slate-800 dark:text-neutral-300 hover:bg-slate-200 dark:hover:bg-neutral-700"
+              onClick={() => setActive(key)}
+              className={`px-4 py-2 rounded-xl text-sm font-medium transition-all duration-200 ${
+                active === key
+                  ? "bg-indigo-600 text-white shadow-lg shadow-indigo-500/25"
+                  : "glass text-neutral-400 hover:text-neutral-200 hover:bg-white/8 border border-neutral-200/70 dark:border-white/[0.08]"
               }`}
-              style={{ touchAction: 'manipulation' }}
             >
-              <Icon size={18} />
               {label}
-            </motion.button>
+            </button>
           ))}
         </motion.div>
 
-        {/* Projects Grid */}
-        <motion.div
-          layout
-          className="grid lg:grid-cols-2 gap-8"
-        >
-          {filteredProjects.map((project, index) => (
+        {/* Grid */}
+        <motion.div layout className="grid md:grid-cols-2 gap-5">
+          {filtered.map((project, i) => (
             <motion.div
               key={project.id}
               layout
-              initial={{ opacity: 0, y: 50 }}
+              initial={{ opacity: 0, y: 28 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
-              className="glass-effect rounded-2xl overflow-hidden border border-white/10 dark:border-white/10 border-slate-200/50 hover:border-white/20 dark:hover:border-white/20 hover:border-slate-300/50 transition-all duration-300 group bg-white/90 dark:bg-transparent"
+              transition={{ delay: i * 0.08, duration: 0.5, ease: "easeOut" }}
+              className="glass rounded-2xl overflow-hidden border border-neutral-200/70 dark:border-white/[0.08] hover:border-white/16 transition-all duration-300 group flex flex-col"
             >
-              {/* Project Image */}
-              <div className="relative h-48 bg-gradient-to-br from-blue-500/20 to-purple-600/20 overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-purple-600/10" />
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="text-6xl opacity-20">
-                    {project.category === "ai" && <Brain />}
-                    {project.category === "data" && <Database />}
-                    {project.category === "web" && <Code2 />}
-                    {project.category === "iot" && <Smartphone />}
-                  </div>
-                </div>
-                
-                {/* Status Badge */}
-                <div className="absolute top-4 right-4">
-                  <span className={`px-3 py-1 text-xs font-medium rounded-full ${
-                    project.status === "Production" 
-                      ? "bg-green-500/20 text-green-700 dark:text-green-300 border border-green-500/30"
-                      : "bg-blue-500/20 text-blue-700 dark:text-blue-300 border border-blue-500/30"
-                  }`}>
+              {/* Visual header */}
+              <div className={`relative h-32 bg-gradient-to-br ${project.gradient} flex items-center justify-between px-6 overflow-hidden`}>
+                <span className="text-5xl select-none">{project.icon}</span>
+                <div className="flex items-center gap-2">
+                  <span className={`text-xs font-semibold px-2.5 py-1 rounded-full border ${statusColors[project.status]}`}>
                     {project.status}
                   </span>
                 </div>
+                {/* Subtle grid overlay */}
+                <div className="absolute inset-0 grid-bg opacity-20 pointer-events-none" />
               </div>
 
-              {/* Project Content */}
-              <div className="p-6">
-                <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-3 group-hover:text-blue-600 dark:group-hover:text-blue-300 transition-colors duration-300">
+              {/* Content */}
+              <div className="p-6 flex flex-col flex-1">
+                <h3 className="font-display font-bold text-white text-lg mb-2 group-hover:text-indigo-300 transition-colors">
                   {project.title}
                 </h3>
-                
-                <p className="text-slate-700 dark:text-gray-300 mb-4 leading-relaxed">
-                  {project.description}
-                </p>
+                <p className="text-neutral-400 text-sm leading-relaxed mb-4">{project.description}</p>
 
                 {/* Highlights */}
-                <div className="mb-4">
-                  <h4 className="text-sm font-semibold text-slate-600 dark:text-slate-300 mb-2">Key Achievements:</h4>
-                  <ul className="space-y-1">
-                    {project.highlights.map((highlight, idx) => (
-                      <li key={idx} className="text-sm text-slate-600 dark:text-gray-300 flex items-start gap-2">
-                        <span className="text-blue-600 dark:text-blue-400 mt-1">•</span>
-                        {highlight}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
+                <ul className="space-y-1 mb-5">
+                  {project.highlights.map((h) => (
+                    <li key={h} className="flex items-start gap-2 text-xs text-neutral-500">
+                      <span className="mt-1.5 w-1 h-1 rounded-full bg-indigo-500 shrink-0" />
+                      {h}
+                    </li>
+                  ))}
+                </ul>
 
                 {/* Tags */}
-                <div className="flex flex-wrap gap-2 mb-6">
-                  {project.tags.map((tag) => (
-                    <span
-                      key={tag}
-                      className="px-3 py-1 text-xs bg-blue-500/20 text-blue-700 dark:text-blue-300 rounded-full border border-blue-500/30"
-                    >
-                      {tag}
+                <div className="flex flex-wrap gap-1.5 mb-5 mt-auto">
+                  {project.tags.map((t) => (
+                    <span key={t} className="text-xs px-2.5 py-1 rounded-full bg-white/6 border border-white/10 text-neutral-400">
+                      {t}
                     </span>
                   ))}
                 </div>
 
-                {/* Action Buttons */}
-                <div className="flex gap-3">
-                  <motion.a
+                {/* Actions */}
+                <div className="flex gap-2.5 pt-2 border-t border-white/8">
+                  <a
                     href={project.github}
                     target="_blank"
                     rel="noopener noreferrer"
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    className="flex items-center gap-2 px-4 py-2 bg-gray-700/50 text-white rounded-lg hover:bg-gray-600/50 transition-all duration-300"
+                    className="flex items-center gap-1.5 text-xs font-medium text-neutral-400 hover:text-white transition-colors px-3 py-2 rounded-lg hover:bg-white/8"
                   >
-                    <Github size={16} />
+                    <Github size={14} />
                     Code
-                  </motion.a>
-                  
-                  <motion.a
-                    href={project.demo}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-lg hover:shadow-lg hover:shadow-blue-500/25 transition-all duration-300"
-                  >
-                    <Play size={16} />
-                    Demo
-                  </motion.a>
+                  </a>
+                  {project.demo && (
+                    <a
+                      href={project.demo}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-1.5 text-xs font-medium text-indigo-400 hover:text-indigo-300 transition-colors px-3 py-2 rounded-lg hover:bg-indigo-500/10"
+                    >
+                      <ArrowUpRight size={14} />
+                      Live Demo
+                    </a>
+                  )}
                 </div>
               </div>
             </motion.div>
           ))}
         </motion.div>
 
-        {/* Call to Action */}
+        {/* CTA */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 24 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8, delay: 0.6 }}
-          className="text-center mt-16"
+          transition={{ delay: 0.6, duration: 0.5 }}
+          className="mt-12 text-center"
         >
-          <div className="glass-effect p-8 rounded-2xl border border-white/10 dark:border-white/10 border-slate-200/50 max-w-3xl mx-auto bg-white/90 dark:bg-transparent">
-            <h3 className="text-2xl font-semibold text-slate-900 dark:text-white mb-4">
-              Interested in Collaborating?
-            </h3>
-            <p className="text-slate-800 dark:text-gray-300 text-lg leading-relaxed mb-6">
-              I&apos;m always excited to work on innovative projects that push the boundaries of 
-              data engineering and AI. Let&apos;s build something amazing together!
-            </p>
-            <motion.a
-              href="#contact"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="inline-flex items-center gap-2 px-8 py-3 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-full font-semibold hover:shadow-lg hover:shadow-blue-500/25 transition-all duration-300"
-            >
-              Let&apos;s Connect
-              <ExternalLink size={18} />
-            </motion.a>
-          </div>
+          <p className="text-neutral-500 text-sm mb-4">More projects on GitHub</p>
+          <motion.a
+            href="https://github.com/Hritiksingh1611"
+            target="_blank"
+            rel="noopener noreferrer"
+            whileHover={{ scale: 1.04, y: -2 }}
+            whileTap={{ scale: 0.97 }}
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-xl btn-ghost text-sm font-semibold"
+          >
+            <Github size={16} />
+            View GitHub Profile
+            <ArrowUpRight size={14} />
+          </motion.a>
         </motion.div>
       </div>
     </section>

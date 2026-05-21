@@ -5,7 +5,8 @@ import { ThemeProvider } from "@/components/theme-provider";
 import { Analytics } from "@vercel/analytics/react";
 import FloatingChat from "@/components/FloatingChat";
 import ContactFAB from "@/components/ContactFAB";
-import PerformanceMonitor from "@/components/PerformanceMonitor";
+import CustomCursor from "@/components/CustomCursor";
+import ScrollProgress from "@/components/ScrollProgress";
 
 const inter = Inter({ 
   subsets: ["latin"], 
@@ -68,14 +69,14 @@ export default function RootLayout({
       >
         <ThemeProvider
           attribute="class"
-          defaultTheme="light"
-          enableSystem
-          disableTransitionOnChange
+          defaultTheme="dark"
+          enableSystem={false}
+          disableTransitionOnChange={false}
         >
+          <ScrollProgress />
+          <CustomCursor />
           {children}
           <Analytics />
-          <PerformanceMonitor />
-          {/* Global floating actions */}
           <FloatingChat />
           <ContactFAB />
         </ThemeProvider>

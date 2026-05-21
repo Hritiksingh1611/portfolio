@@ -3,426 +3,210 @@
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import { useState } from "react";
-import { Mail, Phone, MapPin, Send, Github, Linkedin, CheckCircle, AlertCircle } from "lucide-react";
+import { Mail, MapPin, Send, Github, Linkedin, CheckCircle, AlertCircle } from "lucide-react";
 
-// Custom X (Twitter) Icon Component
-const XIcon = ({ size = 24, className = "" }: { size?: number; className?: string }) => (
-  <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" className={className}>
-    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+const XIcon = ({ size = 18 }: { size?: number }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor">
+    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
   </svg>
 );
 
+const contactInfo = [
+  { icon: Mail,   label: "Email",    value: "hritik16.work@gmail.com", href: "mailto:hritik16.work@gmail.com" },
+  { icon: MapPin, label: "Location", value: "Kolkata, India",           href: "#" },
+];
+
+const socials = [
+  { icon: Github,   label: "GitHub",    href: "https://github.com/Hritiksingh1611",            color: "hover:text-white" },
+  { icon: Linkedin, label: "LinkedIn",  href: "https://linkedin.com/in/hritik-singh-304450206", color: "hover:text-blue-400" },
+  { icon: XIcon,    label: "X",         href: "https://x.com/Hritik1611",                       color: "hover:text-sky-400" },
+];
+
 export default function Contact() {
-  const [ref, inView] = useInView({
-    triggerOnce: true,
-    threshold: 0.1,
-  });
+  const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.1 });
+  const [form, setForm] = useState({ name: "", email: "", subject: "", message: "" });
+  const [submitting, setSubmitting] = useState(false);
+  const [status, setStatus] = useState<"idle" | "success" | "error">("idle");
 
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    subject: "",
-    message: ""
-  });
+  const onChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>
+    setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
 
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData(prev => ({
-      ...prev,
-      [e.target.name]: e.target.value
-    }));
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
+  const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setIsSubmitting(true);
-
+    setSubmitting(true);
     try {
-      const response = await fetch('https://formspree.io/f/xwpnkeob', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          name: formData.name,
-          email: formData.email,
-          subject: formData.subject,
-          message: formData.message,
-        }),
+      const res = await fetch("https://formspree.io/f/xwpnkeob", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
       });
-
-      if (response.ok) {
-        setSubmitStatus('success');
-        setFormData({ name: "", email: "", subject: "", message: "" });
+      if (res.ok) {
+        setStatus("success");
+        setForm({ name: "", email: "", subject: "", message: "" });
       } else {
-        setSubmitStatus('error');
+        setStatus("error");
       }
-    } catch (error) {
-      console.error('Form submission error:', error);
-      setSubmitStatus('error');
+    } catch {
+      setStatus("error");
     } finally {
-      setIsSubmitting(false);
-      setTimeout(() => setSubmitStatus('idle'), 5000);
+      setSubmitting(false);
+      setTimeout(() => setStatus("idle"), 5000);
     }
   };
 
-  const contactMethods = [
-    {
-      icon: Mail,
-      label: "Email",
-      value: "hritik16.work@gmail.com",
-      href: "mailto:hritik16.work@gmail.com",
-      description: "Best way to reach me"
-    },
-    {
-      icon: Phone,
-      label: "Phone",
-      value: "+91 9123964918",
-      href: "tel:+919123964918",
-      description: "Available 9 AM - 8 PM IST"
-    },
-    {
-      icon: MapPin,
-      label: "Location",
-      value: "India",
-      href: "#",
-      description: "Just for consulting"
-    }
-  ];
-
-  const socialLinks = [
-    {
-      icon: Github,
-      label: "GitHub",
-      href: "https://github.com/Hritiksingh1611",
-      color: "hover:text-gray-300"
-    },
-    {
-      icon: Linkedin,
-      label: "LinkedIn", 
-      href: "https://linkedin.com/in/hritik-singh-304450206",
-      color: "hover:text-blue-400"
-    },
-    {
-      icon: XIcon,
-      label: "X (Twitter)",
-      href: "https://x.com/Hritik1611",
-      color: "hover:text-sky-400"
-    }
-  ];
+  const inputClass =
+    "w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder-neutral-600 focus:outline-none focus:border-indigo-500/60 focus:bg-white/8 transition-all duration-200 text-sm";
 
   return (
-    <section id="contact" className="py-20 px-4 pt-24 relative z-10 overflow-hidden bg-gradient-to-br from-slate-50 via-gray-50 to-blue-50 dark:from-neutral-900 dark:via-neutral-800 dark:to-slate-900 transition-all duration-500" ref={ref}>
-      {/* Communication Network Background */}
-      <div className="absolute inset-0 opacity-10 dark:opacity-5 pointer-events-none -z-10">
-        <svg className="w-full h-full" viewBox="0 0 1000 600" fill="none">
-          {/* Network Nodes */}
-          <g>
-            <circle cx="200" cy="150" r="20" fill="currentColor" className="text-blue-600 dark:text-blue-400" opacity="0.4">
-              <animate attributeName="r" values="20;30;20" dur="4s" repeatCount="indefinite" />
-            </circle>
-            <circle cx="500" cy="100" r="15" fill="currentColor" className="text-green-600 dark:text-green-400" opacity="0.4">
-              <animate attributeName="r" values="15;25;15" dur="3.5s" repeatCount="indefinite" />
-            </circle>
-            <circle cx="800" cy="200" r="18" fill="currentColor" className="text-purple-600 dark:text-purple-400" opacity="0.4">
-              <animate attributeName="r" values="18;28;18" dur="4.5s" repeatCount="indefinite" />
-            </circle>
-            <circle cx="300" cy="350" r="22" fill="currentColor" className="text-orange-600 dark:text-orange-400" opacity="0.4">
-              <animate attributeName="r" values="22;32;22" dur="3s" repeatCount="indefinite" />
-            </circle>
-            <circle cx="700" cy="400" r="16" fill="currentColor" className="text-red-600 dark:text-red-400" opacity="0.4">
-              <animate attributeName="r" values="16;26;16" dur="5s" repeatCount="indefinite" />
-            </circle>
-          </g>
-          
-          {/* Connection Lines */}
-          <g stroke="currentColor" strokeWidth="2" className="text-neutral-400 dark:text-neutral-600" opacity="0.3">
-            <line x1="200" y1="150" x2="500" y2="100">
-              <animate attributeName="stroke-dasharray" values="0,300;300,0;0,300" dur="6s" repeatCount="indefinite" />
-            </line>
-            <line x1="500" y1="100" x2="800" y2="200">
-              <animate attributeName="stroke-dasharray" values="0,300;300,0;0,300" dur="7s" repeatCount="indefinite" />
-            </line>
-            <line x1="200" y1="150" x2="300" y2="350">
-              <animate attributeName="stroke-dasharray" values="0,200;200,0;0,200" dur="5s" repeatCount="indefinite" />
-            </line>
-            <line x1="300" y1="350" x2="700" y2="400">
-              <animate attributeName="stroke-dasharray" values="0,400;400,0;0,400" dur="8s" repeatCount="indefinite" />
-            </line>
-            <line x1="800" y1="200" x2="700" y2="400">
-              <animate attributeName="stroke-dasharray" values="0,200;200,0;0,200" dur="6.5s" repeatCount="indefinite" />
-            </line>
-          </g>
-          
-          {/* Message Packets */}
-          <g>
-            <circle r="4" fill="currentColor" className="text-blue-500 dark:text-blue-400" opacity="0.8">
-              <animateMotion dur="6s" repeatCount="indefinite" path="M200,150 L500,100 L800,200" />
-            </circle>
-            <circle r="3" fill="currentColor" className="text-green-500 dark:text-green-400" opacity="0.7">
-              <animateMotion dur="8s" repeatCount="indefinite" path="M300,350 L700,400 L800,200" />
-            </circle>
-            <circle r="3.5" fill="currentColor" className="text-purple-500 dark:text-purple-400" opacity="0.9">
-              <animateMotion dur="10s" repeatCount="indefinite" path="M200,150 L300,350 L700,400" />
-            </circle>
-          </g>
-          
-          {/* Signal Waves */}
-          <g stroke="currentColor" strokeWidth="1" fill="none" className="text-neutral-300 dark:text-neutral-700" opacity="0.5">
-            <circle cx="200" cy="150" r="40">
-              <animate attributeName="r" values="20;60;20" dur="3s" repeatCount="indefinite" />
-              <animate attributeName="opacity" values="0.5;0;0.5" dur="3s" repeatCount="indefinite" />
-            </circle>
-            <circle cx="500" cy="100" r="35">
-              <animate attributeName="r" values="15;55;15" dur="4s" repeatCount="indefinite" />
-              <animate attributeName="opacity" values="0.5;0;0.5" dur="4s" repeatCount="indefinite" />
-            </circle>
-            <circle cx="800" cy="200" r="45">
-              <animate attributeName="r" values="18;65;18" dur="3.5s" repeatCount="indefinite" />
-              <animate attributeName="opacity" values="0.5;0;0.5" dur="3.5s" repeatCount="indefinite" />
-            </circle>
-          </g>
-        </svg>
-      </div>
-      <div className="max-w-6xl mx-auto">
+    <section id="contact" ref={ref} className="py-24 px-4 relative z-10 overflow-hidden">
+      <div className="absolute bottom-0 right-0 w-96 h-96 orb orb-blue opacity-15 pointer-events-none" />
+
+      <div className="max-w-5xl mx-auto">
+        {/* Header */}
         <motion.div
-          initial={{ opacity: 0, y: 50 }}
+          initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8 }}
-          className="text-center mb-16"
+          transition={{ duration: 0.5 }}
+          className="mb-16"
         >
-          <h2 className="text-4xl md:text-6xl font-bold mb-6 text-slate-900 dark:text-white">
-            <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 bg-clip-text text-transparent">Let&apos;s</span> Connect
+          <p className="section-label">Get in touch</p>
+          <h2 className="font-display font-black text-4xl md:text-6xl text-white leading-none">
+            Let&apos;s <span className="text-gradient-vivid">Connect</span>
           </h2>
-          <p className="text-xl text-slate-800 dark:text-neutral-300 max-w-3xl mx-auto">
-            Ready to collaborate on your next big data project? I&apos;d love to hear from you!
-          </p>
         </motion.div>
 
-        <div className="grid lg:grid-cols-2 gap-12">
-          {/* Contact Information */}
+        <div className="grid lg:grid-cols-5 gap-10">
+          {/* Left info — 2 cols */}
           <motion.div
-            initial={{ opacity: 0, x: -50 }}
+            initial={{ opacity: 0, x: -24 }}
             animate={inView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="space-y-8"
+            transition={{ delay: 0.15, duration: 0.55, ease: "easeOut" }}
+            className="lg:col-span-2 flex flex-col gap-6"
           >
-            <div>
-              <h3 className="text-2xl font-bold text-slate-900 dark:text-white mb-6">Get in Touch</h3>
-              <p className="text-slate-800 dark:text-gray-300 text-lg leading-relaxed mb-8">
-                Whether you have a project in mind, want to discuss opportunities, 
-                or just want to say hello, I&apos;m always excited to connect with 
-                fellow tech enthusiasts and potential collaborators.
-              </p>
-            </div>
+            <p className="text-neutral-400 text-sm leading-relaxed">
+              Whether you have a project in mind, want to discuss opportunities, or just want to say hello — I&apos;m always excited to connect with fellow builders.
+            </p>
 
-            {/* Contact Methods */}
-            <div className="space-y-4">
-              {contactMethods.map(({ icon: Icon, label, value, href, description }) => (
-                <motion.a
+            {/* Contact methods */}
+            <div className="space-y-3">
+              {contactInfo.map(({ icon: Icon, label, value, href }) => (
+                <a
                   key={label}
                   href={href}
-                  whileHover={{ scale: 1.02 }}
-                  className="flex items-center gap-4 p-4 glass-effect rounded-xl hover:bg-white/10 dark:hover:bg-white/10 hover:bg-slate-100/80 transition-all duration-300 group bg-white/90 dark:bg-transparent border border-slate-200/50 dark:border-white/10"
+                  className="flex items-center gap-3 glass rounded-xl px-4 py-3 border border-neutral-200/70 dark:border-white/[0.08] hover:border-indigo-500/30 transition-all duration-200 group"
                 >
-                  <div className="p-3 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg group-hover:shadow-lg group-hover:shadow-blue-500/25 transition-all duration-300">
-                    <Icon size={20} className="text-white" />
+                  <div className="w-8 h-8 rounded-lg bg-indigo-500/15 border border-indigo-500/20 flex items-center justify-center shrink-0">
+                    <Icon size={14} className="text-indigo-400" />
                   </div>
                   <div>
-                    <p className="font-semibold text-slate-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-300 transition-colors duration-300">
-                      {label}
-                    </p>
-                    <p className="text-slate-700 dark:text-gray-300">{value}</p>
-                    <p className="text-sm text-slate-600 dark:text-gray-400">{description}</p>
+                    <p className="text-xs text-neutral-500">{label}</p>
+                    <p className="text-sm text-neutral-300 group-hover:text-white transition-colors">{value}</p>
                   </div>
-                </motion.a>
+                </a>
               ))}
             </div>
 
-            {/* Social Links */}
+            {/* Social links */}
             <div>
-              <h4 className="text-lg font-semibold text-slate-900 dark:text-white mb-4">Follow Me</h4>
-              <div className="flex gap-4">
-                {socialLinks.map(({ icon: Icon, label, href, color }) => (
+              <p className="text-xs text-neutral-600 uppercase tracking-widest mb-3">Find me online</p>
+              <div className="flex gap-3">
+                {socials.map(({ icon: Icon, label, href, color }) => (
                   <motion.a
                     key={label}
                     href={href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    whileHover={{ scale: 1.1, rotate: 5 }}
-                    whileTap={{ scale: 0.9 }}
-                    className={`p-3 glass-effect rounded-xl ${color} transition-all duration-300 group`}
                     aria-label={label}
+                    whileHover={{ scale: 1.12, y: -2 }}
+                    whileTap={{ scale: 0.92 }}
+                    className={`p-2.5 glass rounded-xl border border-neutral-200/70 dark:border-white/[0.08] text-neutral-500 ${color} transition-all duration-200`}
                   >
-                    <Icon size={24} />
+                    <Icon size={18} />
                   </motion.a>
                 ))}
               </div>
             </div>
 
-            {/* Availability Status */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ delay: 0.6, duration: 0.5 }}
-              className="glass-effect p-6 rounded-xl border border-green-500/30 bg-white/90 dark:bg-transparent"
-            >
-              <div className="flex items-center gap-3 mb-3">
-                <div className="w-3 h-3 bg-green-400 rounded-full animate-pulse"></div>
-                <span className="text-green-600 dark:text-green-300 font-semibold">Collaboration-Friendly</span>
+            {/* Availability */}
+            <div className="glass rounded-xl p-4 border border-emerald-500/20 bg-emerald-500/5">
+              <div className="flex items-center gap-2 mb-1">
+                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                <span className="text-emerald-400 text-sm font-semibold">Open to collaborate</span>
               </div>
-              <p className="text-slate-700 dark:text-gray-300 text-sm">
-                Currently open to new ideas and build exciting projects. 
-                Let&apos;s build something amazing together for a better tomorrow!
+              <p className="text-neutral-500 text-xs leading-relaxed">
+                Currently working but open to exciting new ideas and projects. Let&apos;s build something great!
               </p>
-            </motion.div>
+            </div>
           </motion.div>
 
-          {/* Contact Form */}
+          {/* Right form — 3 cols */}
           <motion.div
-            initial={{ opacity: 0, x: 50 }}
+            initial={{ opacity: 0, x: 24 }}
             animate={inView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.8, delay: 0.4 }}
+            transition={{ delay: 0.25, duration: 0.55, ease: "easeOut" }}
+            className="lg:col-span-3"
           >
-            <form onSubmit={handleSubmit} className="glass-effect p-8 rounded-2xl border border-white/10 dark:border-white/10 border-slate-200/50 bg-white/90 dark:bg-transparent">
-              <h3 className="text-2xl font-bold text-slate-900 dark:text-white mb-6">Send a Message</h3>
-              
-              <div className="space-y-6">
-                <div className="grid md:grid-cols-2 gap-4">
-                  <div>
-                    <label htmlFor="name" className="block text-sm font-medium text-slate-700 dark:text-gray-300 mb-2">
-                      Name *
-                    </label>
-                    <input
-                      type="text"
-                      id="name"
-                      name="name"
-                      value={formData.name}
-                      onChange={handleInputChange}
-                      required
-                      className="w-full px-4 py-3 bg-white dark:bg-white/5 border border-slate-300 dark:border-white/10 rounded-lg text-slate-900 dark:text-white placeholder-slate-500 dark:placeholder-gray-400 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all duration-300"
-                      placeholder="Your name"
-                    />
-                  </div>
-                  
-                  <div>
-                    <label htmlFor="email" className="block text-sm font-medium text-slate-700 dark:text-gray-300 mb-2">
-                      Email *
-                    </label>
-                    <input
-                      type="email"
-                      id="email"
-                      name="email"
-                      value={formData.email}
-                      onChange={handleInputChange}
-                      required
-                      className="w-full px-4 py-3 bg-white dark:bg-white/5 border border-slate-300 dark:border-white/10 rounded-lg text-slate-900 dark:text-white placeholder-slate-500 dark:placeholder-gray-400 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all duration-300"
-                      placeholder="your@email.com"
-                    />
-                  </div>
-                </div>
+            <form onSubmit={onSubmit} className="glass rounded-2xl p-6 border border-neutral-200/70 dark:border-white/[0.08] space-y-4">
+              <h3 className="font-display font-bold text-white text-lg mb-2">Send a message</h3>
 
+              <div className="grid sm:grid-cols-2 gap-4">
                 <div>
-                  <label htmlFor="subject" className="block text-sm font-medium text-slate-700 dark:text-gray-300 mb-2">
-                    Subject *
-                  </label>
-                  <input
-                    type="text"
-                    id="subject"
-                    name="subject"
-                    value={formData.subject}
-                    onChange={handleInputChange}
-                    required
-                    className="w-full px-4 py-3 bg-white dark:bg-white/5 border border-slate-300 dark:border-white/10 rounded-lg text-slate-900 dark:text-white placeholder-slate-500 dark:placeholder-gray-400 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all duration-300"
-                    placeholder="What's this about?"
-                  />
+                  <label className="text-xs text-neutral-500 block mb-1.5">Name *</label>
+                  <input type="text" name="name" value={form.name} onChange={onChange} required placeholder="Your name" className={inputClass} />
                 </div>
-
                 <div>
-                  <label htmlFor="message" className="block text-sm font-medium text-slate-700 dark:text-gray-300 mb-2">
-                    Message *
-                  </label>
-                  <textarea
-                    id="message"
-                    name="message"
-                    value={formData.message}
-                    onChange={handleInputChange}
-                    required
-                    rows={5}
-                    className="w-full px-4 py-3 bg-white dark:bg-white/5 border border-slate-300 dark:border-white/10 rounded-lg text-slate-900 dark:text-white placeholder-slate-500 dark:placeholder-gray-400 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all duration-300 resize-none"
-                    placeholder="Tell me about your project or inquiry..."
-                  />
+                  <label className="text-xs text-neutral-500 block mb-1.5">Email *</label>
+                  <input type="email" name="email" value={form.email} onChange={onChange} required placeholder="you@email.com" className={inputClass} />
                 </div>
-
-                {/* Submit Status */}
-                {submitStatus !== 'idle' && (
-                  <motion.div
-                    initial={{ opacity: 0, y: -10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    className={`flex items-center gap-2 p-3 rounded-lg ${
-                      submitStatus === 'success' 
-                        ? 'bg-green-500/20 text-green-300 border border-green-500/30'
-                        : 'bg-red-500/20 text-red-300 border border-red-500/30'
-                    }`}
-                  >
-                    {submitStatus === 'success' ? (
-                      <>
-                        <CheckCircle size={16} />
-                        Message sent successfully! I&apos;ll get back to you soon.
-                      </>
-                    ) : (
-                      <>
-                        <AlertCircle size={16} />
-                        Something went wrong. Please try again or contact me directly.
-                      </>
-                    )}
-                  </motion.div>
-                )}
-
-                <motion.button
-                  type="submit"
-                  disabled={isSubmitting}
-                  whileHover={{ scale: isSubmitting ? 1 : 1.02 }}
-                  whileTap={{ scale: isSubmitting ? 1 : 0.98 }}
-                  className="w-full flex items-center justify-center gap-2 px-8 py-4 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-lg font-semibold hover:shadow-lg hover:shadow-blue-500/25 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
-                >
-                  {isSubmitting ? (
-                    <>
-                      <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
-                      Sending...
-                    </>
-                  ) : (
-                    <>
-                      <Send size={18} />
-                      Send Message
-                    </>
-                  )}
-                </motion.button>
               </div>
+
+              <div>
+                <label className="text-xs text-neutral-500 block mb-1.5">Subject *</label>
+                <input type="text" name="subject" value={form.subject} onChange={onChange} required placeholder="What's this about?" className={inputClass} />
+              </div>
+
+              <div>
+                <label className="text-xs text-neutral-500 block mb-1.5">Message *</label>
+                <textarea name="message" value={form.message} onChange={onChange} required rows={5} placeholder="Tell me about your project or idea..." className={`${inputClass} resize-none`} />
+              </div>
+
+              {status !== "idle" && (
+                <motion.div
+                  initial={{ opacity: 0, y: -8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className={`flex items-center gap-2 text-sm px-4 py-3 rounded-xl border ${
+                    status === "success"
+                      ? "bg-emerald-500/10 border-emerald-500/30 text-emerald-400"
+                      : "bg-red-500/10 border-red-500/30 text-red-400"
+                  }`}
+                >
+                  {status === "success" ? <CheckCircle size={15} /> : <AlertCircle size={15} />}
+                  {status === "success" ? "Message sent! I'll get back to you soon." : "Something went wrong. Try again or email me directly."}
+                </motion.div>
+              )}
+
+              <motion.button
+                type="submit"
+                disabled={submitting}
+                whileHover={{ scale: submitting ? 1 : 1.02 }}
+                whileTap={{ scale: submitting ? 1 : 0.98 }}
+                className="w-full flex items-center justify-center gap-2 py-3.5 btn-primary rounded-xl font-semibold text-sm disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                {submitting ? (
+                  <>
+                    <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                    Sending...
+                  </>
+                ) : (
+                  <>
+                    <Send size={15} />
+                    Send Message
+                  </>
+                )}
+              </motion.button>
             </form>
           </motion.div>
         </div>
-
-        {/* Thank You Note */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8, delay: 0.8 }}
-          className="text-center mt-16"
-        >
-          <div className="glass-effect p-8 rounded-2xl border border-white/10 dark:border-white/10 border-slate-200/50 max-w-3xl mx-auto bg-white/90 dark:bg-transparent">
-            <h3 className="text-2xl font-semibold text-slate-900 dark:text-white mb-4">
-              Thank You for Visiting!!
-            </h3>
-            <p className="text-slate-800 dark:text-gray-300 text-lg leading-relaxed">
-              I appreciate you taking the time to learn about my work. Whether you&apos;re 
-              looking to collaborate on a project, discuss opportunities, or just connect 
-              with a fellow data enthusiast, I&apos;m always excited to meet new people in the tech community.
-            </p>
-          </div>
-        </motion.div>
       </div>
     </section>
   );

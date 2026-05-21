@@ -7,27 +7,22 @@ import Projects from "@/components/sections/Projects";
 import Experience from "@/components/sections/Experience";
 import Contact from "@/components/sections/Contact";
 import Navigation from "@/components/Navigation";
+import Footer from "@/components/Footer";
 
 export default function Home() {
   return (
-    <>
-      <div className="relative min-h-screen bg-white dark:bg-neutral-900 transition-colors duration-300">
-        {/* Subtle Background Pattern - Reduced opacity on mobile */}
-        <div className="fixed inset-0 grid-bg opacity-30 md:opacity-50" />
-        
-        {/* Navigation */}
-        <Navigation />
-        
-        {/* Main Content */}
-        <main className="relative z-10">
-          <Hero />
-          <About />
-          <Skills />
-          <Experience />
-          <Projects />
-          <Contact />
-        </main>
-      </div>
-    </>
+    <div className="relative min-h-screen bg-[#f8f8fc] dark:bg-[#080812]">
+      <div className="fixed inset-0 grid-bg opacity-40 pointer-events-none -z-10" />
+      <Navigation />
+      <main>
+        <Hero />
+        <About />
+        <Skills />
+        <Experience />
+        <Projects />
+        <Contact />
+      </main>
+      <Footer />
+    </div>
   );
 }
