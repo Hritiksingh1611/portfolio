@@ -2,174 +2,172 @@
 
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
-import { useState } from "react";
 
-type Category = "all" | "data" | "cloud" | "languages" | "tools";
+type SkillTag = { name: string; highlight?: boolean };
 
-interface Skill {
-  name: string;
-  level: "expert" | "advanced" | "proficient";
-  category: Category;
-}
-
-const skills: Skill[] = [
-  // Data Engineering
-  { name: "AWS Glue",          level: "expert",    category: "data" },
-  { name: "AWS Redshift",      level: "expert",    category: "data" },
-  { name: "AWS DMS",           level: "advanced",  category: "data" },
-  { name: "Snowflake",         level: "advanced",  category: "data" },
-  { name: "Apache Airflow",    level: "advanced",  category: "data" },
-  { name: "Azure Data Factory",level: "proficient",category: "data" },
-  { name: "ETL / ELT",         level: "expert",    category: "data" },
-  { name: "Data Warehousing",  level: "expert",    category: "data" },
-  // Cloud
-  { name: "AWS",               level: "expert",    category: "cloud" },
-  { name: "Google Cloud",      level: "advanced",  category: "cloud" },
-  { name: "Microsoft Azure",   level: "advanced",  category: "cloud" },
-  { name: "AWS S3",            level: "expert",    category: "cloud" },
-  { name: "AWS Lambda",        level: "advanced",  category: "cloud" },
-  { name: "AWS QuickSight",    level: "advanced",  category: "cloud" },
-  // Languages
-  { name: "Python",            level: "expert",    category: "languages" },
-  { name: "SQL",               level: "expert",    category: "languages" },
-  { name: "PySpark",           level: "advanced",  category: "languages" },
-  { name: "Shell Scripting",   level: "advanced",  category: "languages" },
-  { name: "JavaScript",        level: "proficient",category: "languages" },
-  { name: "R",                 level: "proficient",category: "languages" },
-  // Tools & Frameworks
-  { name: "Pandas",            level: "expert",    category: "tools" },
-  { name: "NumPy",             level: "expert",    category: "tools" },
-  { name: "Power BI",          level: "expert",    category: "tools" },
-  { name: "PostgreSQL",        level: "expert",    category: "tools" },
-  { name: "MySQL",             level: "advanced",  category: "tools" },
-  { name: "MongoDB",           level: "proficient",category: "tools" },
-  { name: "FastAPI",           level: "advanced",  category: "tools" },
-  { name: "Docker",            level: "proficient",category: "tools" },
-  { name: "Git / GitHub",      level: "expert",    category: "tools" },
-  { name: "Streamlit",         level: "advanced",  category: "tools" },
+const tracks: { id: number; dir: "ltr" | "rtl"; dur: number; skills: SkillTag[] }[] = [
+  {
+    id: 1,
+    dir: "ltr",
+    dur: 32,
+    skills: [
+      { name: "AWS Glue", highlight: true },
+      { name: "Redshift" },
+      { name: "Apache Airflow", highlight: true },
+      { name: "Snowflake", highlight: true },
+      { name: "AWS DMS" },
+      { name: "ETL / ELT", highlight: true },
+      { name: "Data Warehousing" },
+      { name: "Azure Data Factory" },
+      { name: "PySpark", highlight: true },
+      { name: "AWS S3" },
+    ],
+  },
+  {
+    id: 2,
+    dir: "rtl",
+    dur: 24,
+    skills: [
+      { name: "AWS", highlight: true },
+      { name: "Google Cloud Platform" },
+      { name: "Microsoft Azure" },
+      { name: "Power BI", highlight: true },
+      { name: "AWS Lambda" },
+      { name: "AWS QuickSight" },
+      { name: "Shell Scripting" },
+      { name: "R" },
+      { name: "AWS S3" },
+    ],
+  },
+  {
+    id: 3,
+    dir: "ltr",
+    dur: 40,
+    skills: [
+      { name: "Python", highlight: true },
+      { name: "SQL", highlight: true },
+      { name: "Pandas" },
+      { name: "NumPy" },
+      { name: "FastAPI" },
+      { name: "PostgreSQL", highlight: true },
+      { name: "MySQL" },
+      { name: "MongoDB" },
+      { name: "Docker" },
+      { name: "Git / GitHub" },
+      { name: "Streamlit" },
+      { name: "JavaScript" },
+    ],
+  },
 ];
 
-const filters: { key: Category | "all"; label: string }[] = [
-  { key: "all",       label: "All" },
-  { key: "data",      label: "Data Engineering" },
-  { key: "cloud",     label: "Cloud" },
-  { key: "languages", label: "Languages" },
-  { key: "tools",     label: "Tools & DBs" },
+const counters = [
+  { num: "30+", label: "Technologies",   color: "text-violet-600 dark:text-violet-400" },
+  { num: "5+",  label: "Certifications", color: "text-pink-600 dark:text-pink-400" },
+  { num: "3",   label: "Cloud Platforms",color: "text-cyan-600 dark:text-cyan-400" },
+  { num: "2+",  label: "Years Exp.",     color: "text-indigo-600 dark:text-indigo-400" },
 ];
-
-const levelConfig = {
-  expert:    { label: "Expert",    color: "border-indigo-500/50 bg-indigo-500/10 text-indigo-300 hover:bg-indigo-500/20 hover:border-indigo-400/70" },
-  advanced:  { label: "Advanced",  color: "border-purple-500/40 bg-purple-500/8 text-purple-300 hover:bg-purple-500/18 hover:border-purple-400/60" },
-  proficient:{ label: "Proficient",color: "border-white/15 bg-white/5 text-neutral-400 hover:bg-white/10 hover:border-white/25" },
-};
 
 export default function Skills() {
-  const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.1 });
-  const [active, setActive] = useState<Category | "all">("all");
-
-  const filtered = active === "all" ? skills : skills.filter((s) => s.category === active);
+  const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.08 });
 
   return (
-    <section
-      id="skills"
-      ref={ref}
-      className="py-24 px-4 relative z-10 overflow-hidden"
-    >
-      <div className="absolute bottom-0 left-0 w-96 h-96 orb orb-blue opacity-15 pointer-events-none" />
+    <section id="skills" ref={ref} className="py-24 relative z-10 overflow-hidden">
+      <div className="absolute bottom-0 left-0 w-96 h-96 orb orb-violet opacity-15 pointer-events-none" />
+      <div className="absolute top-1/2 right-0 w-64 h-64 orb orb-cyan opacity-10 pointer-events-none" />
 
-      <div className="max-w-6xl mx-auto">
-        {/* Header */}
+      {/* Header */}
+      <div className="max-w-6xl mx-auto px-4 mb-14">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.5 }}
-          className="mb-12"
         >
-          <p className="section-label">What I work with</p>
-          <h2 className="font-display font-black text-4xl md:text-6xl text-white leading-none">
-            Skills &amp; <span className="text-gradient-vivid">Expertise</span>
-          </h2>
+          <div className="flex items-center gap-3 mb-5">
+            <span className="font-mono text-[10px] text-neutral-400 dark:text-neutral-700 tracking-[0.25em] uppercase shrink-0">02 — Skills</span>
+            <div className="h-px flex-1 bg-neutral-200 dark:bg-white/[0.05]" />
+          </div>
+          <div className="flex flex-col md:flex-row md:items-end gap-4 md:gap-10">
+            <h2 className="font-display font-black text-4xl md:text-6xl text-neutral-900 dark:text-white leading-none">
+              Tech <span className="text-gradient-vivid">Stack</span>
+            </h2>
+            <p className="text-neutral-500 dark:text-neutral-500 text-sm max-w-xs md:mb-1.5 leading-relaxed">
+              2+ years building with these tools — expert in data engineering, cloud platforms, and analytics.
+            </p>
+          </div>
         </motion.div>
+      </div>
 
-        {/* Filter tabs */}
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ delay: 0.15, duration: 0.5 }}
-          className="flex flex-wrap gap-2 mb-10"
-        >
-          {filters.map(({ key, label }) => (
-            <button
-              key={key}
-              onClick={() => setActive(key)}
-              className={`px-4 py-2 rounded-xl text-sm font-medium transition-all duration-200 ${
-                active === key
-                  ? "bg-indigo-600 text-white shadow-lg shadow-indigo-500/25"
-                  : "glass text-neutral-400 hover:text-neutral-200 hover:bg-white/8 border border-neutral-200/70 dark:border-white/[0.08]"
-              }`}
+      {/* Marquee tracks */}
+      <div className="relative">
+        {/* Side fade masks */}
+        <div
+          className="absolute left-0 top-0 bottom-0 w-28 z-10 pointer-events-none"
+          style={{ background: "linear-gradient(to right, var(--bg), transparent)" }}
+        />
+        <div
+          className="absolute right-0 top-0 bottom-0 w-28 z-10 pointer-events-none"
+          style={{ background: "linear-gradient(to left, var(--bg), transparent)" }}
+        />
+
+        <div className="space-y-3">
+          {tracks.map((track, ti) => (
+            <motion.div
+              key={track.id}
+              initial={{ opacity: 0, x: track.dir === "ltr" ? -50 : 50 }}
+              animate={inView ? { opacity: 1, x: 0 } : {}}
+              transition={{ delay: ti * 0.12 + 0.2, duration: 0.7, ease: "easeOut" }}
+              className="overflow-hidden marquee-wrap py-1"
             >
-              {label}
-            </button>
+              <div
+                className={`marquee-track ${track.dir === "rtl" ? "animate-marquee-rev" : "animate-marquee"}`}
+                style={{ animationDuration: `${track.dur}s` }}
+              >
+                {[...track.skills, ...track.skills].map((skill, i) => (
+                  <span
+                    key={i}
+                    className={`inline-flex items-center px-4 py-2.5 mx-1.5 rounded-xl text-sm font-medium border whitespace-nowrap ${
+                      skill.highlight
+                        ? "bg-violet-500/10 dark:bg-violet-500/20 border-violet-500/40 dark:border-violet-500/60 text-violet-600 dark:text-violet-300"
+                        : "bg-white/60 dark:bg-white/[0.05] border-neutral-200 dark:border-white/[0.10] text-neutral-600 dark:text-neutral-400"
+                    }`}
+                  >
+                    {skill.name}
+                  </span>
+                ))}
+              </div>
+            </motion.div>
           ))}
-        </motion.div>
+        </div>
+      </div>
 
-        {/* Legend */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={inView ? { opacity: 1 } : {}}
-          transition={{ delay: 0.2, duration: 0.4 }}
-          className="flex flex-wrap gap-4 mb-8 text-xs text-neutral-500"
-        >
-          {Object.entries(levelConfig).map(([key, { label, color }]) => (
-            <span key={key} className={`skill-pill ${color} text-[11px]`}>{label}</span>
-          ))}
-        </motion.div>
-
-        {/* Skill pills grid */}
-        <motion.div
-          key={active}
-          initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.35 }}
-          className="flex flex-wrap gap-2.5"
-        >
-          {filtered.map((skill, i) => (
-            <motion.span
-              key={skill.name}
-              initial={{ opacity: 0, scale: 0.85 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: i * 0.03, duration: 0.3 }}
-              className={`inline-flex items-center px-4 py-2 rounded-full text-sm font-medium border cursor-default transition-all duration-200 ${levelConfig[skill.level].color}`}
-            >
-              {skill.name}
-            </motion.span>
-          ))}
-        </motion.div>
-
-        {/* Bottom card */}
+      {/* Bottom stats + learning */}
+      <div className="max-w-6xl mx-auto px-4 mt-14 space-y-4">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ delay: 0.5, duration: 0.5 }}
-          className="mt-16 glass rounded-2xl p-7 border border-neutral-200/70 dark:border-white/[0.08] flex flex-col md:flex-row gap-6 items-start md:items-center"
+          transition={{ delay: 0.55, duration: 0.5 }}
+          className="grid grid-cols-2 md:grid-cols-4 gap-4"
         >
-          <div className="flex-1">
-            <h3 className="font-display font-bold text-white text-xl mb-2">Always evolving</h3>
-            <p className="text-neutral-400 text-sm leading-relaxed">
-              Currently exploring <span className="text-indigo-400">LLM integrations</span>, <span className="text-purple-400">real-time streaming</span> with Kafka, and advanced <span className="text-pink-400">MLOps</span> workflows. The data landscape never stands still — and neither do I.
-            </p>
-          </div>
-          <div className="flex gap-3 shrink-0">
-            <div className="text-center">
-              <div className="font-display font-black text-3xl text-white">5+</div>
-              <div className="text-xs text-neutral-500 mt-0.5">Certifications</div>
+          {counters.map(({ num, label, color }) => (
+            <div key={label} className="glass rounded-2xl p-5 border border-neutral-200/70 dark:border-white/[0.08] text-center">
+              <div className={`font-display font-black text-3xl ${color}`}>{num}</div>
+              <div className="text-xs text-neutral-500 mt-1">{label}</div>
             </div>
-            <div className="w-px bg-white/10" />
-            <div className="text-center">
-              <div className="font-display font-black text-3xl text-white">30+</div>
-              <div className="text-xs text-neutral-500 mt-0.5">Technologies</div>
-            </div>
-          </div>
+          ))}
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ delay: 0.7, duration: 0.5 }}
+          className="glass rounded-2xl px-6 py-4 border border-neutral-200/70 dark:border-white/[0.08] flex flex-wrap items-center gap-3"
+        >
+          <span className="text-xs font-mono text-neutral-500 uppercase tracking-widest shrink-0">Currently exploring</span>
+          {["LLM Integration", "Real-time Streaming (Kafka)", "Advanced MLOps"].map((t) => (
+            <span key={t} className="px-3 py-1 rounded-full text-xs font-medium bg-violet-500/10 border border-violet-500/30 text-violet-600 dark:text-violet-400">
+              {t}
+            </span>
+          ))}
         </motion.div>
       </div>
     </section>

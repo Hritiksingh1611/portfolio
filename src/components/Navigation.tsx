@@ -60,7 +60,7 @@ export default function Navigation() {
         <div
           className={`pointer-events-auto flex items-center gap-1 px-3 py-2 rounded-2xl transition-all duration-300 ${
             isScrolled
-              ? "glass-strong shadow-2xl shadow-black/20 border border-white/10"
+              ? "glass-strong shadow-2xl shadow-black/10 dark:shadow-black/20 border border-black/[0.07] dark:border-white/10"
               : "bg-transparent"
           }`}
         >
@@ -80,14 +80,14 @@ export default function Navigation() {
                 onClick={() => scrollTo(href)}
                 className={`relative px-3.5 py-1.5 text-sm font-medium rounded-xl transition-all duration-200 ${
                   activeSection === id
-                    ? "text-white"
-                    : "text-neutral-400 hover:text-neutral-200"
+                    ? "text-violet-700 dark:text-white"
+                    : "text-neutral-500 dark:text-neutral-400 hover:text-neutral-800 dark:hover:text-neutral-200"
                 }`}
               >
                 {activeSection === id && (
                   <motion.span
                     layoutId="nav-pill"
-                    className="absolute inset-0 rounded-xl bg-white/10 border border-white/15"
+                    className="absolute inset-0 rounded-xl bg-violet-500/12 dark:bg-white/10 border border-violet-500/25 dark:border-white/15"
                     transition={{ type: "spring", stiffness: 380, damping: 32 }}
                   />
                 )}
@@ -101,7 +101,7 @@ export default function Navigation() {
             <button
               onClick={toggleTheme}
               aria-label="Toggle theme"
-              className="ml-2 p-2 rounded-xl text-neutral-400 hover:text-neutral-200 hover:bg-white/10 transition-all duration-200"
+              className="ml-2 p-2 rounded-xl text-neutral-500 dark:text-neutral-400 hover:text-neutral-800 dark:hover:text-neutral-200 hover:bg-black/5 dark:hover:bg-white/10 transition-all duration-200"
             >
               {theme === "dark" ? <Sun size={16} /> : <Moon size={16} />}
             </button>
@@ -111,7 +111,7 @@ export default function Navigation() {
           <button
             onClick={() => setMobileOpen((v) => !v)}
             aria-label="Toggle menu"
-            className="md:hidden ml-1 p-2 rounded-xl text-neutral-400 hover:text-neutral-200 hover:bg-white/10 transition-all duration-200"
+            className="md:hidden ml-1 p-2 rounded-xl text-neutral-500 dark:text-neutral-400 hover:text-neutral-800 dark:hover:text-neutral-200 hover:bg-black/5 dark:hover:bg-white/10 transition-all duration-200"
           >
             {mobileOpen ? <X size={18} /> : <Menu size={18} />}
           </button>
@@ -147,8 +147,8 @@ export default function Navigation() {
                   onClick={() => scrollTo(href)}
                   className={`w-full text-left px-4 py-3 rounded-xl text-sm font-medium transition-all duration-200 ${
                     activeSection === id
-                      ? "bg-white/10 text-white border border-white/15"
-                      : "text-neutral-400 hover:text-white hover:bg-white/8"
+                      ? "bg-violet-500/12 dark:bg-white/10 text-violet-700 dark:text-white border border-violet-500/25 dark:border-white/15"
+                      : "text-neutral-500 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white hover:bg-neutral-100/80 dark:hover:bg-white/8"
                   }`}
                 >
                   {label}

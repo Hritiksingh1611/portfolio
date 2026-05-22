@@ -17,13 +17,16 @@ const contactInfo = [
 ];
 
 const socials = [
-  { icon: Github,   label: "GitHub",    href: "https://github.com/Hritiksingh1611",            color: "hover:text-white" },
-  { icon: Linkedin, label: "LinkedIn",  href: "https://linkedin.com/in/hritik-singh-304450206", color: "hover:text-blue-400" },
-  { icon: XIcon,    label: "X",         href: "https://x.com/Hritik1611",                       color: "hover:text-sky-400" },
+  { icon: Github,   label: "GitHub",   href: "https://github.com/Hritiksingh1611" },
+  { icon: Linkedin, label: "LinkedIn", href: "https://linkedin.com/in/hritik-singh-304450206" },
+  { icon: XIcon,    label: "X",        href: "https://x.com/Hritik1611" },
 ];
 
+const inputClass =
+  "w-full px-4 py-3 bg-neutral-100/60 dark:bg-white/[0.05] border border-neutral-200 dark:border-white/[0.09] rounded-xl text-neutral-800 dark:text-neutral-200 placeholder-neutral-400 dark:placeholder-neutral-700 focus:outline-none focus:border-violet-500/60 dark:focus:border-violet-500/50 focus:bg-white dark:focus:bg-white/[0.08] transition-all duration-200 text-sm";
+
 export default function Contact() {
-  const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.1 });
+  const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.08 });
   const [form, setForm] = useState({ name: "", email: "", subject: "", message: "" });
   const [submitting, setSubmitting] = useState(false);
   const [status, setStatus] = useState<"idle" | "success" | "error">("idle");
@@ -54,12 +57,15 @@ export default function Contact() {
     }
   };
 
-  const inputClass =
-    "w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder-neutral-600 focus:outline-none focus:border-indigo-500/60 focus:bg-white/8 transition-all duration-200 text-sm";
-
   return (
-    <section id="contact" ref={ref} className="py-24 px-4 relative z-10 overflow-hidden">
-      <div className="absolute bottom-0 right-0 w-96 h-96 orb orb-blue opacity-15 pointer-events-none" />
+    <section
+      id="contact"
+      ref={ref}
+      className="bg-[#f9f9fc] dark:bg-[#0c0c1a] py-24 px-4 relative z-10 overflow-hidden"
+    >
+      {/* Ambient orbs */}
+      <div className="absolute bottom-0 right-0 w-96 h-96 orb orb-violet opacity-10 dark:opacity-20 pointer-events-none" />
+      <div className="absolute top-0 left-0 w-64 h-64 orb orb-pink opacity-8 pointer-events-none" />
 
       <div className="max-w-5xl mx-auto">
         {/* Header */}
@@ -67,24 +73,27 @@ export default function Contact() {
           initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.5 }}
-          className="mb-16"
+          className="mb-14"
         >
-          <p className="section-label">Get in touch</p>
-          <h2 className="font-display font-black text-4xl md:text-6xl text-white leading-none">
+          <div className="flex items-center gap-3 mb-5">
+            <span className="font-mono text-[10px] text-neutral-400 dark:text-neutral-700 tracking-[0.25em] uppercase shrink-0">05 — Contact</span>
+            <div className="h-px flex-1 bg-neutral-200 dark:bg-white/[0.05]" />
+          </div>
+          <h2 className="font-display font-black text-4xl md:text-6xl text-neutral-900 dark:text-white leading-none">
             Let&apos;s <span className="text-gradient-vivid">Connect</span>
           </h2>
         </motion.div>
 
         <div className="grid lg:grid-cols-5 gap-10">
-          {/* Left info — 2 cols */}
+          {/* Left — 2 cols */}
           <motion.div
             initial={{ opacity: 0, x: -24 }}
             animate={inView ? { opacity: 1, x: 0 } : {}}
             transition={{ delay: 0.15, duration: 0.55, ease: "easeOut" }}
             className="lg:col-span-2 flex flex-col gap-6"
           >
-            <p className="text-neutral-400 text-sm leading-relaxed">
-              Whether you have a project in mind, want to discuss opportunities, or just want to say hello — I&apos;m always excited to connect with fellow builders.
+            <p className="text-neutral-500 text-sm leading-relaxed">
+              Whether you have a project in mind, want to discuss opportunities, or just want to say hello — I&apos;m always open to connecting with fellow builders.
             </p>
 
             {/* Contact methods */}
@@ -93,24 +102,24 @@ export default function Contact() {
                 <a
                   key={label}
                   href={href}
-                  className="flex items-center gap-3 glass rounded-xl px-4 py-3 border border-neutral-200/70 dark:border-white/[0.08] hover:border-indigo-500/30 transition-all duration-200 group"
+                  className="flex items-center gap-3 rounded-xl px-4 py-3 border border-neutral-200 dark:border-white/[0.07] bg-neutral-50 dark:bg-white/[0.03] hover:border-violet-500/30 hover:bg-violet-500/5 transition-all duration-200 group"
                 >
-                  <div className="w-8 h-8 rounded-lg bg-indigo-500/15 border border-indigo-500/20 flex items-center justify-center shrink-0">
-                    <Icon size={14} className="text-indigo-400" />
+                  <div className="w-8 h-8 rounded-lg bg-violet-500/15 border border-violet-500/20 flex items-center justify-center shrink-0">
+                    <Icon size={14} className="text-violet-500 dark:text-violet-400" />
                   </div>
                   <div>
-                    <p className="text-xs text-neutral-500">{label}</p>
-                    <p className="text-sm text-neutral-300 group-hover:text-white transition-colors">{value}</p>
+                    <p className="text-[10px] text-neutral-500 dark:text-neutral-600 uppercase tracking-wider font-mono">{label}</p>
+                    <p className="text-sm text-neutral-700 dark:text-neutral-300 group-hover:text-neutral-900 dark:group-hover:text-white transition-colors">{value}</p>
                   </div>
                 </a>
               ))}
             </div>
 
-            {/* Social links */}
+            {/* Socials */}
             <div>
-              <p className="text-xs text-neutral-600 uppercase tracking-widest mb-3">Find me online</p>
-              <div className="flex gap-3">
-                {socials.map(({ icon: Icon, label, href, color }) => (
+              <p className="text-[10px] text-neutral-400 dark:text-neutral-700 uppercase tracking-widest font-mono mb-3">Find me online</p>
+              <div className="flex gap-2.5">
+                {socials.map(({ icon: Icon, label, href }) => (
                   <motion.a
                     key={label}
                     href={href}
@@ -119,7 +128,7 @@ export default function Contact() {
                     aria-label={label}
                     whileHover={{ scale: 1.12, y: -2 }}
                     whileTap={{ scale: 0.92 }}
-                    className={`p-2.5 glass rounded-xl border border-neutral-200/70 dark:border-white/[0.08] text-neutral-500 ${color} transition-all duration-200`}
+                    className="p-2.5 rounded-xl border border-neutral-200 dark:border-white/[0.07] bg-neutral-50 dark:bg-white/[0.03] text-neutral-500 dark:text-neutral-600 hover:text-neutral-900 dark:hover:text-white hover:border-violet-500/30 transition-all duration-200"
                   >
                     <Icon size={18} />
                   </motion.a>
@@ -127,14 +136,14 @@ export default function Contact() {
               </div>
             </div>
 
-            {/* Availability */}
-            <div className="glass rounded-xl p-4 border border-emerald-500/20 bg-emerald-500/5">
+            {/* Card */}
+            <div className="rounded-xl p-4 border border-violet-500/20 bg-violet-500/5">
               <div className="flex items-center gap-2 mb-1">
-                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                <span className="text-emerald-400 text-sm font-semibold">Open to collaborate</span>
+                <span className="w-2 h-2 rounded-full bg-violet-400 animate-pulse" />
+                <span className="text-violet-600 dark:text-violet-400 text-sm font-semibold">Let&apos;s build together</span>
               </div>
               <p className="text-neutral-500 text-xs leading-relaxed">
-                Currently working but open to exciting new ideas and projects. Let&apos;s build something great!
+                Have an interesting project or just want to talk data &amp; tech? I&apos;m always happy to connect.
               </p>
             </div>
           </motion.div>
@@ -146,27 +155,30 @@ export default function Contact() {
             transition={{ delay: 0.25, duration: 0.55, ease: "easeOut" }}
             className="lg:col-span-3"
           >
-            <form onSubmit={onSubmit} className="glass rounded-2xl p-6 border border-neutral-200/70 dark:border-white/[0.08] space-y-4">
-              <h3 className="font-display font-bold text-white text-lg mb-2">Send a message</h3>
+            <form
+              onSubmit={onSubmit}
+              className="rounded-2xl p-6 border border-neutral-200 dark:border-white/[0.07] bg-neutral-50/50 dark:bg-white/[0.02] space-y-4"
+            >
+              <h3 className="font-display font-bold text-neutral-900 dark:text-white text-lg mb-2">Send a message</h3>
 
               <div className="grid sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="text-xs text-neutral-500 block mb-1.5">Name *</label>
+                  <label className="text-[11px] text-neutral-500 dark:text-neutral-600 font-mono uppercase tracking-wider block mb-1.5">Name *</label>
                   <input type="text" name="name" value={form.name} onChange={onChange} required placeholder="Your name" className={inputClass} />
                 </div>
                 <div>
-                  <label className="text-xs text-neutral-500 block mb-1.5">Email *</label>
+                  <label className="text-[11px] text-neutral-500 dark:text-neutral-600 font-mono uppercase tracking-wider block mb-1.5">Email *</label>
                   <input type="email" name="email" value={form.email} onChange={onChange} required placeholder="you@email.com" className={inputClass} />
                 </div>
               </div>
 
               <div>
-                <label className="text-xs text-neutral-500 block mb-1.5">Subject *</label>
-                <input type="text" name="subject" value={form.subject} onChange={onChange} required placeholder="What's this about?" className={inputClass} />
+                <label className="text-[11px] text-neutral-500 dark:text-neutral-600 font-mono uppercase tracking-wider block mb-1.5">Subject *</label>
+                <input type="text" name="subject" value={form.subject} onChange={onChange} required placeholder="What is this about?" className={inputClass} />
               </div>
 
               <div>
-                <label className="text-xs text-neutral-500 block mb-1.5">Message *</label>
+                <label className="text-[11px] text-neutral-500 dark:text-neutral-600 font-mono uppercase tracking-wider block mb-1.5">Message *</label>
                 <textarea name="message" value={form.message} onChange={onChange} required rows={5} placeholder="Tell me about your project or idea..." className={`${inputClass} resize-none`} />
               </div>
 
@@ -176,12 +188,14 @@ export default function Contact() {
                   animate={{ opacity: 1, y: 0 }}
                   className={`flex items-center gap-2 text-sm px-4 py-3 rounded-xl border ${
                     status === "success"
-                      ? "bg-emerald-500/10 border-emerald-500/30 text-emerald-400"
-                      : "bg-red-500/10 border-red-500/30 text-red-400"
+                      ? "bg-emerald-500/10 border-emerald-500/30 text-emerald-600 dark:text-emerald-400"
+                      : "bg-red-500/10 border-red-500/30 text-red-600 dark:text-red-400"
                   }`}
                 >
                   {status === "success" ? <CheckCircle size={15} /> : <AlertCircle size={15} />}
-                  {status === "success" ? "Message sent! I'll get back to you soon." : "Something went wrong. Try again or email me directly."}
+                  {status === "success"
+                    ? "Message sent! I'll get back to you soon."
+                    : "Something went wrong. Try again or email me directly."}
                 </motion.div>
               )}
 

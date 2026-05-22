@@ -11,8 +11,8 @@ function AnimatedCounter({ target, suffix = "" }: { target: number; suffix?: str
 
   useEffect(() => {
     if (!inView) return;
-    const duration = 1400;
-    const steps = 40;
+    const duration = 1600;
+    const steps = 50;
     const increment = target / steps;
     let current = 0;
     const timer = setInterval(() => {
@@ -27,152 +27,158 @@ function AnimatedCounter({ target, suffix = "" }: { target: number; suffix?: str
     return () => clearInterval(timer);
   }, [inView, target]);
 
-  return (
-    <span ref={ref}>
-      {count}
-      {suffix}
-    </span>
-  );
+  return <span ref={ref}>{count}{suffix}</span>;
 }
 
-const fadeUp = {
-  hidden: { opacity: 0, y: 28 },
-  visible: (i: number) => ({
-    opacity: 1, y: 0,
-    transition: { delay: i * 0.1, duration: 0.55, ease: "easeOut" as const },
-  }),
-};
+const stats = [
+  {
+    value: 2, suffix: "+",
+    label: "Years in data engineering",
+    from: "from-violet-500", to: "to-indigo-500",
+  },
+  {
+    value: 15, suffix: "+",
+    label: "Production pipelines delivered",
+    from: "from-pink-500", to: "to-rose-500",
+  },
+  {
+    value: 3, suffix: "",
+    label: "Cloud platforms — AWS · GCP · Azure",
+    from: "from-cyan-500", to: "to-blue-500",
+  },
+];
+
+const facts = [
+  { icon: MapPin,        text: "Kolkata, India 🇮🇳" },
+  { icon: Briefcase,     text: "Workmates Core2cloud Solutions" },
+  { icon: GraduationCap, text: "MCA — 8.64 CGPA" },
+  { icon: Zap,           text: "Always shipping something new" },
+];
 
 export default function About() {
-  const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.1 });
+  const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.08 });
 
   return (
-    <section
-      id="about"
-      ref={ref}
-      className="py-24 px-4 relative z-10 overflow-hidden"
-    >
-      {/* faint orb */}
-      <div className="absolute top-0 right-0 w-96 h-96 orb orb-purple opacity-20 pointer-events-none" />
+    <section id="about" ref={ref} className="py-24 px-4 relative z-10 overflow-hidden">
+      <div className="absolute top-0 right-0 w-96 h-96 orb orb-violet opacity-15 pointer-events-none" />
+      <div className="absolute bottom-0 left-1/4 w-64 h-64 orb orb-pink opacity-10 pointer-events-none" />
 
       <div className="max-w-6xl mx-auto">
-        {/* Section header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.5 }}
-          className="mb-12"
+          className="mb-14"
         >
-          <p className="section-label">Who I am</p>
-          <h2 className="font-display font-black text-4xl md:text-6xl text-white leading-none">
+          <div className="flex items-center gap-3 mb-5">
+            <span className="font-mono text-[10px] text-neutral-400 dark:text-neutral-700 tracking-[0.25em] uppercase shrink-0">01 — About</span>
+            <div className="h-px flex-1 bg-neutral-200 dark:bg-white/[0.05]" />
+          </div>
+          <h2 className="font-display font-black text-4xl md:text-6xl text-neutral-900 dark:text-white leading-none">
             About <span className="text-gradient-vivid">Me</span>
           </h2>
         </motion.div>
 
-        {/* ── Bento grid ── */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 auto-rows-auto">
+        {/* Two-column editorial layout */}
+        <div className="grid lg:grid-cols-[1.1fr_0.9fr] gap-10 lg:gap-16 items-start">
 
-          {/* Bio card — spans 2 cols */}
+          {/* ── LEFT COLUMN ── */}
           <motion.div
-            custom={0} variants={fadeUp} initial="hidden" animate={inView ? "visible" : "hidden"}
-            className="lg:col-span-2 glass rounded-2xl p-7 border border-neutral-200/70 dark:border-white/[0.08]"
+            initial={{ opacity: 0, x: -30 }}
+            animate={inView ? { opacity: 1, x: 0 } : {}}
+            transition={{ delay: 0.15, duration: 0.6, ease: "easeOut" }}
+            className="flex flex-col gap-7"
           >
-            <h3 className="font-display font-bold text-xl text-white mb-4">
-              Hi, I&apos;m Hritik 👋
-            </h3>
-            <p className="text-neutral-400 leading-relaxed mb-4">
-              A passionate <span className="text-indigo-400 font-medium">Data Engineer</span> with 2+ years of experience designing and implementing scalable ETL pipelines and data solutions. Currently at <span className="text-white font-medium">Workmates Core2cloud Solutions Limited</span>, specializing in modern data stack technologies and cloud-based data warehousing.
-            </p>
-            <p className="text-neutral-400 leading-relaxed">
-              I thrive at the intersection of data engineering and cloud computing — building efficient pipelines with Python, SQL, AWS Glue, GCP, and Snowflake, delivering data-driven insights for enterprise clients.
-            </p>
-            <div className="flex flex-wrap gap-2 mt-5">
-              {["ETL Development", "Data Warehousing", "Cloud Computing", "Database Management"].map((s) => (
+            {/* Bio */}
+            <div className="space-y-4">
+              <p className="text-neutral-700 dark:text-neutral-300 leading-relaxed text-[15px]">
+                A passionate <span className="text-violet-600 dark:text-violet-400 font-semibold">Data Engineer</span> with 2+ years of experience designing scalable ETL pipelines and cloud-native data solutions. I turn raw, chaotic data into clean, reliable, and actionable infrastructure.
+              </p>
+              <p className="text-neutral-500 leading-relaxed text-[15px]">
+                Currently at <span className="text-neutral-800 dark:text-neutral-200 font-semibold">Workmates Core2cloud Solutions Limited</span>, I specialize in the modern data stack — Python, SQL, AWS Glue, GCP, Snowflake, and Apache Airflow — delivering enterprise-grade data systems.
+              </p>
+            </div>
+
+            {/* Current role card */}
+            <div className="glass rounded-2xl p-5 border border-neutral-200/70 dark:border-white/[0.08] flex items-center gap-4">
+              <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-violet-600 to-indigo-600 flex items-center justify-center text-white font-black text-base shrink-0 select-none">
+                HS
+              </div>
+              <div className="flex-1 min-w-0">
+                <p className="text-[10px] text-neutral-400 font-mono uppercase tracking-widest">Current Position</p>
+                <p className="text-sm font-semibold text-neutral-800 dark:text-neutral-200 truncate">Data Engineer</p>
+                <p className="text-xs text-neutral-500 truncate">Workmates Core2cloud Solutions Ltd.</p>
+              </div>
+              <span className="flex items-center gap-1.5 text-[10px] text-emerald-500 font-mono uppercase tracking-wider shrink-0">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                Active
+              </span>
+            </div>
+
+            {/* Quick facts */}
+            <div className="space-y-2.5">
+              {facts.map(({ icon: Icon, text }) => (
+                <div key={text} className="flex items-center gap-3 text-sm">
+                  <div className="w-7 h-7 rounded-lg bg-violet-500/10 flex items-center justify-center shrink-0">
+                    <Icon size={13} className="text-violet-500" />
+                  </div>
+                  <span className="text-neutral-600 dark:text-neutral-400">{text}</span>
+                </div>
+              ))}
+            </div>
+
+            {/* Skill tags */}
+            <div className="flex flex-wrap gap-2">
+              {["ETL Development", "Data Warehousing", "Cloud Computing", "Data Modeling", "Pipeline Architecture"].map((s) => (
                 <span key={s} className="skill-pill text-xs">{s}</span>
               ))}
             </div>
           </motion.div>
 
-          {/* Quick facts card */}
+          {/* ── RIGHT COLUMN: Giant stats ── */}
           <motion.div
-            custom={1} variants={fadeUp} initial="hidden" animate={inView ? "visible" : "hidden"}
-            className="glass rounded-2xl p-7 border border-neutral-200/70 dark:border-white/[0.08] flex flex-col gap-4"
+            initial={{ opacity: 0, x: 30 }}
+            animate={inView ? { opacity: 1, x: 0 } : {}}
+            transition={{ delay: 0.25, duration: 0.6, ease: "easeOut" }}
+            className="flex flex-col gap-4"
           >
-            <h3 className="font-display font-bold text-lg text-white">Quick Facts</h3>
-            <div className="space-y-3 text-sm">
-              {[
-                { icon: MapPin,        label: "Location",     value: "Kolkata, India 🇮🇳" },
-                { icon: Briefcase,     label: "Role",         value: "Assoc. Data Engineer" },
-                { icon: GraduationCap, label: "Education",    value: "MCA — 8.64 CGPA" },
-                { icon: Zap,           label: "Status",       value: "Currently Working" },
-              ].map(({ icon: Icon, label, value }) => (
-                <div key={label} className="flex items-center gap-3">
-                  <Icon size={14} className="text-indigo-400 shrink-0" />
-                  <span className="text-neutral-500">{label}</span>
-                  <span className="ml-auto text-neutral-300 font-medium text-right">{value}</span>
+            {stats.map(({ value, suffix, label, from, to }, i) => (
+              <motion.div
+                key={label}
+                initial={{ opacity: 0, y: 20 }}
+                animate={inView ? { opacity: 1, y: 0 } : {}}
+                transition={{ delay: 0.3 + i * 0.1, duration: 0.5 }}
+                className="glass rounded-2xl p-7 border border-neutral-200/70 dark:border-white/[0.08] overflow-hidden relative group"
+              >
+                <div
+                  className={`absolute inset-0 bg-gradient-to-br ${from} ${to} opacity-0 group-hover:opacity-[0.05] transition-opacity duration-500 pointer-events-none`}
+                />
+                <div className={`font-display font-black text-8xl leading-none bg-gradient-to-r ${from} ${to} bg-clip-text text-transparent select-none`}>
+                  <AnimatedCounter target={value} suffix={suffix} />
                 </div>
-              ))}
-            </div>
-          </motion.div>
+                <p className="text-neutral-500 text-sm mt-2 leading-snug">{label}</p>
+              </motion.div>
+            ))}
 
-          {/* Stat: Experience */}
-          <motion.div
-            custom={2} variants={fadeUp} initial="hidden" animate={inView ? "visible" : "hidden"}
-            className="glass rounded-2xl p-7 border border-indigo-500/20 bg-indigo-500/5 flex flex-col justify-between"
-          >
-            <p className="text-neutral-500 text-sm font-medium">Years of Experience</p>
-            <div>
-              <p className="font-display font-black text-6xl text-white leading-none">
-                <AnimatedCounter target={2} suffix="+" />
-              </p>
-              <p className="text-indigo-400 text-sm mt-1">in Data Engineering</p>
-            </div>
-          </motion.div>
-
-          {/* Stat: Projects */}
-          <motion.div
-            custom={3} variants={fadeUp} initial="hidden" animate={inView ? "visible" : "hidden"}
-            className="glass rounded-2xl p-7 border border-purple-500/20 bg-purple-500/5 flex flex-col justify-between"
-          >
-            <p className="text-neutral-500 text-sm font-medium">Projects Delivered</p>
-            <div>
-              <p className="font-display font-black text-6xl text-white leading-none">
-                <AnimatedCounter target={15} suffix="+" />
-              </p>
-              <p className="text-purple-400 text-sm mt-1">across data & web</p>
-            </div>
-          </motion.div>
-
-          {/* Stat: Cloud platforms */}
-          <motion.div
-            custom={4} variants={fadeUp} initial="hidden" animate={inView ? "visible" : "hidden"}
-            className="glass rounded-2xl p-7 border border-pink-500/20 bg-pink-500/5 flex flex-col justify-between"
-          >
-            <p className="text-neutral-500 text-sm font-medium">Cloud Platforms</p>
-            <div>
-              <p className="font-display font-black text-6xl text-white leading-none">
-                <AnimatedCounter target={3} suffix="+" />
-              </p>
-              <p className="text-pink-400 text-sm mt-1">AWS · GCP · Azure</p>
-            </div>
-          </motion.div>
-
-          {/* Currently learning card */}
-          <motion.div
-            custom={5} variants={fadeUp} initial="hidden" animate={inView ? "visible" : "hidden"}
-            className="md:col-span-2 lg:col-span-3 glass rounded-2xl p-7 border border-neutral-200/70 dark:border-white/[0.08]"
-          >
-            <div className="flex items-start gap-4">
-              <div className="w-10 h-10 rounded-xl bg-indigo-500/15 border border-indigo-500/25 flex items-center justify-center shrink-0">
-                <Zap size={18} className="text-indigo-400" />
+            {/* Currently learning */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{ delay: 0.62, duration: 0.5 }}
+              className="glass rounded-2xl p-5 border border-violet-500/20 bg-violet-500/5"
+            >
+              <p className="text-[10px] text-violet-500 font-mono uppercase tracking-widest mb-2.5">Currently exploring</p>
+              <div className="flex flex-wrap gap-2">
+                {["LLM Integration", "Real-time Streaming", "MLOps Workflows"].map((t) => (
+                  <span
+                    key={t}
+                    className="px-3 py-1 text-xs rounded-full bg-white/5 dark:bg-white/[0.04] border border-neutral-200/70 dark:border-white/[0.08] text-neutral-500 dark:text-neutral-400"
+                  >
+                    {t}
+                  </span>
+                ))}
               </div>
-              <div>
-                <h3 className="font-display font-bold text-white mb-1">Always learning, always building</h3>
-                <p className="text-neutral-400 text-sm leading-relaxed">
-                  Currently diving deep into <span className="text-indigo-400">Large Language Models</span>, <span className="text-purple-400">Edge Computing</span>, and <span className="text-pink-400">Advanced MLOps</span> practices. Technology evolves rapidly — so do I.
-                </p>
-              </div>
-            </div>
+            </motion.div>
           </motion.div>
 
         </div>

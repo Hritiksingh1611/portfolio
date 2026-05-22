@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import { useState } from "react";
-import { ArrowUpRight, Github } from "lucide-react";
+import { ArrowUpRight, Github, Database, BarChart2, Server, Shield, Briefcase, Globe, type LucideIcon } from "lucide-react";
 
 type Category = "all" | "data" | "analytics" | "web";
 
@@ -18,7 +18,8 @@ interface Project {
   demo?: string;
   highlights: string[];
   gradient: string;
-  icon: string;
+  icon: LucideIcon;
+  iconColor: string;
 }
 
 const projects: Project[] = [
@@ -32,7 +33,8 @@ const projects: Project[] = [
     github: "https://github.com/Hritiksingh1611/aws-etl-pipeline",
     highlights: ["Processes 100 GB+ of data daily", "40% improvement in processing speed", "Automated data quality validation"],
     gradient: "from-indigo-600/20 to-blue-600/10",
-    icon: "⚡",
+    icon: Database,
+    iconColor: "text-indigo-600 dark:text-indigo-400",
   },
   {
     id: 2,
@@ -44,7 +46,8 @@ const projects: Project[] = [
     github: "https://github.com/Hritiksingh1611/powerbi-dashboards",
     highlights: ["Real-time data visualization", "Automated reports for 50+ stakeholders", "Interactive drill-down capabilities"],
     gradient: "from-yellow-600/15 to-orange-600/10",
-    icon: "📊",
+    icon: BarChart2,
+    iconColor: "text-yellow-600 dark:text-yellow-400",
   },
   {
     id: 3,
@@ -56,7 +59,8 @@ const projects: Project[] = [
     github: "https://github.com/Hritiksingh1611/data-warehouse",
     highlights: ["Scalable warehouse design", "60% query performance improvement", "Cost-effective cloud storage"],
     gradient: "from-cyan-600/15 to-teal-600/10",
-    icon: "🏗️",
+    icon: Server,
+    iconColor: "text-cyan-600 dark:text-cyan-400",
   },
   {
     id: 4,
@@ -68,7 +72,8 @@ const projects: Project[] = [
     github: "https://github.com/Hritiksingh1611/data-quality",
     highlights: ["Automated quality checks", "Real-time anomaly detection", "85% reduction in data errors"],
     gradient: "from-emerald-600/15 to-green-600/10",
-    icon: "🛡️",
+    icon: Shield,
+    iconColor: "text-emerald-600 dark:text-emerald-400",
   },
   {
     id: 5,
@@ -80,7 +85,8 @@ const projects: Project[] = [
     github: "https://github.com/Hritiksingh1611/reviewprobe-jobs",
     highlights: ["Complete job portal functionality", "User authentication & authorization", "Payment system integration"],
     gradient: "from-purple-600/15 to-pink-600/10",
-    icon: "💼",
+    icon: Briefcase,
+    iconColor: "text-purple-600 dark:text-purple-400",
   },
   {
     id: 6,
@@ -93,7 +99,8 @@ const projects: Project[] = [
     demo: "https://hritiksingh-portfolio.vercel.app",
     highlights: ["Dark-first Gen Z design", "Smooth Framer Motion animations", "Optimized for Core Web Vitals"],
     gradient: "from-indigo-600/20 to-purple-600/10",
-    icon: "🚀",
+    icon: Globe,
+    iconColor: "text-violet-600 dark:text-violet-400",
   },
 ];
 
@@ -128,8 +135,11 @@ export default function Projects() {
           transition={{ duration: 0.5 }}
           className="mb-12"
         >
-          <p className="section-label">What I&apos;ve built</p>
-          <h2 className="font-display font-black text-4xl md:text-6xl text-white leading-none">
+          <div className="flex items-center gap-3 mb-5">
+            <span className="font-mono text-[10px] text-neutral-400 dark:text-neutral-700 tracking-[0.25em] uppercase shrink-0">04 — Projects</span>
+            <div className="h-px flex-1 bg-neutral-200 dark:bg-white/[0.05]" />
+          </div>
+          <h2 className="font-display font-black text-4xl md:text-6xl text-neutral-900 dark:text-white leading-none">
             Featured <span className="text-gradient-vivid">Projects</span>
           </h2>
         </motion.div>
@@ -148,7 +158,7 @@ export default function Projects() {
               className={`px-4 py-2 rounded-xl text-sm font-medium transition-all duration-200 ${
                 active === key
                   ? "bg-indigo-600 text-white shadow-lg shadow-indigo-500/25"
-                  : "glass text-neutral-400 hover:text-neutral-200 hover:bg-white/8 border border-neutral-200/70 dark:border-white/[0.08]"
+                  : "glass text-neutral-400 hover:text-neutral-800 dark:hover:text-neutral-200 hover:bg-neutral-100 dark:hover:bg-white/8 border border-neutral-200/70 dark:border-white/[0.08]"
               }`}
             >
               {label}
@@ -165,11 +175,13 @@ export default function Projects() {
               initial={{ opacity: 0, y: 28 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ delay: i * 0.08, duration: 0.5, ease: "easeOut" }}
-              className="glass rounded-2xl overflow-hidden border border-neutral-200/70 dark:border-white/[0.08] hover:border-white/16 transition-all duration-300 group flex flex-col"
+              className="glass rounded-2xl overflow-hidden border border-neutral-200/70 dark:border-white/[0.08] hover:border-violet-300 dark:hover:border-white/20 transition-all duration-300 group flex flex-col"
             >
               {/* Visual header */}
               <div className={`relative h-32 bg-gradient-to-br ${project.gradient} flex items-center justify-between px-6 overflow-hidden`}>
-                <span className="text-5xl select-none">{project.icon}</span>
+                <div className="w-12 h-12 rounded-xl bg-black/10 dark:bg-white/5 border border-black/10 dark:border-white/10 flex items-center justify-center backdrop-blur-sm">
+                  <project.icon size={24} className={project.iconColor} />
+                </div>
                 <div className="flex items-center gap-2">
                   <span className={`text-xs font-semibold px-2.5 py-1 rounded-full border ${statusColors[project.status]}`}>
                     {project.status}
@@ -181,7 +193,7 @@ export default function Projects() {
 
               {/* Content */}
               <div className="p-6 flex flex-col flex-1">
-                <h3 className="font-display font-bold text-white text-lg mb-2 group-hover:text-indigo-300 transition-colors">
+                <h3 className="font-display font-bold text-neutral-900 dark:text-white text-lg mb-2 group-hover:text-violet-700 dark:group-hover:text-indigo-300 transition-colors">
                   {project.title}
                 </h3>
                 <p className="text-neutral-400 text-sm leading-relaxed mb-4">{project.description}</p>
@@ -199,19 +211,19 @@ export default function Projects() {
                 {/* Tags */}
                 <div className="flex flex-wrap gap-1.5 mb-5 mt-auto">
                   {project.tags.map((t) => (
-                    <span key={t} className="text-xs px-2.5 py-1 rounded-full bg-white/6 border border-white/10 text-neutral-400">
+                    <span key={t} className="text-xs px-2.5 py-1 rounded-full bg-neutral-100 dark:bg-white/6 border border-neutral-200 dark:border-white/10 text-neutral-500 dark:text-neutral-400">
                       {t}
                     </span>
                   ))}
                 </div>
 
                 {/* Actions */}
-                <div className="flex gap-2.5 pt-2 border-t border-white/8">
+                <div className="flex gap-2.5 pt-2 border-t border-neutral-100 dark:border-white/8">
                   <a
                     href={project.github}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-1.5 text-xs font-medium text-neutral-400 hover:text-white transition-colors px-3 py-2 rounded-lg hover:bg-white/8"
+                    className="flex items-center gap-1.5 text-xs font-medium text-neutral-500 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white transition-colors px-3 py-2 rounded-lg hover:bg-neutral-100 dark:hover:bg-white/8"
                   >
                     <Github size={14} />
                     Code
@@ -221,7 +233,7 @@ export default function Projects() {
                       href={project.demo}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center gap-1.5 text-xs font-medium text-indigo-400 hover:text-indigo-300 transition-colors px-3 py-2 rounded-lg hover:bg-indigo-500/10"
+                      className="flex items-center gap-1.5 text-xs font-medium text-indigo-500 dark:text-indigo-400 hover:text-indigo-700 dark:hover:text-indigo-300 transition-colors px-3 py-2 rounded-lg hover:bg-indigo-500/10"
                     >
                       <ArrowUpRight size={14} />
                       Live Demo
