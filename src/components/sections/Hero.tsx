@@ -127,11 +127,11 @@ const socials = [
   { href: "mailto:hritik16.work@gmail.com",                 icon: Mail,     label: "Email" },
 ];
 
-const techPills = ["Python", "AWS", "Snowflake", "GCP", "Airflow", "SQL", "PySpark", "Power BI"];
+const techPills = ["Python", "AWS", "Clickhouse", "GCP", "Airflow", "SQL", "PySpark", "Power BI"];
 
 const ticker = [
   "Python", "·", "SQL", "·", "AWS Glue", "·", "Redshift", "·",
-  "Snowflake", "·", "Power BI", "·", "PySpark", "·", "ETL / ELT", "·",
+  "Clickhouse", "·", "Power BI", "·", "PySpark", "·", "ETL / ELT", "·",
   "GCP", "·", "Apache Airflow", "·", "Data Warehousing", "·", "FastAPI", "·",
   "PostgreSQL", "·", "Pandas", "·", "Docker", "·",
 ];
@@ -241,7 +241,7 @@ export default function Hero() {
                 transition={{ delay: 0.42, duration: 0.4 }}
                 className="flex items-center gap-2 text-sm mb-4"
               >
-                <span className="font-mono text-neutral-500 dark:text-neutral-700">{"// currently working as"}</span>
+                <span className="font-mono text-neutral-500 dark:text-neutral-700">{"Currently working as"}</span>
                 <TypewriterRole />
               </motion.div>
 
@@ -254,7 +254,7 @@ export default function Hero() {
               >
                 2+ years shipping data pipelines &amp; cloud infrastructure at{" "}
                 <span className="text-neutral-700 dark:text-neutral-300 font-medium">Workmates Core2cloud</span>.
-                {" "}Building on AWS Glue, Redshift, GCP &amp; Snowflake — from raw ingestion to production dashboards.
+                {" "}Building on AWS Glue, Redshift, GCP &amp; Clickhouse — from raw ingestion to production dashboards.
               </motion.p>
 
               {/* Stats row */}
@@ -268,7 +268,7 @@ export default function Hero() {
                   { num: "2+",  label: "Years" },
                   { num: "15+", label: "Pipelines" },
                   { num: "3",   label: "Clouds" },
-                  { num: "5+",  label: "Certs" },
+                  { num: "6+",  label: "Certs" },
                 ].map(({ num, label }) => (
                   <div key={label} className="text-center">
                     <div className="font-display font-black text-xl text-neutral-900 dark:text-white leading-none">{num}</div>
