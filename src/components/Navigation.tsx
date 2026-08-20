@@ -107,6 +107,18 @@ export default function Navigation() {
             </button>
           )}
 
+          {/* Quick Resume Link */}
+          <a
+            href="/resume.pdf"
+            download="Hritik_Singh_Data_Engineer_Resume.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="ml-2 text-xs font-mono font-bold px-3 py-1.5 rounded-xl bg-violet-600 hover:bg-violet-500 text-white transition-all shadow-md hidden sm:inline-flex items-center gap-1"
+          >
+            Resume
+          </a>
+
+
           {/* Mobile hamburger */}
           <button
             onClick={() => setMobileOpen((v) => !v)}

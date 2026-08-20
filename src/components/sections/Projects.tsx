@@ -3,9 +3,9 @@
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import { useState } from "react";
-import { ArrowUpRight, Github, Database, BarChart2, Server, Shield, Briefcase, Globe, type LucideIcon } from "lucide-react";
+import { ArrowUpRight, Github, Database, Server, Briefcase, Globe, Cpu, Cloud, type LucideIcon } from "lucide-react";
 
-type Category = "all" | "data" | "analytics" | "web";
+type Category = "all" | "data" | "cloud" | "web";
 
 interface Project {
   id: number;
@@ -13,7 +13,7 @@ interface Project {
   description: string;
   tags: string[];
   category: Exclude<Category, "all">;
-  status: "Production" | "Live" | "Ongoing";
+  status: "Production" | "Live" | "Completed";
   github: string;
   demo?: string;
   highlights: string[];
@@ -25,97 +25,91 @@ interface Project {
 const projects: Project[] = [
   {
     id: 1,
-    title: "AWS Data Pipeline System",
-    description: "Comprehensive ETL pipelines using AWS Glue and Redshift for enterprise data processing — automated ingestion from multiple sources with robust error handling.",
-    tags: ["AWS Glue", "Redshift", "Python", "SQL", "S3"],
+    title: "SAP OData & Redshift Integration Pipeline",
+    description: "End-to-end SAP data integration using OData APIs and AWS Glue to extract SAP records, execute transformation & quality checks, and load curated data into Amazon Redshift.",
+    tags: ["AWS Glue", "PySpark", "Amazon Redshift", "SAP OData", "Python"],
     category: "data",
     status: "Production",
     github: "https://github.com/Hritiksingh1611/aws-etl-pipeline",
-    highlights: ["Processes 100 GB+ of data daily", "40% improvement in processing speed", "Automated data quality validation"],
-    gradient: "from-indigo-600/20 to-blue-600/10",
+    highlights: ["Automated SAP OData extraction", "Curated schema transformations", "Zero data loss validation"],
+    gradient: "from-violet-600/25 to-indigo-600/10",
     icon: Database,
-    iconColor: "text-indigo-600 dark:text-indigo-400",
+    iconColor: "text-violet-500",
   },
   {
     id: 2,
-    title: "Power BI Dashboard Suite",
-    description: "Interactive business intelligence dashboards using Power BI — automated reports enabling stakeholder decision-making with real-time drill-down analytics.",
-    tags: ["Power BI", "SQL", "Azure", "DAX", "Data Modeling"],
-    category: "analytics",
-    status: "Production",
-    github: "https://github.com/Hritiksingh1611/powerbi-dashboards",
-    highlights: ["Real-time data visualization", "Automated reports for 50+ stakeholders", "Interactive drill-down capabilities"],
-    gradient: "from-yellow-600/15 to-orange-600/10",
-    icon: BarChart2,
-    iconColor: "text-yellow-600 dark:text-yellow-400",
-  },
-  {
-    id: 3,
-    title: "Data Warehouse Architecture",
-    description: "Modern data warehouse built on Snowflake and Azure Synapse — scalable architecture for enterprise data storage, analytics, and cost-optimized cloud storage.",
-    tags: ["Snowflake", "Azure Synapse", "SQL", "Data Modeling", "ETL"],
+    title: "Multi-Database DMS CDC Migration System",
+    description: "Centralized Change Data Capture (CDC) pipelines using AWS DMS to replicate 5+ PostgreSQL RDS and SQL Server databases into Amazon Redshift for continuous analytics.",
+    tags: ["AWS DMS", "PostgreSQL", "SQL Server", "Amazon Redshift", "CDC"],
     category: "data",
     status: "Production",
     github: "https://github.com/Hritiksingh1611/data-warehouse",
-    highlights: ["Scalable warehouse design", "60% query performance improvement", "Cost-effective cloud storage"],
-    gradient: "from-cyan-600/15 to-teal-600/10",
+    highlights: ["Zero-downtime database replication", "Multi-schema CDC workflows", "Power BI downstream feed"],
+    gradient: "from-cyan-600/25 to-blue-600/10",
     icon: Server,
-    iconColor: "text-cyan-600 dark:text-cyan-400",
+    iconColor: "text-cyan-500",
+  },
+  {
+    id: 3,
+    title: "S3 Database Archival & Cost Analytics",
+    description: "Automated RDS MariaDB to Amazon S3 archival pipelines paired with serverless cloud cost monitoring using Lambda, Athena, CloudFormation, and Amazon QuickSight.",
+    tags: ["AWS Lambda", "Athena", "S3", "QuickSight", "CloudFormation"],
+    category: "cloud",
+    status: "Production",
+    github: "https://github.com/Hritiksingh1611/data-quality",
+    highlights: ["Automated MariaDB to S3 archiving", "Serverless Athena query engine", "QuickSight cost dashboards"],
+    gradient: "from-emerald-600/25 to-teal-600/10",
+    icon: Cloud,
+    iconColor: "text-emerald-500",
   },
   {
     id: 4,
-    title: "Automated Data Quality Framework",
-    description: "Comprehensive data quality framework with automated validation rules, anomaly detection, and real-time alerting using Python and SQL.",
-    tags: ["Python", "SQL", "Data Validation", "Automation", "Monitoring"],
+    title: "Enterprise Centralized Data Warehouse",
+    description: "Unified analytics warehouse integrating disparate data sources — SAP, MoEngage, GA4, and GCP Cloud SQL — into Redshift for executive reporting.",
+    tags: ["GCP Cloud SQL", "GA4", "MoEngage", "Amazon Redshift", "SQL"],
     category: "data",
     status: "Production",
-    github: "https://github.com/Hritiksingh1611/data-quality",
-    highlights: ["Automated quality checks", "Real-time anomaly detection", "85% reduction in data errors"],
-    gradient: "from-emerald-600/15 to-green-600/10",
-    icon: Shield,
-    iconColor: "text-emerald-600 dark:text-emerald-400",
+    github: "https://github.com/Hritiksingh1611/powerbi-dashboards",
+    highlights: ["Multi-source data unification", "GCP & AWS cross-cloud pipeline", "Executive KPI dashboards"],
+    gradient: "from-pink-600/25 to-purple-600/10",
+    icon: Cpu,
+    iconColor: "text-pink-500",
   },
   {
     id: 5,
     title: "reviewProbe Jobs Platform",
-    description: "End-to-end job searching and posting platform with user auth, job management, and payment integration — built with modern full-stack technologies.",
-    tags: ["React", "Node.js", "MongoDB", "Express.js", "JavaScript"],
+    description: "Full-stack job portal platform featuring authentication, job searching, posting management, and payment gateway integration.",
+    tags: ["React", "Node.js", "MongoDB", "Express.js", "REST APIs"],
     category: "web",
     status: "Live",
     github: "https://github.com/Hritiksingh1611/reviewprobe-jobs",
-    highlights: ["Complete job portal functionality", "User authentication & authorization", "Payment system integration"],
-    gradient: "from-purple-600/15 to-pink-600/10",
+    highlights: ["Complete job portal application", "Secure REST API architecture", "MongoDB database management"],
+    gradient: "from-amber-600/25 to-orange-600/10",
     icon: Briefcase,
-    iconColor: "text-purple-600 dark:text-purple-400",
+    iconColor: "text-amber-500",
   },
   {
     id: 6,
-    title: "Portfolio Website",
-    description: "This site — built with Next.js 15, TypeScript, Tailwind CSS, and Framer Motion. Dark-first, Gen Z aesthetic with performance-first architecture.",
-    tags: ["Next.js", "TypeScript", "Tailwind CSS", "Framer Motion"],
+    title: "Interactive Data Engineer Portfolio",
+    description: "Next.js 15 static portfolio website featuring live ETL node animation, interactive PySpark code terminal, and dark-first high-tech UI.",
+    tags: ["Next.js 15", "TypeScript", "Tailwind CSS", "Framer Motion"],
     category: "web",
     status: "Live",
     github: "https://github.com/Hritiksingh1611/portfolio",
-    demo: "https://hritiksingh-portfolio.vercel.app",
-    highlights: ["Dark-first Gen Z design", "Smooth Framer Motion animations", "Optimized for Core Web Vitals"],
-    gradient: "from-indigo-600/20 to-purple-600/10",
+    demo: "https://hritiksingh1611.github.io/portfolio/",
+    highlights: ["Live ETL node flow simulator", "Interactive code terminal playground", "Core Web Vitals optimized"],
+    gradient: "from-indigo-600/25 to-violet-600/10",
     icon: Globe,
-    iconColor: "text-violet-600 dark:text-violet-400",
+    iconColor: "text-indigo-500",
   },
 ];
 
 const filters: { key: Category; label: string }[] = [
-  { key: "all",       label: "All Projects" },
-  { key: "data",      label: "Data Engineering" },
-  { key: "analytics", label: "Analytics" },
-  { key: "web",       label: "Web Dev" },
+  { key: "all",   label: "All Projects" },
+  { key: "data",  label: "Data & CDC Pipelines" },
+  { key: "cloud", label: "Cloud & Archival" },
+  { key: "web",   label: "Web Development" },
 ];
-
-const statusColors: Record<Project["status"], string> = {
-  Production: "bg-emerald-500/15 text-emerald-400 border-emerald-500/30",
-  Live:       "bg-blue-500/15 text-blue-400 border-blue-500/30",
-  Ongoing:    "bg-amber-500/15 text-amber-400 border-amber-500/30",
-};
 
 export default function Projects() {
   const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.05 });
@@ -124,9 +118,7 @@ export default function Projects() {
   const filtered = active === "all" ? projects : projects.filter((p) => p.category === active);
 
   return (
-    <section id="projects" ref={ref} className="py-24 px-4 relative z-10 overflow-hidden">
-      <div className="absolute top-0 left-1/4 w-96 h-96 orb orb-pink opacity-10 pointer-events-none" />
-
+    <section id="projects" ref={ref} className="py-24 px-6 relative z-10 overflow-hidden bg-slate-50/50 dark:bg-[#030712]">
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <motion.div
@@ -135,30 +127,30 @@ export default function Projects() {
           transition={{ duration: 0.5 }}
           className="mb-12"
         >
-          <div className="flex items-center gap-3 mb-5">
-            <span className="font-mono text-[10px] text-neutral-400 dark:text-neutral-700 tracking-[0.25em] uppercase shrink-0">04 — Projects</span>
-            <div className="h-px flex-1 bg-neutral-200 dark:bg-white/[0.05]" />
+          <div className="flex items-center gap-3 mb-4">
+            <span className="font-mono text-xs text-violet-500 tracking-[0.2em] uppercase shrink-0">04 — Featured Works</span>
+            <div className="h-px flex-1 bg-neutral-200 dark:bg-white/10" />
           </div>
-          <h2 className="font-display font-black text-4xl md:text-6xl text-neutral-900 dark:text-white leading-none">
-            Featured <span className="text-gradient-vivid">Projects</span>
+          <h2 className="font-display font-black text-4xl md:text-6xl text-neutral-900 dark:text-white leading-tight">
+            Featured <span className="text-gradient-vivid">Projects &amp; Solutions</span>
           </h2>
         </motion.div>
 
-        {/* Filter tabs */}
+        {/* Filter Buttons */}
         <motion.div
-          initial={{ opacity: 0, y: 16 }}
+          initial={{ opacity: 0, y: 15 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ delay: 0.15, duration: 0.5 }}
-          className="flex flex-wrap gap-2 mb-10"
+          className="flex flex-wrap gap-2.5 mb-10"
         >
           {filters.map(({ key, label }) => (
             <button
               key={key}
               onClick={() => setActive(key)}
-              className={`px-4 py-2 rounded-xl text-sm font-medium transition-all duration-200 ${
+              className={`px-4 py-2.5 rounded-xl text-xs md:text-sm font-semibold transition-all duration-200 ${
                 active === key
-                  ? "bg-indigo-600 text-white shadow-lg shadow-indigo-500/25"
-                  : "glass text-neutral-400 hover:text-neutral-800 dark:hover:text-neutral-200 hover:bg-neutral-100 dark:hover:bg-white/8 border border-neutral-200/70 dark:border-white/[0.08]"
+                  ? "bg-violet-600 text-white shadow-lg shadow-violet-500/30 scale-105"
+                  : "glass text-neutral-600 dark:text-neutral-300 hover:text-neutral-900 dark:hover:text-white hover:bg-neutral-100 dark:hover:bg-white/10 border border-neutral-200 dark:border-white/10"
               }`}
             >
               {label}
@@ -166,106 +158,95 @@ export default function Projects() {
           ))}
         </motion.div>
 
-        {/* Grid */}
-        <motion.div layout className="grid md:grid-cols-2 gap-5">
+        {/* Bento Grid */}
+        <motion.div layout className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {filtered.map((project, i) => (
             <motion.div
               key={project.id}
               layout
-              initial={{ opacity: 0, y: 28 }}
+              initial={{ opacity: 0, y: 24 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ delay: i * 0.08, duration: 0.5, ease: "easeOut" }}
-              className="glass rounded-2xl overflow-hidden border border-neutral-200/70 dark:border-white/[0.08] hover:border-violet-300 dark:hover:border-white/20 transition-all duration-300 group flex flex-col"
+              transition={{ delay: i * 0.08, duration: 0.45 }}
+              className="glass bento-card rounded-2xl overflow-hidden border border-neutral-200/80 dark:border-white/10 flex flex-col justify-between group"
             >
-              {/* Visual header */}
-              <div className={`relative h-32 bg-gradient-to-br ${project.gradient} flex items-center justify-between px-6 overflow-hidden`}>
-                <div className="w-12 h-12 rounded-xl bg-black/10 dark:bg-white/5 border border-black/10 dark:border-white/10 flex items-center justify-center backdrop-blur-sm">
-                  <project.icon size={24} className={project.iconColor} />
+              {/* Header Visual */}
+              <div className={`relative h-28 bg-gradient-to-br ${project.gradient} p-5 flex items-center justify-between`}>
+                <div className="w-12 h-12 rounded-xl bg-slate-900/60 backdrop-blur-md border border-white/10 flex items-center justify-center shadow-lg">
+                  <project.icon size={22} className={project.iconColor} />
                 </div>
-                <div className="flex items-center gap-2">
-                  <span className={`text-xs font-semibold px-2.5 py-1 rounded-full border ${statusColors[project.status]}`}>
-                    {project.status}
-                  </span>
-                </div>
-                {/* Subtle grid overlay */}
-                <div className="absolute inset-0 grid-bg opacity-20 pointer-events-none" />
+                <span className="text-[10px] font-mono font-bold px-2.5 py-1 rounded-full bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 border border-emerald-500/30">
+                  {project.status}
+                </span>
               </div>
 
               {/* Content */}
-              <div className="p-6 flex flex-col flex-1">
-                <h3 className="font-display font-bold text-neutral-900 dark:text-white text-lg mb-2 group-hover:text-violet-700 dark:group-hover:text-indigo-300 transition-colors">
-                  {project.title}
-                </h3>
-                <p className="text-neutral-400 text-sm leading-relaxed mb-4">{project.description}</p>
+              <div className="p-6 flex flex-col flex-1 justify-between">
+                <div>
+                  <h3 className="font-display font-bold text-neutral-900 dark:text-white text-base mb-2 group-hover:text-violet-600 dark:group-hover:text-violet-300 transition-colors">
+                    {project.title}
+                  </h3>
+                  <p className="text-neutral-600 dark:text-neutral-400 text-xs leading-relaxed mb-4">
+                    {project.description}
+                  </p>
 
-                {/* Highlights */}
-                <ul className="space-y-1 mb-5">
-                  {project.highlights.map((h) => (
-                    <li key={h} className="flex items-start gap-2 text-xs text-neutral-500">
-                      <span className="mt-1.5 w-1 h-1 rounded-full bg-indigo-500 shrink-0" />
-                      {h}
-                    </li>
-                  ))}
-                </ul>
-
-                {/* Tags */}
-                <div className="flex flex-wrap gap-1.5 mb-5 mt-auto">
-                  {project.tags.map((t) => (
-                    <span key={t} className="text-xs px-2.5 py-1 rounded-full bg-neutral-100 dark:bg-white/6 border border-neutral-200 dark:border-white/10 text-neutral-500 dark:text-neutral-400">
-                      {t}
-                    </span>
-                  ))}
+                  <ul className="space-y-1.5 mb-5">
+                    {project.highlights.map((h) => (
+                      <li key={h} className="flex items-center gap-2 text-[11px] font-mono text-neutral-500 dark:text-neutral-400">
+                        <span className="w-1 h-1 rounded-full bg-violet-500 shrink-0" />
+                        {h}
+                      </li>
+                    ))}
+                  </ul>
                 </div>
 
-                {/* Actions */}
-                <div className="flex gap-2.5 pt-2 border-t border-neutral-100 dark:border-white/8">
-                  <a
-                    href={project.github}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-1.5 text-xs font-medium text-neutral-500 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white transition-colors px-3 py-2 rounded-lg hover:bg-neutral-100 dark:hover:bg-white/8"
-                  >
-                    <Github size={14} />
-                    Code
-                  </a>
-                  {project.demo && (
+                <div>
+                  {/* Tech Tags */}
+                  <div className="flex flex-wrap gap-1.5 mb-5">
+                    {project.tags.map((t) => (
+                      <span key={t} className="text-[10px] font-mono px-2 py-0.5 rounded bg-neutral-100 dark:bg-white/5 border border-neutral-200 dark:border-white/10 text-neutral-600 dark:text-neutral-400">
+                        {t}
+                      </span>
+                    ))}
+                  </div>
+
+                  {/* Actions */}
+                  <div className="flex items-center gap-3 pt-3 border-t border-neutral-200 dark:border-white/10">
                     <a
-                      href={project.demo}
+                      href={project.github}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center gap-1.5 text-xs font-medium text-indigo-500 dark:text-indigo-400 hover:text-indigo-700 dark:hover:text-indigo-300 transition-colors px-3 py-2 rounded-lg hover:bg-indigo-500/10"
+                      className="flex items-center gap-1.5 text-xs font-mono font-semibold text-neutral-600 dark:text-neutral-300 hover:text-violet-600 dark:hover:text-white transition-colors"
                     >
-                      <ArrowUpRight size={14} />
-                      Live Demo
+                      <Github size={14} /> Code Repo
                     </a>
-                  )}
+                    {project.demo && (
+                      <a
+                        href={project.demo}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-1 text-xs font-mono font-semibold text-violet-600 dark:text-violet-400 hover:text-violet-700 transition-colors ml-auto"
+                      >
+                        Live Site <ArrowUpRight size={13} />
+                      </a>
+                    )}
+                  </div>
                 </div>
               </div>
             </motion.div>
           ))}
         </motion.div>
 
-        {/* CTA */}
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ delay: 0.6, duration: 0.5 }}
-          className="mt-12 text-center"
-        >
-          <p className="text-neutral-500 text-sm mb-4">More projects on GitHub</p>
-          <motion.a
+        {/* GitHub CTA */}
+        <div className="mt-12 text-center">
+          <a
             href="https://github.com/Hritiksingh1611"
             target="_blank"
             rel="noopener noreferrer"
-            whileHover={{ scale: 1.04, y: -2 }}
-            whileTap={{ scale: 0.97 }}
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-xl btn-ghost text-sm font-semibold"
+            className="btn-ghost inline-flex items-center gap-2 px-6 py-3 rounded-xl font-semibold text-sm"
           >
-            <Github size={16} />
-            View GitHub Profile
-            <ArrowUpRight size={14} />
-          </motion.a>
-        </motion.div>
+            <Github size={16} /> Explore All Repositories on GitHub <ArrowUpRight size={14} />
+          </a>
+        </div>
       </div>
     </section>
   );

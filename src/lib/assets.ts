@@ -13,3 +13,7 @@ export function getAssetPath(path: string): string {
   
   return `${basePath}${normalizedPath}`;
 }
+
+export function getPublicPath(path: string): string {
+  return getAssetPath(path);
+}
