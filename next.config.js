@@ -10,6 +10,7 @@ const nextConfig = {
   },
   basePath: isProd ? '/portfolio' : '',
   assetPrefix: isProd ? '/portfolio/' : '',
+  allowedDevOrigins: ['192.168.1.7', '192.168.1.*', 'localhost'],
   experimental: {
     optimizePackageImports: ['framer-motion', 'lucide-react'],
   },

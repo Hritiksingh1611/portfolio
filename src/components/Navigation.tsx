@@ -3,7 +3,9 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
 import { useTheme } from "next-themes";
-import { Menu, X, Sun, Moon } from "lucide-react";
+import { Menu, X, Sun, Moon, Briefcase, FileText } from "lucide-react";
+import RecruiterModal from "@/components/RecruiterModal";
+import { getAssetPath } from "@/lib/assets";
 
 const navItems = [
   { id: "home",       label: "Home",       href: "#" },
@@ -18,6 +20,7 @@ export default function Navigation() {
   const [activeSection, setActiveSection] = useState("home");
   const [isScrolled, setIsScrolled]       = useState(false);
   const [mobileOpen, setMobileOpen]       = useState(false);
+  const [recruiterOpen, setRecruiterOpen] = useState(false);
   const { theme, setTheme }               = useTheme();
   const [mounted, setMounted]             = useState(false);
 
@@ -67,7 +70,7 @@ export default function Navigation() {
           {/* Logo */}
           <button
             onClick={() => scrollTo("#")}
-            className="px-3 py-1.5 mr-2 font-display font-black text-lg text-gradient tracking-tight"
+            className="px-3 py-1.5 mr-1 font-display font-black text-lg text-gradient tracking-tight"
           >
             HS
           </button>
@@ -101,23 +104,30 @@ export default function Navigation() {
             <button
               onClick={toggleTheme}
               aria-label="Toggle theme"
-              className="ml-2 p-2 rounded-xl text-neutral-500 dark:text-neutral-400 hover:text-neutral-800 dark:hover:text-neutral-200 hover:bg-black/5 dark:hover:bg-white/10 transition-all duration-200"
+              className="ml-1.5 p-2 rounded-xl text-neutral-500 dark:text-neutral-400 hover:text-neutral-800 dark:hover:text-neutral-200 hover:bg-black/5 dark:hover:bg-white/10 transition-all duration-200"
             >
               {theme === "dark" ? <Sun size={16} /> : <Moon size={16} />}
             </button>
           )}
 
+          {/* Recruiter 1-Page Quick Scan Button */}
+          <button
+            onClick={() => setRecruiterOpen(true)}
+            className="ml-1.5 text-xs font-mono font-semibold px-2.5 py-1.5 rounded-xl border border-violet-500/30 text-violet-700 dark:text-violet-300 hover:bg-violet-500/10 transition-all hidden lg:inline-flex items-center gap-1"
+          >
+            <Briefcase size={13} /> Recruiter View
+          </button>
+
           {/* Quick Resume Link */}
           <a
-            href="/resume.pdf"
+            href={getAssetPath("/resume.pdf")}
             download="Hritik_Singh_Data_Engineer_Resume.pdf"
             target="_blank"
             rel="noopener noreferrer"
-            className="ml-2 text-xs font-mono font-bold px-3 py-1.5 rounded-xl bg-violet-600 hover:bg-violet-500 text-white transition-all shadow-md hidden sm:inline-flex items-center gap-1"
+            className="ml-1.5 text-xs font-mono font-bold px-3 py-1.5 rounded-xl bg-violet-600 hover:bg-violet-500 text-white transition-all shadow-md hidden sm:inline-flex items-center gap-1"
           >
-            Resume
+            <FileText size={13} /> Resume
           </a>
-
 
           {/* Mobile hamburger */}
           <button
@@ -129,6 +139,9 @@ export default function Navigation() {
           </button>
         </div>
       </motion.header>
+
+      {/* ── Recruiter Modal ── */}
+      <RecruiterModal isOpen={recruiterOpen} onClose={() => setRecruiterOpen(false)} />
 
       {/* ── Mobile menu ── */}
       <AnimatePresence>
@@ -148,7 +161,7 @@ export default function Navigation() {
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: -10 }}
               transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
-              className="fixed top-20 left-4 right-4 z-50 glass-strong rounded-2xl border border-white/10 p-3 md:hidden shadow-2xl"
+              className="fixed top-20 left-4 right-4 z-50 glass-strong rounded-2xl border border-white/10 p-3 md:hidden shadow-2xl flex flex-col gap-1"
             >
               {navItems.map(({ id, label, href }, i) => (
                 <motion.button
@@ -166,6 +179,14 @@ export default function Navigation() {
                   {label}
                 </motion.button>
               ))}
+
+              <button
+                onClick={() => { setMobileOpen(false); setRecruiterOpen(true); }}
+                className="w-full text-left px-4 py-3 rounded-xl text-sm font-semibold text-violet-400 bg-violet-500/10 border border-violet-500/20 mt-1 flex items-center justify-between"
+              >
+                <span>Brief Recruiter Executive View</span>
+                <Briefcase size={16} />
+              </button>
             </motion.div>
           </>
         )}

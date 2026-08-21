@@ -3,7 +3,8 @@
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import { useState } from "react";
-import { ArrowUpRight, Github, Database, Server, Briefcase, Globe, Cpu, Cloud, type LucideIcon } from "lucide-react";
+import { ArrowUpRight, Github, Database, Server, Briefcase, Globe, Cpu, Cloud, Layers, Activity, type LucideIcon } from "lucide-react";
+import ArchitectureModal, { ProjectArchitecture } from "@/components/ArchitectureModal";
 
 type Category = "all" | "data" | "cloud" | "web";
 
@@ -20,6 +21,7 @@ interface Project {
   gradient: string;
   icon: LucideIcon;
   iconColor: string;
+  architecture?: ProjectArchitecture;
 }
 
 const projects: Project[] = [
@@ -35,6 +37,23 @@ const projects: Project[] = [
     gradient: "from-violet-600/25 to-indigo-600/10",
     icon: Database,
     iconColor: "text-violet-500",
+    architecture: {
+      title: "SAP OData Enterprise ETL Architecture",
+      subtitle: "SAP S/4HANA OData API → AWS Glue PySpark → Amazon Redshift DW",
+      nodes: [
+        { label: "SAP S/4HANA", sub: "REST OData API", icon: Database, color: "text-blue-400", border: "border-blue-500/40", bg: "bg-blue-500/10" },
+        { label: "AWS Glue", sub: "PySpark ETL", icon: Cpu, color: "text-violet-400", border: "border-violet-500/60", bg: "bg-violet-500/20" },
+        { label: "Amazon S3", sub: "Parquet Staging", icon: Cloud, color: "text-cyan-400", border: "border-cyan-500/40", bg: "bg-cyan-500/10" },
+        { label: "Amazon Redshift", sub: "Curated DW", icon: Server, color: "text-pink-400", border: "border-pink-500/40", bg: "bg-pink-500/10" },
+      ],
+      specs: [
+        { label: "Daily Data Volume", value: "50 GB+ / Day" },
+        { label: "Pipeline SLA", value: "< 15 Mins Execution" },
+        { label: "Data Quality Strategy", value: "Source-to-Target DQ Rules" },
+        { label: "Encryption & Security", value: "KMS & IAM Role Enforcement" },
+      ],
+      flowDescription: "Extracts enterprise SAP business records via secure REST OData APIs into AWS Glue dynamic frames. PySpark transformations filter, deduplicate, and enrich schemas before loading optimized columnar datasets into Amazon Redshift.",
+    },
   },
   {
     id: 2,
@@ -48,6 +67,23 @@ const projects: Project[] = [
     gradient: "from-cyan-600/25 to-blue-600/10",
     icon: Server,
     iconColor: "text-cyan-500",
+    architecture: {
+      title: "AWS DMS Multi-Schema CDC Replication",
+      subtitle: "RDS PostgreSQL / SQL Server → AWS DMS CDC → Redshift Fact Tables",
+      nodes: [
+        { label: "PostgreSQL RDS", sub: "Source OLTP", icon: Database, color: "text-blue-400", border: "border-blue-500/40", bg: "bg-blue-500/10" },
+        { label: "AWS DMS", sub: "CDC Task Engine", icon: Activity, color: "text-cyan-400", border: "border-cyan-500/40", bg: "bg-cyan-500/10" },
+        { label: "AWS Lambda", sub: "Audit Trigger", icon: Cpu, color: "text-violet-400", border: "border-violet-500/60", bg: "bg-violet-500/20" },
+        { label: "Amazon Redshift", sub: "Analytics Warehouse", icon: Server, color: "text-emerald-400", border: "border-emerald-500/40", bg: "bg-emerald-500/10" },
+      ],
+      specs: [
+        { label: "Replicated Schemas", value: "5+ Production RDS DBs" },
+        { label: "CDC Replication SLA", value: "Near-Real-Time Merge" },
+        { label: "Downtime Requirement", value: "Zero Downtime (0 Mins)" },
+        { label: "Downstream Consumer", value: "Power BI Executive Reports" },
+      ],
+      flowDescription: "Continuous Change Data Capture (CDC) replication from production RDS PostgreSQL and SQL Server instances using AWS Database Migration Service (DMS), merging SQL inserts/updates/deletes into Redshift warehouse tables.",
+    },
   },
   {
     id: 3,
@@ -61,6 +97,23 @@ const projects: Project[] = [
     gradient: "from-emerald-600/25 to-teal-600/10",
     icon: Cloud,
     iconColor: "text-emerald-500",
+    architecture: {
+      title: "Serverless S3 Database Archival & Athena Engine",
+      subtitle: "RDS MariaDB → Lambda Archiver → S3 Parquet → Athena → QuickSight",
+      nodes: [
+        { label: "RDS MariaDB", sub: "Historical OLTP", icon: Database, color: "text-amber-400", border: "border-amber-500/40", bg: "bg-amber-500/10" },
+        { label: "AWS Lambda", sub: "Scheduled Cron", icon: Cpu, color: "text-violet-400", border: "border-violet-500/60", bg: "bg-violet-500/20" },
+        { label: "Amazon S3", sub: "Cold Parquet Storage", icon: Cloud, color: "text-emerald-400", border: "border-emerald-500/40", bg: "bg-emerald-500/10" },
+        { label: "Amazon Athena", sub: "Serverless SQL", icon: Server, color: "text-cyan-400", border: "border-cyan-500/40", bg: "bg-cyan-500/10" },
+      ],
+      specs: [
+        { label: "Storage Format", value: "Snappy Parquet on S3" },
+        { label: "Cost Reduction", value: "45% Cloud Infrastructure Savings" },
+        { label: "Query Engine", value: "Amazon Athena Serverless" },
+        { label: "Deployment Method", value: "CloudFormation IaC Templates" },
+      ],
+      flowDescription: "Automated serverless pipeline that extracts historical MariaDB partitions, converts them to compressed Snappy Parquet on S3, and enables instant serverless SQL querying via Athena and QuickSight reporting.",
+    },
   },
   {
     id: 4,
@@ -114,6 +167,7 @@ const filters: { key: Category; label: string }[] = [
 export default function Projects() {
   const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.05 });
   const [active, setActive] = useState<Category>("all");
+  const [selectedArch, setSelectedArch] = useState<ProjectArchitecture | null>(null);
 
   const filtered = active === "all" ? projects : projects.filter((p) => p.category === active);
 
@@ -174,9 +228,19 @@ export default function Projects() {
                 <div className="w-12 h-12 rounded-xl bg-slate-900/60 backdrop-blur-md border border-white/10 flex items-center justify-center shadow-lg">
                   <project.icon size={22} className={project.iconColor} />
                 </div>
-                <span className="text-[10px] font-mono font-bold px-2.5 py-1 rounded-full bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 border border-emerald-500/30">
-                  {project.status}
-                </span>
+                <div className="flex items-center gap-2">
+                  {project.architecture && (
+                    <button
+                      onClick={() => setSelectedArch(project.architecture!)}
+                      className="text-[10px] font-mono font-semibold px-2.5 py-1 rounded-full bg-violet-600 hover:bg-violet-500 text-white border border-violet-400/40 shadow-md transition-all flex items-center gap-1"
+                    >
+                      <Layers size={11} /> Diagram
+                    </button>
+                  )}
+                  <span className="text-[10px] font-mono font-bold px-2.5 py-1 rounded-full bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 border border-emerald-500/30">
+                    {project.status}
+                  </span>
+                </div>
               </div>
 
               {/* Content */}
@@ -235,6 +299,9 @@ export default function Projects() {
             </motion.div>
           ))}
         </motion.div>
+
+        {/* Architecture Diagram Modal */}
+        <ArchitectureModal architecture={selectedArch} onClose={() => setSelectedArch(null)} />
 
         {/* GitHub CTA */}
         <div className="mt-12 text-center">

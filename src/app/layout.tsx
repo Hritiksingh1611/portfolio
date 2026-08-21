@@ -22,33 +22,44 @@ const spaceGrotesk = Space_Grotesk({
 });
 
 export const metadata: Metadata = {
-  title: "Hritik Singh | Data Engineer Portfolio",
-  description: "Passionate Data Engineer specializing in scalable data pipelines, ML solutions, and transforming raw data into actionable insights. Expert in Python, cloud platforms, and distributed systems.",
-  keywords: ["Data Engineer", "ETL", "Data Pipeline", "Machine Learning", "Python", "Apache Kafka", "AWS", "Apache Spark", "PostgreSQL", "Docker"],
+  metadataBase: new URL("https://hritiksingh1611.github.io/portfolio"),
+  title: "Hritik Singh | Data Engineer Portfolio & Architecture",
+  description: "Data Engineer with 3+ years experience designing scalable ETL/ELT data pipelines, AWS Glue, PySpark, Redshift, AWS DMS CDC workflows, and GCP Cloud Data Platforms.",
+  keywords: ["Data Engineer", "ETL", "ELT", "AWS Glue", "PySpark", "Amazon Redshift", "AWS DMS", "CDC", "GCP BigQuery", "Python", "SQL", "Apache Airflow"],
   authors: [{ name: "Hritik Singh" }],
   creator: "Hritik Singh",
   publisher: "Hritik Singh",
   robots: "index, follow",
   openGraph: {
     title: "Hritik Singh | Data Engineer Portfolio",
-    description: "Passionate Data Engineer specializing in scalable data pipelines, ML solutions, and transforming raw data into actionable insights.",
-    type: "website",
-    locale: "en_US",
+    description: "Data Engineer with 3+ years experience building scalable ETL pipelines across AWS & GCP.",
+    url: "https://hritiksingh1611.github.io/portfolio/",
     siteName: "Hritik Singh Portfolio",
+    images: [
+      {
+        url: "/og-image.svg",
+        width: 1200,
+        height: 630,
+        alt: "Hritik Singh Data Engineer Portfolio Preview",
+      },
+    ],
+    locale: "en_US",
+    type: "website",
   },
   twitter: {
     card: "summary_large_image",
     title: "Hritik Singh | Data Engineer Portfolio",
-    description: "Passionate Data Engineer specializing in scalable data pipelines, ML solutions, and transforming raw data into actionable insights.",
+    description: "Data Engineer with 3+ years experience building scalable ETL pipelines across AWS & GCP.",
+    images: ["/og-image.svg"],
   },
   icons: {
     icon: [
-      { url: '/favicon.svg', type: 'image/svg+xml' },
-      { url: '/favicon.ico', sizes: '32x32', type: 'image/x-icon' },
-      { url: '/icon-192.svg', sizes: '192x192', type: 'image/svg+xml' },
+      { url: "/favicon.svg", type: "image/svg+xml" },
+      { url: "/favicon.ico", sizes: "32x32", type: "image/x-icon" },
+      { url: "/icon-192.svg", sizes: "192x192", type: "image/svg+xml" },
     ],
-    apple: { url: '/apple-icon.svg', sizes: '180x180', type: 'image/svg+xml' },
-    shortcut: '/favicon.svg',
+    apple: { url: "/apple-icon.svg", sizes: "180x180", type: "image/svg+xml" },
+    shortcut: "/favicon.svg",
   },
 };
 
