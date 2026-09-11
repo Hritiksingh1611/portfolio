@@ -3,8 +3,7 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
 import { useTheme } from "next-themes";
-import { Menu, X, Sun, Moon, Briefcase, FileText } from "lucide-react";
-import RecruiterModal from "@/components/RecruiterModal";
+import { Menu, X, Sun, Moon, FileText } from "lucide-react";
 import { getAssetPath } from "@/lib/assets";
 
 const navItems = [
@@ -20,7 +19,6 @@ export default function Navigation() {
   const [activeSection, setActiveSection] = useState("home");
   const [isScrolled, setIsScrolled]       = useState(false);
   const [mobileOpen, setMobileOpen]       = useState(false);
-  const [recruiterOpen, setRecruiterOpen] = useState(false);
   const { theme, setTheme }               = useTheme();
   const [mounted, setMounted]             = useState(false);
 
@@ -110,13 +108,6 @@ export default function Navigation() {
             </button>
           )}
 
-          {/* Recruiter 1-Page Quick Scan Button */}
-          <button
-            onClick={() => setRecruiterOpen(true)}
-            className="ml-1.5 text-xs font-mono font-semibold px-2.5 py-1.5 rounded-xl border border-violet-500/30 text-violet-700 dark:text-violet-300 hover:bg-violet-500/10 transition-all hidden lg:inline-flex items-center gap-1"
-          >
-            <Briefcase size={13} /> Recruiter View
-          </button>
 
           {/* Quick Resume Link */}
           <a
@@ -139,9 +130,6 @@ export default function Navigation() {
           </button>
         </div>
       </motion.header>
-
-      {/* ── Recruiter Modal ── */}
-      <RecruiterModal isOpen={recruiterOpen} onClose={() => setRecruiterOpen(false)} />
 
       {/* ── Mobile menu ── */}
       <AnimatePresence>
@@ -180,13 +168,6 @@ export default function Navigation() {
                 </motion.button>
               ))}
 
-              <button
-                onClick={() => { setMobileOpen(false); setRecruiterOpen(true); }}
-                className="w-full text-left px-4 py-3 rounded-xl text-sm font-semibold text-violet-400 bg-violet-500/10 border border-violet-500/20 mt-1 flex items-center justify-between"
-              >
-                <span>Brief Recruiter Executive View</span>
-                <Briefcase size={16} />
-              </button>
             </motion.div>
           </>
         )}
